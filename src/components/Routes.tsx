@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-//import Header from "./Header";
+import Header from "./Header";
 import Register from "./Register";
 const Routes: React.FC<{}> = () => {
     return (
         <React.Fragment>
-            {/* <Header /> */}
+            <Header />
             <Switch>
                 <Route path="/" exact component={Register} />
             </Switch>

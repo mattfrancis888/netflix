@@ -389,4 +389,31 @@ body {
   width: 100%;
 }
 
+.headerContainer {
+  margin: 0;
+  padding: 1rem;
+}
+@media screen and (min-width: 520px) {
+  .headerContainer {
+    padding: 2rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .headerContainer {
+    padding: 3rem;
+  }
+}
+
+.netflixLogo {
+  width: 7rem;
+  height: 3.2rem;
+  fill: #e50914;
+}
+@media screen and (min-width: 520px) {
+  .netflixLogo {
+    width: 16rem;
+    height: 4.5rem;
+  }
+}
+
 /*# sourceMappingURL=main.css.map */

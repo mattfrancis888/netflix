@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
+// import netflixBgMd from "../img/netflixBgMd.jpg";
+
 const Register: React.FC<{}> = (props) => {
-    return (
-        <div>
-            <h1>Hi</h1>{" "}
-        </div>
-    );
+    return <div>{/* <img src={netflixBgMd} alt="background"></img> */}</div>;
 };
 
 export default Register;
