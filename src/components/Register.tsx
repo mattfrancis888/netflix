@@ -3,14 +3,27 @@ import React, { useEffect } from "react";
 const Register: React.FC<{}> = (props) => {
     return (
         <div className="registerContainer">
-            <div className="registerBackgroundWrap">
-                <img
-                    src="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg"
-                    srcSet="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w"
-                    alt=""
-                ></img>
-                <div className="registerFade"></div>
+            <div className="registerBanner">
+                <div className="registerIntroTextAndButtonWrap">
+                    <h1>Unlimited movies, TV shows, and more.</h1>
+                    <h3>Watch anywhere. Cancel anytime.</h3>
+                    <h3>
+                        Ready to watch? Enter your email to create or restart
+                        your membership.
+                    </h3>
+                    <button className="registerButton">Register Now</button>
+                </div>
+                <div className="registerBackgroundWrap">
+                    <img
+                        src="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg"
+                        srcSet="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w"
+                        alt=""
+                    ></img>
+
+                    <div className="registerFade"></div>
+                </div>
             </div>
+
             <div className="registerSectionWrap">
                 <div className="registerSectionTitleWrap">
                     <h1>Download your shows to watch offline.</h1>
