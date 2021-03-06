@@ -43,11 +43,13 @@ const Register: React.FC<{}> = (props) => {
 
             <div className="registerSectionWrap">
                 <div className="registerSectionTitleWrap">
-                    <h1>Enjoy On Your Tv</h1>
+                    <h1>Enjoy On Your Tv.</h1>
                     <h3>
                         Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple
                         TV, Blu-ray players, and more.
                     </h3>
+                </div>
+                <div className="registerSectionImgWrap">
                     <img
                         className="registerSectionImg"
                         src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/mobile-0819.jpg"
@@ -59,7 +61,7 @@ const Register: React.FC<{}> = (props) => {
 
             <div className="registerSectionWrap">
                 <div className="registerSectionTitleWrap">
-                    <h1>Watch everywhere</h1>
+                    <h1>Watch everywhere.</h1>
                     <h3>
                         Stream unlimited movies and TV shows on your phone,
                         tablet, laptop, and TV without paying more.

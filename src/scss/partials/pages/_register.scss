@@ -1,3 +1,8 @@
+.registerContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
 .registerBackgroundWrap {
     position: relative;
     width: 100vw;
@@ -23,12 +28,50 @@
 .registerSectionWrap {
     text-align: center;
     padding: 0.5rem 1rem;
+    max-width: 65rem;
+    @media screen and (min-width: $lg_breakpoint) {
+        max-width: none;
+        display: flex;
+        padding: 0.5rem 5rem;
+    }
 }
 .registerSectionTitleWrap {
     margin-top: 4rem;
     h3 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: normal;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 2.1rem;
+        }
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 2.4rem;
+        }
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 2.8rem;
+        }
+        @media screen and (min-width: $xl_breakpoint) {
+            font-size: 3.2rem;
+        }
+    }
+    h1 {
+        font-family: "Netflix Sans Bold";
+        font-size: 2rem;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 2.6rem;
+        }
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 3.1rem;
+        }
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 3.5rem;
+        }
+        @media screen and (min-width: $xl_breakpoint) {
+            font-size: 4rem;
+        }
+    }
+    @media screen and (min-width: $lg_breakpoint) {
+        width: 50%;
+        margin-top: 8rem;
     }
 }
 .tvContainer {
@@ -40,6 +83,13 @@
     width: 100%;
     height: 100%;
 }
+.registerSectionImgWrap {
+    width: 100%;
+    @media screen and (min-width: $lg_breakpoint) {
+        width: 50%;
+    }
+}
+
 .tvVidContent {
     position: absolute;
     top: 50%;
@@ -52,7 +102,6 @@
 
 .watchEverywhereTVContent {
     position: absolute;
-
     left: 17%;
     width: 65%;
     height: 70%;

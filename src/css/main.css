@@ -454,6 +454,12 @@ body {
   height: 100vh;
 }
 
+.registerContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .registerBackgroundWrap {
   position: relative;
   width: 100vw;
@@ -479,14 +485,72 @@ body {
 .registerSectionWrap {
   text-align: center;
   padding: 0.5rem 1rem;
+  max-width: 65rem;
+}
+@media screen and (min-width: 992px) {
+  .registerSectionWrap {
+    max-width: none;
+    display: flex;
+    padding: 0.5rem 5rem;
+  }
 }
 
 .registerSectionTitleWrap {
   margin-top: 4rem;
 }
 .registerSectionTitleWrap h3 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: normal;
+}
+@media screen and (min-width: 520px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 2.1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 2.4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 2.8rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 3.2rem;
+  }
+}
+.registerSectionTitleWrap h1 {
+  font-family: "Netflix Sans Bold";
+  font-size: 2rem;
+}
+@media screen and (min-width: 520px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 2.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 3.1rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 3.5rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerSectionTitleWrap {
+    width: 50%;
+    margin-top: 8rem;
+  }
 }
 
 .tvContainer {
@@ -498,6 +562,15 @@ body {
 .registerSectionImg {
   width: 100%;
   height: 100%;
+}
+
+.registerSectionImgWrap {
+  width: 100%;
+}
+@media screen and (min-width: 992px) {
+  .registerSectionImgWrap {
+    width: 50%;
+  }
 }
 
 .tvVidContent {
