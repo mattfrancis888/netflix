@@ -20,6 +20,12 @@ afterEach(() => {
     cleanup();
 });
 
+//Use this because with our current version of react, mp4's muted has issues with testing
+//It will give a log/ warning about flushing updates
+//https://github.com/testing-library/react-testing-library/issues/470
+Object.defineProperty(HTMLMediaElement.prototype, "muted", {
+    set: () => {},
+});
 beforeEach(async () => {
     app = render(
         <Root>
@@ -35,8 +41,6 @@ beforeEach(async () => {
 });
 
 test("Netflix logo clicked", async () => {
-    //Dont wory about console warning of React's flush updates, it's due to the mp4
-    //https://github.com/enzymejs/enzyme/issues/2326
     act(() => {
         fireEvent.click(app.getByTestId("netflixLogoForRegisterAndSignIn"));
     });
@@ -46,8 +50,6 @@ test("Netflix logo clicked", async () => {
 }, 30000);
 
 test("Register now button clicked", async () => {
-    //Dont wory about console warning of React's flush updates, it's due to the mp4
-    //https://github.com/enzymejs/enzyme/issues/2326
     act(() => {
         fireEvent.click(app.getByTestId("registerNowButton"));
     });

@@ -32,7 +32,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test:local": "react-scripts test",
-        "test": "CI=true react-scripts test --env=jsdom",
+        "test": "CI=false react-scripts test --env=jsdom",
         "test:coverage": "npm test -- --coverage",
         "eject": "react-scripts eject"
     },
