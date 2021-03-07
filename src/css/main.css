@@ -341,7 +341,7 @@ template,
  */
 body {
   margin: 0;
-  background-color: black;
+  background-color: white;
   color: white;
 }
 
@@ -890,13 +890,66 @@ body {
 
 .monthlyPlanContainer {
   display: flex;
+  opacity: 1;
   width: 100%;
   flex-direction: column;
   text-align: center;
+  transition: opacity 0.5s;
+  position: relative;
 }
 @media screen and (min-width: 992px) {
   .monthlyPlanContainer {
     width: 60%;
+  }
+}
+
+.hideMonthlyPlanContainer {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.registerMonthlyPlanTextWrap {
+  text-align: left;
+  margin-left: 1rem;
+}
+@media screen and (min-width: 520px) {
+  .registerMonthlyPlanTextWrap {
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerMonthlyPlanTextWrap {
+    margin-bottom: 3rem;
+  }
+}
+.registerMonthlyPlanTextWrap p {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+@media screen and (min-width: 520px) {
+  .registerMonthlyPlanTextWrap p {
+    font-size: 1.4rem;
+  }
+}
+.registerMonthlyPlanTextWrap ul {
+  padding: 0;
+}
+.registerMonthlyPlanTextWrap li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+@media screen and (min-width: 520px) {
+  .registerMonthlyPlanTextWrap li {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerMonthlyPlanTextWrap li {
+    font-size: 1.9rem;
+    margin-bottom: 0.8rem;
   }
 }
 
@@ -997,6 +1050,18 @@ body {
 
 .hideArrow {
   display: none;
+}
+
+.checkMark {
+  color: #f40612;
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin-right: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .checkMark {
+    font-size: 2.5rem;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
