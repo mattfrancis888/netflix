@@ -65,7 +65,7 @@
     align-items: center;
     justify-content: center;
     background: $selected-plan-color;
-
+    cursor: pointer;
     font-weight: 700;
     margin: 0 0.3rem;
     height: 10rem;
@@ -89,10 +89,10 @@
     @media screen and (min-width: $sm_breakpoint) {
         padding: 1rem 0rem;
     }
+
     td {
         width: calc(100% / 3);
         font-weight: bold;
-        color: grey;
         @media screen and (min-width: $sm_breakpoint) {
             font-size: 1.4rem;
         }
@@ -108,6 +108,14 @@
     }
 }
 
+.monthlyPlanSelected {
+    color: red;
+}
+
+.monthlyPlanUnselected {
+    color: grey;
+}
+
 .planRowTitle {
     margin-bottom: 1rem;
     font-weight: bold;
@@ -120,9 +128,13 @@
         margin-bottom: 2rem;
         font-size: 1.6rem;
     }
+    &::first-of-type {
+        margin-top: 1.5rem;
+    }
 }
 
 .arrowDown {
+    display: block;
     position: absolute;
     bottom: -1.5rem;
     width: 0;
@@ -131,4 +143,8 @@
     border-right: 1.5rem solid transparent;
 
     border-top: 1.5rem solid $selected-plan-color;
+}
+
+.hideArrow {
+    display: none;
 }

@@ -908,6 +908,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #e50914;
+  cursor: pointer;
   font-weight: 700;
   margin: 0 0.3rem;
   height: 10rem;
@@ -937,7 +938,6 @@ body {
 .monthlyRowPlanWrap td {
   width: calc(100% / 3);
   font-weight: bold;
-  color: grey;
 }
 @media screen and (min-width: 520px) {
   .monthlyRowPlanWrap td {
@@ -956,6 +956,14 @@ body {
   color: white;
 }
 
+.monthlyPlanSelected {
+  color: red;
+}
+
+.monthlyPlanUnselected {
+  color: grey;
+}
+
 .planRowTitle {
   margin-bottom: 1rem;
   font-weight: bold;
@@ -972,8 +980,12 @@ body {
     font-size: 1.6rem;
   }
 }
+.planRowTitle::first-of-type {
+  margin-top: 1.5rem;
+}
 
 .arrowDown {
+  display: block;
   position: absolute;
   bottom: -1.5rem;
   width: 0;
@@ -981,6 +993,10 @@ body {
   border-left: 1.5rem solid transparent;
   border-right: 1.5rem solid transparent;
   border-top: 1.5rem solid #e50914;
+}
+
+.hideArrow {
+  display: none;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import EmailAndPasswordForm from "./EmailAndPasswordForm";
 import { EmailAndPasswordFormValues } from "./EmailAndPasswordForm";
 import PlanHeader from "./PlanHeader";
@@ -13,6 +13,12 @@ export interface RegisterPlanProps {
 }
 
 const RegisterPlan: React.FC<{}> = (props) => {
+    const [planValues, setPlanValues] = useState({
+        basic: true,
+        standard: false,
+        premium: false,
+    });
+
     const onSubmitRegister = async (formValues: EmailAndPasswordFormValues) => {
         // props.signUp(formValues);
     };
@@ -36,32 +42,165 @@ const RegisterPlan: React.FC<{}> = (props) => {
                 </div>
                 <table className="monthlyPlanContainer">
                     <tr className="monthlyRowPlanWrap">
-                        <td className="selectedPlan">
+                        <td
+                            className={
+                                planValues.basic
+                                    ? "selectedPlan"
+                                    : "unselectedPlan"
+                            }
+                            onClick={() => {
+                                setPlanValues({
+                                    basic: true,
+                                    standard: false,
+                                    premium: false,
+                                });
+                            }}
+                        >
                             Basic
-                            <div className="arrowDown"></div>
+                            <div
+                                className={
+                                    planValues.basic ? "arrowDown" : "hideArrow"
+                                }
+                            ></div>
                         </td>
 
-                        <td className="unselectedPlan">Standard</td>
-                        <td className="unselectedPlan">Premium</td>
+                        <td
+                            className={
+                                planValues.standard
+                                    ? "selectedPlan"
+                                    : "unselectedPlan"
+                            }
+                            onClick={() => {
+                                setPlanValues({
+                                    basic: false,
+                                    standard: true,
+                                    premium: false,
+                                });
+                            }}
+                        >
+                            Standard
+                            <div
+                                className={
+                                    planValues.standard
+                                        ? "arrowDown"
+                                        : "hideArrow"
+                                }
+                            ></div>
+                        </td>
+                        <td
+                            className={
+                                planValues.premium
+                                    ? "selectedPlan"
+                                    : "unselectedPlan"
+                            }
+                            onClick={() => {
+                                setPlanValues({
+                                    basic: false,
+                                    standard: false,
+                                    premium: true,
+                                });
+                            }}
+                        >
+                            Premium
+                            <div
+                                className={
+                                    planValues.premium
+                                        ? "arrowDown"
+                                        : "hideArrow"
+                                }
+                            ></div>
+                        </td>
                     </tr>
 
                     <tr className="planRowTitle">Monthly Price</tr>
                     <tr className="monthlyRowPlanWrap">
-                        <td>$9.99</td>
-                        <td>$14.99</td>
-                        <td>$18.99</td>
+                        <td
+                            className={
+                                planValues.basic
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            $9.99
+                        </td>
+                        <td
+                            className={
+                                planValues.standard
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            $14.99
+                        </td>
+                        <td
+                            className={
+                                planValues.premium
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            $18.99
+                        </td>
                     </tr>
                     <tr className="planRowTitle">Quality</tr>
                     <tr className="monthlyRowPlanWrap">
-                        <td>Good</td>
-                        <td>Better</td>
-                        <td>Best</td>
+                        <td
+                            className={
+                                planValues.basic
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            Good
+                        </td>
+                        <td
+                            className={
+                                planValues.standard
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            Better
+                        </td>
+                        <td
+                            className={
+                                planValues.premium
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            Best
+                        </td>
                     </tr>
                     <tr className="planRowTitle">Resolution</tr>
                     <tr className="monthlyRowPlanWrap">
-                        <td>480p</td>
-                        <td>1080p</td>
-                        <td>4k+ HDR</td>
+                        <td
+                            className={
+                                planValues.basic
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            480p
+                        </td>
+                        <td
+                            className={
+                                planValues.standard
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            1080p
+                        </td>
+                        <td
+                            className={
+                                planValues.premium
+                                    ? "monthlyPlanSelected"
+                                    : "monthlyPlanUnselected"
+                            }
+                        >
+                            4k+ HDR
+                        </td>
                     </tr>
                 </table>
             </div>
