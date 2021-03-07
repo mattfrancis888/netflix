@@ -25,7 +25,7 @@ const SignIn: React.FC<{}> = (props) => {
                     ></img>
                     <div className="signInFade"></div>
                 </div>
-                <div className="signInFormContainer">
+                <div className="signInFormContainer" data-testid="signInBox">
                     <SignInForm
                         onSubmit={(formValues: any) =>
                             onSubmitSignIn(formValues)

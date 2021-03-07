@@ -47,7 +47,7 @@ test("Netflix logo clicked", async () => {
     history.push("/");
     expect(pushSpy).toBeCalledWith("/");
     pushSpy.mockRestore();
-}, 30000);
+});
 
 test("Register now button clicked", async () => {
     act(() => {
@@ -56,4 +56,4 @@ test("Register now button clicked", async () => {
     history.push("/plan");
     expect(pushSpy).toBeCalledWith("/plan");
     pushSpy.mockRestore();
-}, 30000);
+});
