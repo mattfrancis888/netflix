@@ -1,7 +1,18 @@
 import React, { useEffect } from "react";
 // import netflixBgMd from "../img/netflixBgMd.jpg";
 import Header from "./Header";
+import SignInForm, { SignInFormValues } from "./SignInForm";
+
+export interface SignInFormProps {
+    onSubmit(formValues: any): void;
+    authStatus?: string | null;
+}
+
 const SignIn: React.FC<{}> = (props) => {
+    const onSubmitSignIn = async (formValues: SignInFormValues) => {
+        // props.signUp(formValues);
+    };
+
     return (
         <React.Fragment>
             <Header />
@@ -13,6 +24,13 @@ const SignIn: React.FC<{}> = (props) => {
                         alt=""
                     ></img>
                     <div className="signInFade"></div>
+                </div>
+                <div className="signInFormContainer" data-testid="signInBox">
+                    <SignInForm
+                        onSubmit={(formValues: any) =>
+                            onSubmitSignIn(formValues)
+                        }
+                    />
                 </div>
             </div>
         </React.Fragment>

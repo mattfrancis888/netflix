@@ -29,7 +29,7 @@ Object.defineProperty(HTMLMediaElement.prototype, "muted", {
 beforeEach(async () => {
     app = render(
         <Root>
-            <MemoryRouter initialEntries={["/register"]} initialIndex={0}>
+            <MemoryRouter initialEntries={["/"]} initialIndex={0}>
                 <Routes />
             </MemoryRouter>
         </Root>
@@ -47,13 +47,8 @@ test("Netflix logo clicked", async () => {
     history.push("/");
     expect(pushSpy).toBeCalledWith("/");
     pushSpy.mockRestore();
-});
+}, 30000);
 
-test("Register now button clicked", async () => {
-    act(() => {
-        fireEvent.click(app.getByTestId("registerNowButton"));
-    });
-    history.push("/plan");
-    expect(pushSpy).toBeCalledWith("/plan");
-    pushSpy.mockRestore();
+test("Sign In box exists", async () => {
+    expect(app.getByTestId("signInBox")).toBeInTheDocument();
 });

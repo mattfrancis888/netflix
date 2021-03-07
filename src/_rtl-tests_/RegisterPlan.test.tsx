@@ -70,4 +70,4 @@ test("Register form on submit", async () => {
         fireEvent.click(app.getByTestId("emailAndPasswordContinueButton"));
     });
     expect(app.getByTestId("monthlyPlanTable")).toBeInTheDocument();
-}, 30000);
+});
