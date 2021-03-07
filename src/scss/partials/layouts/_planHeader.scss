@@ -1,0 +1,35 @@
+.planHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 1rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        padding: 1.5rem 3rem;
+    }
+
+    background-color: transparent;
+    position: relative;
+    background-color: white;
+    border-bottom: 1px solid $light-grey;
+    width: 100%;
+    color: black;
+    align-items: center;
+    h1 {
+        font-size: 1.4rem;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 1.6rem;
+        }
+        cursor: pointer;
+    }
+}
+.planHeaderNetflixLogo {
+    width: 10rem;
+    height: 5rem;
+    fill: #e50914;
+    cursor: pointer;
+
+    @media screen and (min-width: $md_breakpoint) {
+        width: 16rem;
+        height: 4.5rem;
+    }
+}

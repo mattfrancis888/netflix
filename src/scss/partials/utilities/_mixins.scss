@@ -1,0 +1,8 @@
+@mixin step {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        font-size: 1.4rem;
+    }
+}

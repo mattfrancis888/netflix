@@ -1,0 +1,193 @@
+.registerPlanContainer {
+    padding: 5rem 2rem;
+    min-height: 100vh;
+    background: white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @media screen and (min-width: $sm_breakpoint) {
+        padding: 5rem 3rem;
+    }
+}
+
+.registerPlanStepWrap {
+    display: flex;
+    flex-direction: column;
+    h1,
+    h3,
+    p {
+        margin: 0;
+    }
+    p {
+        @include step;
+    }
+    .planTitle {
+        font-size: 1.8rem;
+        font-family: "Netflix Sans Bold";
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 2.3rem;
+        }
+    }
+
+    h3 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        font-weight: normal;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.monthlyPlanContainer {
+    display: flex;
+    opacity: 1;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    @media screen and (min-width: $lg_breakpoint) {
+        width: 60%;
+    }
+    transition: opacity 0.5s;
+    position: relative;
+}
+.hideMonthlyPlanContainer {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.registerMonthlyPlanTextWrap {
+    text-align: left;
+    margin-left: 1rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        margin-bottom: 2rem;
+    }
+    @media screen and (min-width: $md_breakpoint) {
+        margin-bottom: 3rem;
+    }
+
+    p {
+        @include step;
+    }
+    ul {
+        padding: 0;
+    }
+    li {
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 1.6rem;
+        }
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 1.9rem;
+            margin-bottom: 0.8rem;
+        }
+    }
+}
+.unselectedPlan,
+.selectedPlan {
+    display: flex;
+    font-size: 1.2rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: $selected-plan-color;
+    cursor: pointer;
+    font-weight: 700;
+    margin: 0 0.3rem;
+    height: 10rem;
+    position: relative;
+}
+
+.unselectedPlan {
+    opacity: 0.6;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.monthlyRowPlanWrap {
+    margin: 0 0.5rem;
+    padding: 0.3rem 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $light-grey;
+    margin-bottom: 2rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        padding: 1rem 0rem;
+    }
+
+    td {
+        width: calc(100% / 3);
+        font-weight: bold;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 1.4rem;
+        }
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 1.6rem;
+        }
+    }
+    &:first-of-type {
+        border: none;
+        td {
+            color: white;
+        }
+    }
+}
+
+.monthlyPlanSelected {
+    color: red;
+}
+
+.monthlyPlanUnselected {
+    color: grey;
+}
+
+.planRowTitle {
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    @media screen and (min-width: $sm_breakpoint) {
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+    }
+    @media screen and (min-width: $lg_breakpoint) {
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+    }
+    &::first-of-type {
+        margin-top: 1.5rem;
+    }
+}
+
+.arrowDown {
+    display: block;
+    position: absolute;
+    bottom: -1.5rem;
+    width: 0;
+    height: 0;
+    border-left: 1.5rem solid transparent;
+    border-right: 1.5rem solid transparent;
+
+    border-top: 1.5rem solid $selected-plan-color;
+}
+
+.hideArrow {
+    display: none;
+}
+
+.checkMark {
+    color: $bright-red;
+    font-weight: 400;
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    @media screen and (min-width: $md_breakpoint) {
+        font-size: 2.5rem;
+    }
+}

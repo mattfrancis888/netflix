@@ -1,0 +1,1068 @@
+/* Document
+   ========================================================================== */
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+html {
+  line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  /*If default font-size is 16px; 1 rem = 10 px*/
+  box-sizing: inherit;
+}
+
+/* Sections
+   ========================================================================== */
+/**
+ * Remove the margin in all browsers.
+ */
+body {
+  margin-top: 5rem;
+}
+
+/**
+ * Render the `main` element consistently in IE.
+ */
+main {
+  display: block;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+hr {
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+pre {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+abbr[title] {
+  border-bottom: none;
+  /* 1 */
+  text-decoration: underline;
+  /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+button::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+legend {
+  box-sizing: border-box;
+  /* 1 */
+  color: inherit;
+  /* 2 */
+  display: table;
+  /* 1 */
+  max-width: 100%;
+  /* 1 */
+  padding: 0;
+  /* 3 */
+  white-space: normal;
+  /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+[type=checkbox],
+[type=radio] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type=number]::-webkit-inner-spin-button, [type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type=search] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+/**
+ * Add the correct display in IE 10+.
+ */
+template,
+[hidden] {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+body {
+  margin: 0;
+  background-color: white;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+html {
+  /*If default font-size is 16px; 1 rem = 10 px*/
+  font-size: 62.5%;
+}
+
+body {
+  /*Make default font-size bigger. If default font-size is 16px; 1.6 rem = 16 px*/
+  font: 1.1rem "Netflix Sans Light", helvetica, arial, sans-serif;
+}
+
+@font-face {
+  font-family: "Netflix Sans Bold";
+  src: url(../fonts/NetflixSansBold.otf) format("opentype");
+}
+@font-face {
+  font-family: "Netflix Sans Light";
+  src: url(../fonts/NetflixSansLight.otf) format("opentype");
+}
+@font-face {
+  font-family: "Netflix Sans Medium";
+  src: url(../fonts/NetflixSansMedium.otf) format("opentype");
+}
+.loadingCenter {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 80vh;
+}
+.loadingCenter > div {
+  margin: 0 auto;
+  z-index: -1;
+  width: 10rem;
+  height: 10rem;
+}
+@media screen and (min-width: 520px) {
+  .loadingCenter > div {
+    width: 12rem;
+    height: 12rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .loadingCenter > div {
+    width: 16rem;
+    height: 16rem;
+  }
+}
+
+.loadingCenterForEditOrPostAdForm {
+  width: 100%;
+}
+
+.headerContainer {
+  margin: 0;
+  padding: 1rem;
+  background-color: transparent;
+  position: absolute;
+}
+@media screen and (min-width: 520px) {
+  .headerContainer {
+    padding: 2rem 3rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .headerContainer {
+    padding: 3rem 4rem;
+  }
+}
+
+.netflixLogo {
+  width: 10rem;
+  height: 5rem;
+  fill: #e50914;
+}
+@media screen and (min-width: 768px) {
+  .netflixLogo {
+    width: 16rem;
+    height: 4.5rem;
+  }
+}
+
+.planHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 1rem;
+  background-color: transparent;
+  position: relative;
+  background-color: white;
+  border-bottom: 1px solid #e2e2e5;
+  width: 100%;
+  color: black;
+  align-items: center;
+}
+@media screen and (min-width: 520px) {
+  .planHeaderContainer {
+    padding: 1.5rem 3rem;
+  }
+}
+.planHeaderContainer h1 {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+@media screen and (min-width: 520px) {
+  .planHeaderContainer h1 {
+    font-size: 1.6rem;
+  }
+}
+
+.planHeaderNetflixLogo {
+  width: 10rem;
+  height: 5rem;
+  fill: #e50914;
+  cursor: pointer;
+}
+@media screen and (min-width: 768px) {
+  .planHeaderNetflixLogo {
+    width: 16rem;
+    height: 4.5rem;
+  }
+}
+
+.authFormFieldTitleWrap {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+@media screen and (min-width: 520px) {
+  .authFormFieldTitleWrap {
+    margin-bottom: 0.7rem;
+  }
+}
+.authFormFieldTitleWrap h1 {
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+.authFormFieldTitleEmailInUse {
+  margin: 0;
+  font-size: 0.8rem;
+  color: red;
+  margin-left: 0.3rem;
+}
+@media screen and (min-width: 520px) {
+  .authFormFieldTitleEmailInUse {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .authFormFieldTitleEmailInUse {
+    font-size: 1.3rem;
+  }
+}
+
+.errorText {
+  margin: 0.2rem 0;
+  color: red;
+  font-size: 1rem;
+}
+@media screen and (min-width: 520px) {
+  .errorText {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .errorText {
+    font-size: 1.4rem;
+  }
+}
+
+.createAuthInputs {
+  padding: 1rem;
+  border: 1px solid #e2e2e5;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.createAuthInputs:focus {
+  outline: none;
+  border: 1px solid #f40612;
+  box-shadow: 0 0 5px #f40612;
+  background-color: white;
+}
+@media screen and (min-width: 520px) {
+  .createAuthInputs {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .createAuthInputs {
+    padding: 0.8rem;
+    font-size: 1.7rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .createAuthInputs {
+    padding: 1rem;
+    font-size: 1.9rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .createAuthInputs {
+    padding: 1.3rem;
+  }
+}
+
+.authButton {
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+  width: 100%;
+  color: white;
+  font-size: 1.4rem;
+  padding: 1.1rem 1rem;
+  background-color: #e50914;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+  cursor: pointer;
+}
+.authButton:hover {
+  background: #f40612;
+}
+
+.signInBackgroundWrap {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1;
+  position: absolute;
+  color: white;
+}
+.signInBackgroundWrap img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.signInFade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  background: black;
+  width: 100vw;
+  height: 100vh;
+}
+
+.registerContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.registerBanner {
+  position: relative;
+  width: 100vw;
+  height: 50rem;
+}
+@media screen and (min-width: 520px) {
+  .registerBanner {
+    height: 70rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerBanner {
+    height: 85rem;
+  }
+}
+
+.registerBackgroundWrap {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+  top: 0;
+}
+.registerBackgroundWrap img {
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.registerFade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.registerIntroTextAndButtonWrap {
+  position: absolute;
+  width: 100%;
+  padding: 2rem;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+@media screen and (min-width: 768px) {
+  .registerIntroTextAndButtonWrap {
+    padding: 4rem;
+    width: 65%;
+  }
+}
+.registerIntroTextAndButtonWrap h1 {
+  font-family: "Netflix Sans Bold";
+  font-size: 2.8rem;
+}
+@media screen and (min-width: 520px) {
+  .registerIntroTextAndButtonWrap h1 {
+    font-size: 3.5rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerIntroTextAndButtonWrap h1 {
+    font-size: 4rem;
+  }
+}
+.registerIntroTextAndButtonWrap h3 {
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+@media screen and (min-width: 520px) {
+  .registerIntroTextAndButtonWrap h3 {
+    font-size: 2.1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerIntroTextAndButtonWrap h3 {
+    font-size: 2.8rem;
+  }
+}
+
+.registerButton {
+  background-color: #e50914;
+  color: white;
+  padding: 1rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+  outline: none !important;
+  box-shadow: none !important;
+  border: none;
+  cursor: pointer;
+}
+@media screen and (min-width: 520px) {
+  .registerButton {
+    margin-top: 1rem;
+    padding: 1.3rem;
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerButton {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    font-size: 2.3rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerButton {
+    margin-top: 2rem;
+    padding: 1.5rem 2.5rem;
+  }
+}
+.registerButton:hover {
+  background: #f40612;
+}
+
+.registerSectionWrap {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  max-width: 65rem;
+}
+@media screen and (min-width: 992px) {
+  .registerSectionWrap {
+    max-width: none;
+    display: flex;
+    padding: 0.5rem 5rem;
+  }
+}
+
+.registerSectionTitleWrap {
+  margin-top: 4rem;
+}
+.registerSectionTitleWrap h3 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+@media screen and (min-width: 520px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 2.1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 2.4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 2.8rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .registerSectionTitleWrap h3 {
+    font-size: 3.2rem;
+  }
+}
+.registerSectionTitleWrap h1 {
+  font-family: "Netflix Sans Bold";
+  font-size: 2rem;
+}
+@media screen and (min-width: 520px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 2.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 3.1rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 3.5rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .registerSectionTitleWrap h1 {
+    font-size: 4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .registerSectionTitleWrap {
+    width: 50%;
+    margin-top: 8rem;
+  }
+}
+
+.tvContainer {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+.registerSectionImg {
+  width: 100%;
+  height: 100%;
+}
+
+.registerSectionImgWrap {
+  width: 100%;
+}
+@media screen and (min-width: 992px) {
+  .registerSectionImgWrap {
+    width: 50%;
+  }
+}
+
+.tvVidContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.watchEverywhereTVContent {
+  position: absolute;
+  left: 17%;
+  width: 65%;
+  height: 70%;
+  z-index: -1;
+}
+
+.registerPlanContainer {
+  padding: 5rem 2rem;
+  min-height: 100vh;
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@media screen and (min-width: 520px) {
+  .registerPlanContainer {
+    padding: 5rem 3rem;
+  }
+}
+
+.registerPlanStepWrap {
+  display: flex;
+  flex-direction: column;
+}
+.registerPlanStepWrap h1,
+.registerPlanStepWrap h3,
+.registerPlanStepWrap p {
+  margin: 0;
+}
+.registerPlanStepWrap p {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+@media screen and (min-width: 520px) {
+  .registerPlanStepWrap p {
+    font-size: 1.4rem;
+  }
+}
+.registerPlanStepWrap .planTitle {
+  font-size: 1.8rem;
+  font-family: "Netflix Sans Bold";
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+@media screen and (min-width: 520px) {
+  .registerPlanStepWrap .planTitle {
+    font-size: 2.3rem;
+  }
+}
+.registerPlanStepWrap h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  font-weight: normal;
+}
+@media screen and (min-width: 520px) {
+  .registerPlanStepWrap h3 {
+    font-size: 1.6rem;
+  }
+}
+
+.monthlyPlanContainer {
+  display: flex;
+  opacity: 1;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+  transition: opacity 0.5s;
+  position: relative;
+}
+@media screen and (min-width: 992px) {
+  .monthlyPlanContainer {
+    width: 60%;
+  }
+}
+
+.hideMonthlyPlanContainer {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.registerMonthlyPlanTextWrap {
+  text-align: left;
+  margin-left: 1rem;
+}
+@media screen and (min-width: 520px) {
+  .registerMonthlyPlanTextWrap {
+    margin-bottom: 2rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerMonthlyPlanTextWrap {
+    margin-bottom: 3rem;
+  }
+}
+.registerMonthlyPlanTextWrap p {
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+@media screen and (min-width: 520px) {
+  .registerMonthlyPlanTextWrap p {
+    font-size: 1.4rem;
+  }
+}
+.registerMonthlyPlanTextWrap ul {
+  padding: 0;
+}
+.registerMonthlyPlanTextWrap li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+@media screen and (min-width: 520px) {
+  .registerMonthlyPlanTextWrap li {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .registerMonthlyPlanTextWrap li {
+    font-size: 1.9rem;
+    margin-bottom: 0.8rem;
+  }
+}
+
+.unselectedPlan,
+.selectedPlan {
+  display: flex;
+  font-size: 1.2rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #e50914;
+  cursor: pointer;
+  font-weight: 700;
+  margin: 0 0.3rem;
+  height: 10rem;
+  position: relative;
+}
+
+.unselectedPlan {
+  opacity: 0.6;
+}
+.unselectedPlan:hover {
+  opacity: 1;
+}
+
+.monthlyRowPlanWrap {
+  margin: 0 0.5rem;
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e5;
+  margin-bottom: 2rem;
+}
+@media screen and (min-width: 520px) {
+  .monthlyRowPlanWrap {
+    padding: 1rem 0rem;
+  }
+}
+.monthlyRowPlanWrap td {
+  width: calc(100% / 3);
+  font-weight: bold;
+}
+@media screen and (min-width: 520px) {
+  .monthlyRowPlanWrap td {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .monthlyRowPlanWrap td {
+    font-size: 1.6rem;
+  }
+}
+.monthlyRowPlanWrap:first-of-type {
+  border: none;
+}
+.monthlyRowPlanWrap:first-of-type td {
+  color: white;
+}
+
+.monthlyPlanSelected {
+  color: red;
+}
+
+.monthlyPlanUnselected {
+  color: grey;
+}
+
+.planRowTitle {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+@media screen and (min-width: 520px) {
+  .planRowTitle {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .planRowTitle {
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+  }
+}
+.planRowTitle::first-of-type {
+  margin-top: 1.5rem;
+}
+
+.arrowDown {
+  display: block;
+  position: absolute;
+  bottom: -1.5rem;
+  width: 0;
+  height: 0;
+  border-left: 1.5rem solid transparent;
+  border-right: 1.5rem solid transparent;
+  border-top: 1.5rem solid #e50914;
+}
+
+.hideArrow {
+  display: none;
+}
+
+.checkMark {
+  color: #f40612;
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin-right: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .checkMark {
+    font-size: 2.5rem;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

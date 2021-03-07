@@ -1,0 +1,22 @@
+.headerContainer {
+    margin: 0;
+    padding: 1rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        padding: 2rem 3rem;
+    }
+    @media screen and (min-width: $md_breakpoint) {
+        padding: 3rem 4rem;
+    }
+    background-color: transparent;
+    position: absolute;
+}
+.netflixLogo {
+    width: 10rem;
+    height: 5rem;
+    fill: #e50914;
+
+    @media screen and (min-width: $md_breakpoint) {
+        width: 16rem;
+        height: 4.5rem;
+    }
+}
