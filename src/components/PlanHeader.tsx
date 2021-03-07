@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import history from "../browserHistory";
 const Header: React.FC<{}> = (props) => {
     return (
         <div className="planHeaderContainer">
@@ -14,7 +15,7 @@ const Header: React.FC<{}> = (props) => {
                     ></path>
                 </g>
             </svg>
-            <h1>Sign In</h1>
+            <h1 onClick={() => history.push("/")}>Sign In</h1>
         </div>
     );
 };

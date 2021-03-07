@@ -451,6 +451,7 @@ body {
 }
 .planHeaderContainer h1 {
   font-size: 1.4rem;
+  cursor: pointer;
 }
 @media screen and (min-width: 520px) {
   .planHeaderContainer h1 {
@@ -831,7 +832,7 @@ body {
 }
 
 .registerPlanContainer {
-  padding: 5rem 3rem;
+  padding: 5rem 2rem;
   min-height: 100vh;
   background: white;
   color: black;
@@ -885,6 +886,101 @@ body {
   .registerPlanStepWrap h3 {
     font-size: 1.6rem;
   }
+}
+
+.monthlyPlanContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+}
+@media screen and (min-width: 992px) {
+  .monthlyPlanContainer {
+    width: 60%;
+  }
+}
+
+.unselectedPlan,
+.selectedPlan {
+  display: flex;
+  font-size: 1.2rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: #e50914;
+  font-weight: 700;
+  margin: 0 0.3rem;
+  height: 10rem;
+  position: relative;
+}
+
+.unselectedPlan {
+  opacity: 0.6;
+}
+.unselectedPlan:hover {
+  opacity: 1;
+}
+
+.monthlyRowPlanWrap {
+  margin: 0 0.5rem;
+  padding: 0.3rem 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2e2e5;
+  margin-bottom: 2rem;
+}
+@media screen and (min-width: 520px) {
+  .monthlyRowPlanWrap {
+    padding: 1rem 0rem;
+  }
+}
+.monthlyRowPlanWrap td {
+  width: calc(100% / 3);
+  font-weight: bold;
+  color: grey;
+}
+@media screen and (min-width: 520px) {
+  .monthlyRowPlanWrap td {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .monthlyRowPlanWrap td {
+    font-size: 1.6rem;
+  }
+}
+.monthlyRowPlanWrap:first-of-type {
+  border: none;
+}
+.monthlyRowPlanWrap:first-of-type td {
+  color: white;
+}
+
+.planRowTitle {
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+@media screen and (min-width: 520px) {
+  .planRowTitle {
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .planRowTitle {
+    margin-bottom: 2rem;
+    font-size: 1.6rem;
+  }
+}
+
+.arrowDown {
+  position: absolute;
+  bottom: -1.5rem;
+  width: 0;
+  height: 0;
+  border-left: 1.5rem solid transparent;
+  border-right: 1.5rem solid transparent;
+  border-top: 1.5rem solid #e50914;
 }
 
 /*# sourceMappingURL=main.css.map */

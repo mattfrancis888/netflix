@@ -1,5 +1,5 @@
 .registerPlanContainer {
-    padding: 5rem 3rem;
+    padding: 5rem 2rem;
     min-height: 100vh;
     background: white;
     color: black;
@@ -46,4 +46,89 @@
             font-size: 1.6rem;
         }
     }
+}
+
+.monthlyPlanContainer {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    @media screen and (min-width: $lg_breakpoint) {
+        width: 60%;
+    }
+}
+.unselectedPlan,
+.selectedPlan {
+    display: flex;
+    font-size: 1.2rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background: $selected-plan-color;
+
+    font-weight: 700;
+    margin: 0 0.3rem;
+    height: 10rem;
+    position: relative;
+}
+
+.unselectedPlan {
+    opacity: 0.6;
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.monthlyRowPlanWrap {
+    margin: 0 0.5rem;
+    padding: 0.3rem 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $light-grey;
+    margin-bottom: 2rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        padding: 1rem 0rem;
+    }
+    td {
+        width: calc(100% / 3);
+        font-weight: bold;
+        color: grey;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 1.4rem;
+        }
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 1.6rem;
+        }
+    }
+    &:first-of-type {
+        border: none;
+        td {
+            color: white;
+        }
+    }
+}
+
+.planRowTitle {
+    margin-bottom: 1rem;
+    font-weight: bold;
+
+    @media screen and (min-width: $sm_breakpoint) {
+        margin-bottom: 1.5rem;
+        font-size: 1.4rem;
+    }
+    @media screen and (min-width: $lg_breakpoint) {
+        margin-bottom: 2rem;
+        font-size: 1.6rem;
+    }
+}
+
+.arrowDown {
+    position: absolute;
+    bottom: -1.5rem;
+    width: 0;
+    height: 0;
+    border-left: 1.5rem solid transparent;
+    border-right: 1.5rem solid transparent;
+
+    border-top: 1.5rem solid $selected-plan-color;
 }
