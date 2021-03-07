@@ -2,11 +2,17 @@ import React, { useEffect } from "react";
 import history from "../browserHistory";
 const Header: React.FC<{}> = (props) => {
     return (
-        <div className="planHeaderContainer">
+        <div
+            className="planHeaderContainer"
+            data-testid="planHeaderNetflixLogo"
+        >
             <svg
                 viewBox="0 0 111 30"
                 focusable="true"
                 className="planHeaderNetflixLogo"
+                onClick={() => {
+                    history.push("/");
+                }}
             >
                 <g id="netflix-logo">
                     <path

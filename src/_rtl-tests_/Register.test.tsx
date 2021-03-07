@@ -23,7 +23,7 @@ afterEach(() => {
 beforeEach(async () => {
     app = render(
         <Root>
-            <MemoryRouter initialEntries={["/plan"]} initialIndex={0}>
+            <MemoryRouter initialEntries={["/register"]} initialIndex={0}>
                 <Routes />
             </MemoryRouter>
         </Root>
@@ -35,39 +35,23 @@ beforeEach(async () => {
 });
 
 test("Netflix logo clicked", async () => {
+    //Dont wory about console warning of React's flush updates, it's due to the mp4
+    //https://github.com/enzymejs/enzyme/issues/2326
     act(() => {
-        fireEvent.click(app.getByTestId("planHeaderNetflixLogo"));
+        fireEvent.click(app.getByTestId("netflixLogoForRegisterAndSignIn"));
     });
     history.push("/");
     expect(pushSpy).toBeCalledWith("/");
     pushSpy.mockRestore();
-});
+}, 30000);
 
-test("Steps exist", async () => {
-    expect(app.getByTestId("step1")).toBeInTheDocument();
-    expect(app.getByTestId("step2")).toBeInTheDocument();
-});
-
-test("Register form on submit", async () => {
-    const signInResponse = {
-        token: "asdfsadf12",
-        refreshToken: "asdufahsfd",
-    };
-
-    const expectedMockFormValues = {
-        email: "hi@gmail.com",
-        password: "123",
-    };
-
-    fireEvent.change(app.getByTestId("email"), {
-        target: { value: expectedMockFormValues.email },
-    });
-    fireEvent.change(app.getByTestId("password"), {
-        target: { value: expectedMockFormValues.password },
-    });
-
+test("Register now button clicked", async () => {
+    //Dont wory about console warning of React's flush updates, it's due to the mp4
+    //https://github.com/enzymejs/enzyme/issues/2326
     act(() => {
-        fireEvent.click(app.getByTestId("emailAndPasswordContinueButton"));
+        fireEvent.click(app.getByTestId("registerNowButton"));
     });
-    expect(app.getByTestId("monthlyPlanTable")).toBeInTheDocument();
+    history.push("/plan");
+    expect(pushSpy).toBeCalledWith("/plan");
+    pushSpy.mockRestore();
 }, 30000);

@@ -5,7 +5,7 @@ cache:
     directories:
         - node_modules
 script:
-    - npm run -e CI=true test --env=jsdom
+    - npm run test
     - npm run test:coverage
     - npm run build
 # deploy:

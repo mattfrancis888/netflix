@@ -56,7 +56,7 @@ const RegisterPlan: React.FC<{}> = (props) => {
                     }
                 >
                     <div className="registerMonthlyPlanTextWrap">
-                        <p>Step 2 of 2 </p>
+                        <p data-testid="step2">Step 2 of 2 </p>
                         <ul>
                             <li>
                                 <BsCheck className="checkMark" /> Watch all you
@@ -72,7 +72,7 @@ const RegisterPlan: React.FC<{}> = (props) => {
                             </li>
                         </ul>
                     </div>
-                    <table>
+                    <table data-testid="monthlyPlanTable">
                         <tbody>
                             <tr className="monthlyRowPlanWrap">
                                 <td

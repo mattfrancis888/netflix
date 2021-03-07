@@ -14,7 +14,12 @@ const Register: React.FC<{}> = (props) => {
                             Ready to watch? Enter your email to create or
                             restart your membership.
                         </h3>
-                        <button className="registerButton">Register Now</button>
+                        <button
+                            className="registerButton"
+                            data-testid="registerNowButton"
+                        >
+                            Register Now
+                        </button>
                     </div>
                     <div className="registerBackgroundWrap">
                         <img

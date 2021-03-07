@@ -114,7 +114,12 @@ const RegisterForm: React.FC<
                     />
                 </div>
 
-                <button className="authButton">Continue</button>
+                <button
+                    className="authButton"
+                    data-testid="emailAndPasswordContinueButton"
+                >
+                    Continue
+                </button>
             </form>
         </React.Fragment>
     );

@@ -463,6 +463,7 @@ body {
   width: 10rem;
   height: 5rem;
   fill: #e50914;
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   .planHeaderNetflixLogo {
