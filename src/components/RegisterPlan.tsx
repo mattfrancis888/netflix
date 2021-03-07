@@ -36,7 +36,7 @@ const RegisterPlan: React.FC<{}> = (props) => {
                     className="registerPlanStepWrap"
                     style={step1ButtonClicked ? { display: "none" } : {}}
                 >
-                    <p>Step 1 of 2 </p>
+                    <p data-testid="step1">Step 1 of 2 </p>
                     <h1 className="planTitle">Welcome back!</h1>
                     <h1 className="planTitle">Joining Netflix is easy.</h1>
                     <h3>
@@ -73,169 +73,177 @@ const RegisterPlan: React.FC<{}> = (props) => {
                         </ul>
                     </div>
                     <table>
-                        <tr className="monthlyRowPlanWrap">
-                            <td
-                                className={
-                                    planValues.basic
-                                        ? "selectedPlan"
-                                        : "unselectedPlan"
-                                }
-                                onClick={() => {
-                                    setPlanValues({
-                                        basic: true,
-                                        standard: false,
-                                        premium: false,
-                                    });
-                                }}
-                            >
-                                Basic
-                                <div
+                        <tbody>
+                            <tr className="monthlyRowPlanWrap">
+                                <td
                                     className={
                                         planValues.basic
-                                            ? "arrowDown"
-                                            : "hideArrow"
+                                            ? "selectedPlan"
+                                            : "unselectedPlan"
                                     }
-                                ></div>
-                            </td>
+                                    onClick={() => {
+                                        setPlanValues({
+                                            basic: true,
+                                            standard: false,
+                                            premium: false,
+                                        });
+                                    }}
+                                >
+                                    Basic
+                                    <div
+                                        className={
+                                            planValues.basic
+                                                ? "arrowDown"
+                                                : "hideArrow"
+                                        }
+                                    ></div>
+                                </td>
 
-                            <td
-                                className={
-                                    planValues.standard
-                                        ? "selectedPlan"
-                                        : "unselectedPlan"
-                                }
-                                onClick={() => {
-                                    setPlanValues({
-                                        basic: false,
-                                        standard: true,
-                                        premium: false,
-                                    });
-                                }}
-                            >
-                                Standard
-                                <div
+                                <td
                                     className={
                                         planValues.standard
-                                            ? "arrowDown"
-                                            : "hideArrow"
+                                            ? "selectedPlan"
+                                            : "unselectedPlan"
                                     }
-                                ></div>
-                            </td>
-                            <td
-                                className={
-                                    planValues.premium
-                                        ? "selectedPlan"
-                                        : "unselectedPlan"
-                                }
-                                onClick={() => {
-                                    setPlanValues({
-                                        basic: false,
-                                        standard: false,
-                                        premium: true,
-                                    });
-                                }}
-                            >
-                                Premium
-                                <div
+                                    onClick={() => {
+                                        setPlanValues({
+                                            basic: false,
+                                            standard: true,
+                                            premium: false,
+                                        });
+                                    }}
+                                >
+                                    Standard
+                                    <div
+                                        className={
+                                            planValues.standard
+                                                ? "arrowDown"
+                                                : "hideArrow"
+                                        }
+                                    ></div>
+                                </td>
+                                <td
                                     className={
                                         planValues.premium
-                                            ? "arrowDown"
-                                            : "hideArrow"
+                                            ? "selectedPlan"
+                                            : "unselectedPlan"
                                     }
-                                ></div>
-                            </td>
-                        </tr>
+                                    onClick={() => {
+                                        setPlanValues({
+                                            basic: false,
+                                            standard: false,
+                                            premium: true,
+                                        });
+                                    }}
+                                >
+                                    Premium
+                                    <div
+                                        className={
+                                            planValues.premium
+                                                ? "arrowDown"
+                                                : "hideArrow"
+                                        }
+                                    ></div>
+                                </td>
+                            </tr>
 
-                        <tr className="planRowTitle">Monthly Price</tr>
-                        <tr className="monthlyRowPlanWrap">
-                            <td
-                                className={
-                                    planValues.basic
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                $9.99
-                            </td>
-                            <td
-                                className={
-                                    planValues.standard
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                $14.99
-                            </td>
-                            <td
-                                className={
-                                    planValues.premium
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                $18.99
-                            </td>
-                        </tr>
-                        <tr className="planRowTitle">Quality</tr>
-                        <tr className="monthlyRowPlanWrap">
-                            <td
-                                className={
-                                    planValues.basic
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                Good
-                            </td>
-                            <td
-                                className={
-                                    planValues.standard
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                Better
-                            </td>
-                            <td
-                                className={
-                                    planValues.premium
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                Best
-                            </td>
-                        </tr>
-                        <tr className="planRowTitle">Resolution</tr>
-                        <tr className="monthlyRowPlanWrap">
-                            <td
-                                className={
-                                    planValues.basic
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                480p
-                            </td>
-                            <td
-                                className={
-                                    planValues.standard
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                1080p
-                            </td>
-                            <td
-                                className={
-                                    planValues.premium
-                                        ? "monthlyPlanSelected"
-                                        : "monthlyPlanUnselected"
-                                }
-                            >
-                                4k+ HDR
-                            </td>
-                        </tr>
+                            <tr className="planRowTitle">
+                                <td>Monthly Price</td>
+                            </tr>
+                            <tr className="monthlyRowPlanWrap">
+                                <td
+                                    className={
+                                        planValues.basic
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    $9.99
+                                </td>
+                                <td
+                                    className={
+                                        planValues.standard
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    $14.99
+                                </td>
+                                <td
+                                    className={
+                                        planValues.premium
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    $18.99
+                                </td>
+                            </tr>
+                            <tr className="planRowTitle">
+                                <td>Quality</td>
+                            </tr>
+                            <tr className="monthlyRowPlanWrap">
+                                <td
+                                    className={
+                                        planValues.basic
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    Good
+                                </td>
+                                <td
+                                    className={
+                                        planValues.standard
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    Better
+                                </td>
+                                <td
+                                    className={
+                                        planValues.premium
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    Best
+                                </td>
+                            </tr>
+                            <tr className="planRowTitle">
+                                <td>Resolution</td>
+                            </tr>
+                            <tr className="monthlyRowPlanWrap">
+                                <td
+                                    className={
+                                        planValues.basic
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    480p
+                                </td>
+                                <td
+                                    className={
+                                        planValues.standard
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    1080p
+                                </td>
+                                <td
+                                    className={
+                                        planValues.premium
+                                            ? "monthlyPlanSelected"
+                                            : "monthlyPlanUnselected"
+                                    }
+                                >
+                                    4k+ HDR
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
                     <button
                         className="authButton"
