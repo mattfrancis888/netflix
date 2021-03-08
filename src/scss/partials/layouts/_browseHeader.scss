@@ -1,0 +1,57 @@
+.browseHeaderContainer {
+    position: sticky;
+    top: 0;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7) 10%,
+        rgba(0, 0, 0, 0)
+    );
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    @media screen and (min-width: $md_breakpoint) {
+        padding: 2rem 4rem;
+    }
+    justify-content: space-between;
+    z-index: 1;
+    color: white;
+    h1 {
+        font-size: 1rem;
+        font-weight: normal;
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 1.8rem;
+        }
+    }
+}
+.netflixBrowseLogo {
+    width: 4rem;
+    height: 3rem;
+    fill: #e50914;
+    cursor: pointer;
+    @media screen and (min-width: $sm_breakpoint) {
+        width: 7rem;
+        height: 5rem;
+    }
+    @media screen and (min-width: $md_breakpoint) {
+        width: 9rem;
+        height: 5rem;
+    }
+    margin-right: 1.4rem;
+}
+
+.artistNameHide {
+    margin: 0;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+.artistNameOnScroll {
+    font-weight: 800;
+    margin: 0;
+    opacity: 1;
+    color: white;
+    font-size: 2.2rem;
+    @media screen and (min-width: $md_breakpoint) {
+        font-size: 2.8rem;
+    }
+    transition: opacity 0.5s;
+}
