@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
-import pool from "../databasePool";
-import { signUp, signIn } from "../controllers/authentication";
+import { signUp, signIn, signOut } from "../controllers/authentication";
 import { localLogin } from "../services/passport";
 import passport from "passport";
 import jwt from "jsonwebtoken";
@@ -42,6 +41,6 @@ const router = Router();
 router.post("/signin", requireSignIn, signIn);
 router.post("/signup", signUp);
 //router.post("/token", refreshToken);
-//router.post("/signout", signOut);
+router.post("/signout", signOut);
 
 export default router;

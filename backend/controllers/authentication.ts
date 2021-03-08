@@ -121,28 +121,28 @@ export const authenticateToken = async (
     //     https://solidgeargroup.com/en/refresh-token-with-jwt-authentication-node-js/
 };
 
-// export const signOut = async (req: Request, res: Response) => {
-//     const refreshToken = req.headers["cookie"]
-//         ?.split(";")
-//         .map((item: any) => item.trim())
-//         .find((str: string) => str.startsWith(REFRESH_TOKEN))
-//         ?.split("=")
-//         .pop();
+export const signOut = async (req: Request, res: Response) => {
+    const refreshToken = req.headers["cookie"]
+        ?.split(";")
+        .map((item: any) => item.trim())
+        .find((str: string) => str.startsWith(REFRESH_TOKEN))
+        ?.split("=")
+        .pop();
 
-//     if (refreshToken) {
-//         pool.query(
-//             `UPDATE auth SET refresh_token = null WHERE refresh_token = '${refreshToken}'`,
-//             (error, user) => {
-//                 if (error) return res.send(INTERNAL_SERVER_ERROR_STATUS);
-//                 res.clearCookie(ACCESS_TOKEN);
-//                 res.clearCookie(REFRESH_TOKEN);
-//                 res.send({ token: "" });
-//             }
-//         );
-//     } else {
-//         res.sendStatus(FORBIDDEN_STATUS);
-//     }
-// };
+    if (refreshToken) {
+        pool.query(
+            `UPDATE auth SET refresh_token = null WHERE refresh_token = '${refreshToken}'`,
+            (error, user) => {
+                if (error) return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
+                res.clearCookie(ACCESS_TOKEN);
+                res.clearCookie(REFRESH_TOKEN);
+                res.send({ token: "" });
+            }
+        );
+    } else {
+        res.sendStatus(FORBIDDEN_STATUS);
+    }
+};
 
 export const signIn = (req: any, res: Response) => {
     if (PRIVATE_KEY) {

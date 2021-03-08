@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUp = exports.signIn = exports.authenticateToken = exports.refreshToken = void 0;
+exports.signUp = exports.signIn = exports.signOut = exports.authenticateToken = exports.refreshToken = void 0;
 var databasePool_1 = __importDefault(require("../databasePool"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var bcrypt_1 = __importDefault(require("bcrypt"));
@@ -132,27 +132,27 @@ var authenticateToken = function (req, res, next) { return __awaiter(void 0, voi
     });
 }); };
 exports.authenticateToken = authenticateToken;
-// export const signOut = async (req: Request, res: Response) => {
-//     const refreshToken = req.headers["cookie"]
-//         ?.split(";")
-//         .map((item: any) => item.trim())
-//         .find((str: string) => str.startsWith(REFRESH_TOKEN))
-//         ?.split("=")
-//         .pop();
-//     if (refreshToken) {
-//         pool.query(
-//             `UPDATE auth SET refresh_token = null WHERE refresh_token = '${refreshToken}'`,
-//             (error, user) => {
-//                 if (error) return res.send(INTERNAL_SERVER_ERROR_STATUS);
-//                 res.clearCookie(ACCESS_TOKEN);
-//                 res.clearCookie(REFRESH_TOKEN);
-//                 res.send({ token: "" });
-//             }
-//         );
-//     } else {
-//         res.sendStatus(FORBIDDEN_STATUS);
-//     }
-// };
+var signOut = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var refreshToken;
+    var _a, _b;
+    return __generator(this, function (_c) {
+        refreshToken = (_b = (_a = req.headers["cookie"]) === null || _a === void 0 ? void 0 : _a.split(";").map(function (item) { return item.trim(); }).find(function (str) { return str.startsWith(REFRESH_TOKEN); })) === null || _b === void 0 ? void 0 : _b.split("=").pop();
+        if (refreshToken) {
+            databasePool_1.default.query("UPDATE auth SET refresh_token = null WHERE refresh_token = '" + refreshToken + "'", function (error, user) {
+                if (error)
+                    return res.sendStatus(constants_1.INTERNAL_SERVER_ERROR_STATUS);
+                res.clearCookie(ACCESS_TOKEN);
+                res.clearCookie(REFRESH_TOKEN);
+                res.send({ token: "" });
+            });
+        }
+        else {
+            res.sendStatus(constants_1.FORBIDDEN_STATUS);
+        }
+        return [2 /*return*/];
+    });
+}); };
+exports.signOut = signOut;
 var signIn = function (req, res) {
     if (PRIVATE_KEY) {
         //req.user exists because of the done(null, user) used in the Strategies at passport.ts

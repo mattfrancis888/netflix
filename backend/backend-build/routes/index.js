@@ -38,5 +38,5 @@ var router = express_1.Router();
 router.post("/signin", requireSignIn, authentication_1.signIn);
 router.post("/signup", authentication_1.signUp);
 //router.post("/token", refreshToken);
-//router.post("/signout", signOut);
+router.post("/signout", authentication_1.signOut);
 exports.default = router;
