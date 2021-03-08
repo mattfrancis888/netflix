@@ -11,7 +11,7 @@ console.log("database", process.env.database);
 console.log("password", process.env.password);
 var pool = new pg_1.Pool({
     user: process.env.user,
-    host: process.env.elephantSQLServer,
+    host: process.env.host,
     database: process.env.database,
     password: process.env.password,
     port: 5432,
