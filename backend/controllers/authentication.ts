@@ -144,59 +144,54 @@ export const authenticateToken = async (
 //     }
 // };
 
-// export const signIn = (req: any, res: Response) => {
-//     if (PRIVATE_KEY) {
-//         //req.user exists because of the done(null, user) used in the Strategies at passport.ts
-//         // console.log("REQ.USER", req.user.email);
-//         const refreshToken = generateRefreshToken(req.user.email, PRIVATE_KEY);
-//         const token = generateAccessToken(req.user.email, PRIVATE_KEY);
-//         // Update Refresh token to database
-//         pool.query(
-//             `UPDATE auth
-//         SET refresh_token = $1 WHERE email = $2`,
-//             [refreshToken, req.user.email],
-//             (error, response) => {
-//                 if (error) return res.send(FORBIDDEN_STATUS);
-//                 // For acces token,  flags should be "secure: true"
-//                 //For refreshtoken "secure: true" and "httpOnly: true"
+export const signIn = (req: any, res: Response) => {
+    if (PRIVATE_KEY) {
+        //req.user exists because of the done(null, user) used in the Strategies at passport.ts
+        // console.log("REQ.USER", req.user.email);
+        const refreshToken = generateRefreshToken(req.user.email, PRIVATE_KEY);
+        const token = generateAccessToken(req.user.email, PRIVATE_KEY);
+        // Update Refresh token to database
+        pool.query(
+            `UPDATE auth
+        SET refresh_token = $1 WHERE email = $2`,
+            [refreshToken, req.user.email],
+            (error, response) => {
+                if (error) return res.send(FORBIDDEN_STATUS);
+                // For acces token,  flags should be "secure: true"
+                //For refreshtoken "secure: true" and "httpOnly: true"
 
-//                 //Note: cookies will not be shown in http://localhost dev tools because it has flags of secure
-//                 //and http only; but POSTMAN will show your cookies
+                //Note: cookies will not be shown in http://localhost dev tools because it has flags of secure
+                //and http only; but POSTMAN will show your cookies
 
-//                 //Note: ORDER IS IMPORTANT, SEND setHeader FIRST EBFORE SENDING cookie!
-//                 // res.setHeader("set-cookie", [
-//                 //     `REFRESH_TOKEN=${refreshToken}; httponly;`,
-//                 // ]);
+                //Chrome's default settings for cookie is samesite=Strict (to avoid CSRF attacks) and Secure
+                //We should make it samesite=strict
+                // res.cookie(REFRESH_TOKEN, refreshToken, {
+                //     sameSite: "strict",
+                //     secure: true,
+                //     httpOnly: true,
+                // });
 
-//                 //Chrome's default settings for cookie is samesite=Strict (to avoid CSRF attacks) and Secure
-//                 //We should make it samesite=strict
-//                 // res.cookie(REFRESH_TOKEN, refreshToken, {
-//                 //     sameSite: "strict",
-//                 //     secure: true,
-//                 //     httpOnly: true,
-//                 // });
+                // res.cookie(ACCESS_TOKEN, token, {
+                //     sameSite: "strict",
+                //     secure: true,
+                // });
 
-//                 // res.cookie(ACCESS_TOKEN, token, {
-//                 //     sameSite: "strict",
-//                 //     secure: true,
-//                 // });
+                //For development, we remove secure because it's on http:
+                res.cookie(REFRESH_TOKEN, refreshToken, {
+                    httpOnly: true,
+                });
+                res.cookie(ACCESS_TOKEN, token);
 
-//                 //For development, we remove secure because it's on http:
-//                 res.cookie(REFRESH_TOKEN, refreshToken, {
-//                     httpOnly: true,
-//                 });
-//                 res.cookie(ACCESS_TOKEN, token);
-
-//                 res.send({
-//                     token,
-//                     refreshToken,
-//                 });
-//             }
-//         );
-//     } else {
-//         res.send(FORBIDDEN_STATUS);
-//     }
-// };
+                res.send({
+                    token,
+                    refreshToken,
+                });
+            }
+        );
+    } else {
+        res.send(FORBIDDEN_STATUS);
+    }
+};
 export const signUp = async (req: any, res: Response, next: NextFunction) => {
     if (PRIVATE_KEY) {
         //If user with given email exists

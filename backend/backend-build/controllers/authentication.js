@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.signUp = exports.authenticateToken = exports.refreshToken = void 0;
+exports.signUp = exports.signIn = exports.authenticateToken = exports.refreshToken = void 0;
 var databasePool_1 = __importDefault(require("../databasePool"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var bcrypt_1 = __importDefault(require("bcrypt"));
@@ -153,62 +153,56 @@ exports.authenticateToken = authenticateToken;
 //         res.sendStatus(FORBIDDEN_STATUS);
 //     }
 // };
-// export const signIn = (req: any, res: Response) => {
-//     if (PRIVATE_KEY) {
-//         //req.user exists because of the done(null, user) used in the Strategies at passport.ts
-//         // console.log("REQ.USER", req.user.email);
-//         const refreshToken = generateRefreshToken(req.user.email, PRIVATE_KEY);
-//         const token = generateAccessToken(req.user.email, PRIVATE_KEY);
-//         // Update Refresh token to database
-//         pool.query(
-//             `UPDATE auth
-//         SET refresh_token = $1 WHERE email = $2`,
-//             [refreshToken, req.user.email],
-//             (error, response) => {
-//                 if (error) return res.send(FORBIDDEN_STATUS);
-//                 // For acces token,  flags should be "secure: true"
-//                 //For refreshtoken "secure: true" and "httpOnly: true"
-//                 //Note: cookies will not be shown in http://localhost dev tools because it has flags of secure
-//                 //and http only; but POSTMAN will show your cookies
-//                 //Note: ORDER IS IMPORTANT, SEND setHeader FIRST EBFORE SENDING cookie!
-//                 // res.setHeader("set-cookie", [
-//                 //     `REFRESH_TOKEN=${refreshToken}; httponly;`,
-//                 // ]);
-//                 //Chrome's default settings for cookie is samesite=Strict (to avoid CSRF attacks) and Secure
-//                 //We should make it samesite=strict
-//                 // res.cookie(REFRESH_TOKEN, refreshToken, {
-//                 //     sameSite: "strict",
-//                 //     secure: true,
-//                 //     httpOnly: true,
-//                 // });
-//                 // res.cookie(ACCESS_TOKEN, token, {
-//                 //     sameSite: "strict",
-//                 //     secure: true,
-//                 // });
-//                 //For development, we remove secure because it's on http:
-//                 res.cookie(REFRESH_TOKEN, refreshToken, {
-//                     httpOnly: true,
-//                 });
-//                 res.cookie(ACCESS_TOKEN, token);
-//                 res.send({
-//                     token,
-//                     refreshToken,
-//                 });
-//             }
-//         );
-//     } else {
-//         res.send(FORBIDDEN_STATUS);
-//     }
-// };
+var signIn = function (req, res) {
+    if (PRIVATE_KEY) {
+        //req.user exists because of the done(null, user) used in the Strategies at passport.ts
+        // console.log("REQ.USER", req.user.email);
+        var refreshToken_1 = generateRefreshToken(req.user.email, PRIVATE_KEY);
+        var token_1 = generateAccessToken(req.user.email, PRIVATE_KEY);
+        // Update Refresh token to database
+        databasePool_1.default.query("UPDATE auth\n        SET refresh_token = $1 WHERE email = $2", [refreshToken_1, req.user.email], function (error, response) {
+            if (error)
+                return res.send(constants_1.FORBIDDEN_STATUS);
+            // For acces token,  flags should be "secure: true"
+            //For refreshtoken "secure: true" and "httpOnly: true"
+            //Note: cookies will not be shown in http://localhost dev tools because it has flags of secure
+            //and http only; but POSTMAN will show your cookies
+            //Chrome's default settings for cookie is samesite=Strict (to avoid CSRF attacks) and Secure
+            //We should make it samesite=strict
+            // res.cookie(REFRESH_TOKEN, refreshToken, {
+            //     sameSite: "strict",
+            //     secure: true,
+            //     httpOnly: true,
+            // });
+            // res.cookie(ACCESS_TOKEN, token, {
+            //     sameSite: "strict",
+            //     secure: true,
+            // });
+            //For development, we remove secure because it's on http:
+            res.cookie(REFRESH_TOKEN, refreshToken_1, {
+                httpOnly: true,
+            });
+            res.cookie(ACCESS_TOKEN, token_1);
+            res.send({
+                token: token_1,
+                refreshToken: refreshToken_1,
+            });
+        });
+    }
+    else {
+        res.send(constants_1.FORBIDDEN_STATUS);
+    }
+};
+exports.signIn = signIn;
 var signUp = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var email, password, refreshToken_1, token, UNPROCESSABLE_ENTITY_STATUS, checkEmailResponse, saltRounds, hash, hashedPassword, error_1, error_2;
+    var email, password, refreshToken_2, token, UNPROCESSABLE_ENTITY_STATUS, checkEmailResponse, saltRounds, hash, hashedPassword, error_1, error_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 if (!PRIVATE_KEY) return [3 /*break*/, 10];
                 email = req.body.email;
                 password = req.body.password;
-                refreshToken_1 = generateRefreshToken(email, PRIVATE_KEY);
+                refreshToken_2 = generateRefreshToken(email, PRIVATE_KEY);
                 token = generateAccessToken(email, PRIVATE_KEY);
                 UNPROCESSABLE_ENTITY_STATUS = 422;
                 //Email or password not given
@@ -239,7 +233,7 @@ var signUp = function (req, res, next) { return __awaiter(void 0, void 0, void 0
                 _a.label = 4;
             case 4:
                 _a.trys.push([4, 6, , 7]);
-                return [4 /*yield*/, databasePool_1.default.query(" INSERT INTO auth(email, password, refresh_token)VALUES($1, $2, $3)", [email, hashedPassword, refreshToken_1])];
+                return [4 /*yield*/, databasePool_1.default.query(" INSERT INTO auth(email, password, refresh_token)VALUES($1, $2, $3)", [email, hashedPassword, refreshToken_2])];
             case 5:
                 _a.sent();
                 //Generate a token when user signs in, this token will be used so that they can access protected routes
@@ -255,7 +249,7 @@ var signUp = function (req, res, next) { return __awaiter(void 0, void 0, void 0
                 //     secure: true,
                 // });
                 //For development, we remove secure because it's on http:
-                res.cookie(REFRESH_TOKEN, refreshToken_1, {
+                res.cookie(REFRESH_TOKEN, refreshToken_2, {
                     httpOnly: true,
                 });
                 res.cookie(ACCESS_TOKEN, token);

@@ -1,19 +1,21 @@
 import { Router, Request, Response } from "express";
 import pool from "../databasePool";
-import { signUp } from "../controllers/authentication";
-// import { jwtLogin, localLogin } from "../services/passport";
+import { signUp, signIn } from "../controllers/authentication";
+import { localLogin } from "../services/passport";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 
+//jwtlog in is an optional way to check if user is signed in at x route. We will be using a HOC to check if a user is signed in
+//So this is not needed / another implementation of the same goal.
 //passport.use(jwtLogin);
 //authenticates if a user can log in / acess a specific resource
 //We are not using cookie sessions, so we put in session: false
 //const requireAuth = passport.authenticate("jwt", { session: false });
 //requireAuth uses the jwtLogin strategy
 
-//const requireSignIn = passport.authenticate("local", { session: false });
+const requireSignIn = passport.authenticate("local", { session: false });
 //requireSignin uses the locallogin strategy
-//passport.use(localLogin);
+passport.use(localLogin);
 
 const router = Router();
 //We want to ensure that the user token can acess specific resources in the page
@@ -37,7 +39,7 @@ const router = Router();
 // });
 
 //Go through passsport strategy middleware first, if succesfull, will be continuted to signIn middleware
-// router.post("/signin", requireSignIn, signIn);
+router.post("/signin", requireSignIn, signIn);
 router.post("/signup", signUp);
 //router.post("/token", refreshToken);
 //router.post("/signout", signOut);
