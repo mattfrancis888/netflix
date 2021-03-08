@@ -21,16 +21,8 @@
     color: white;
     h3 {
         margin: 0;
+        margin-bottom: 1rem;
     }
-}
-
-.mediaRowWrap {
-    display: flex;
-    justify-content: flex-start;
-    overflow-x: scroll;
-    margin-right: -10rem;
-    margin-bottom: 1rem;
-    padding-bottom: 3rem;
 }
 
 .mediaContainer {

@@ -1,0 +1,81 @@
+.mediaCarouselWrap {
+    margin-bottom: 5rem;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+.sliderAndButtonWrap {
+    position: relative;
+}
+
+.mediaNextButton {
+    @include carouselNextAndPrevButton;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    outline: none !important;
+}
+
+.mediaBackButton {
+    @include carouselNextAndPrevButton;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    outline: none !important;
+}
+
+.mediaContainerCarousel {
+    position: relative;
+
+    // opacity: 0;
+}
+// .moviePosterTitleFade {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     height: 100%;
+//     width: 100%;
+//     z-index: 0;
+//     background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0, transparent 34%);
+// }
+
+// .movieOverlay {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     cursor: pointer;
+//     background: rgba(0, 0, 0, 0.6);
+//     h3 {
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         color: white;
+//         text-transform: uppercase;
+//         font-size: 0.8rem;
+//         @media screen and (min-width: $sm_breakpoint) {
+//             font-size: 1.3rem;
+//         }
+//         @media screen and (min-width: $md_breakpoint) {
+//             font-size: 1.6rem;
+//         }
+//         @media screen and (min-width: $lg_breakpoint) {
+//             font-size: 2rem;
+//         }
+//         filter: none;
+//     }
+//     // opacity: 0;
+//     transition: all 0.3s ease;
+
+//     &:hover {
+//         opacity: 1;
+//     }
+// }
