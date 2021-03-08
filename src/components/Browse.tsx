@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import BrowseHeader from "./BrowseHeader";
 import history from "../browserHistory";
 import MediaCarousel from "./MediaCarousel";
+import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import useWindowDimensions from "../windowDimensions";
 
 const Browse: React.FC<{}> = (props) => {
@@ -22,10 +23,12 @@ const Browse: React.FC<{}> = (props) => {
                 <h3>Continue Watching</h3>
                 <MediaCarousel />
                 <h3>TV Shows</h3>
-
-                <h3>Popular On Netflix</h3>
-
+                <MediaCarousel />
                 <h3>Netflix Originals</h3>
+                <NetflixOriginalCarousel />
+                <h3>Popular On Netflix</h3>
+                <MediaCarousel />
+
                 <div className="mediaRowWrap"></div>
             </div>
         </React.Fragment>

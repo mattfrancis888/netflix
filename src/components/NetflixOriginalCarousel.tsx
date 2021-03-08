@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 
 import useWindowDimensions from "../windowDimensions";
 
-const MoviesCarousel: React.FC<{}> = (props) => {
+const NetflixOriginalCarousel: React.FC<{}> = (props) => {
     const history = useHistory();
     const { width } = useWindowDimensions();
     const [style, setStyle] = useState({ opacity: "1" });
@@ -30,7 +30,7 @@ const MoviesCarousel: React.FC<{}> = (props) => {
             >
                 <CarouselProvider
                     naturalSlideWidth={100}
-                    naturalSlideHeight={50}
+                    naturalSlideHeight={200}
                     totalSlides={5}
                     className="mediaCarouselWrap"
                     visibleSlides={width < 900 ? 3 : 5}
@@ -50,7 +50,7 @@ const MoviesCarousel: React.FC<{}> = (props) => {
                                 <LazyLoad>
                                     <div className="mediaContainerCarousel movieOne">
                                         <img
-                                            src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKu3dDN-pDHe0IvQ4LNtbONhqii1apdDPYyIo2md7qVZ2KCD8hRNrvBsD-M2X4GXjQAezSV5LPxK-BkGw_pYfEmHrETmdk6ASeOn5GJvoBzhRCidWlrvqRJ4s8c5H0LuQ.webp?r=158"
+                                            src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187"
                                             alt="movie poster"
                                         ></img>
                                     </div>
@@ -60,7 +60,7 @@ const MoviesCarousel: React.FC<{}> = (props) => {
                                 <LazyLoad>
                                     <div className="mediaContainerCarousel movieTwo">
                                         <img
-                                            src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKu3dDN-pDHe0IvQ4LNtbONhqii1apdDPYyIo2md7qVZ2KCD8hRNrvBsD-M2X4GXjQAezSV5LPxK-BkGw_pYfEmHrETmdk6ASeOn5GJvoBzhRCidWlrvqRJ4s8c5H0LuQ.webp?r=158"
+                                            src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187"
                                             alt="movie poster"
                                         ></img>
                                     </div>
@@ -70,7 +70,7 @@ const MoviesCarousel: React.FC<{}> = (props) => {
                                 <LazyLoad>
                                     <div className="mediaContainerCarousel movieTwo">
                                         <img
-                                            src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKu3dDN-pDHe0IvQ4LNtbONhqii1apdDPYyIo2md7qVZ2KCD8hRNrvBsD-M2X4GXjQAezSV5LPxK-BkGw_pYfEmHrETmdk6ASeOn5GJvoBzhRCidWlrvqRJ4s8c5H0LuQ.webp?r=158"
+                                            src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187"
                                             alt="movie poster"
                                         ></img>
                                     </div>
@@ -92,4 +92,4 @@ const MoviesCarousel: React.FC<{}> = (props) => {
     return <div data-testid="movieCarousel">{renderCarousel()}</div>;
 };
 
-export default MoviesCarousel;
+export default NetflixOriginalCarousel;
