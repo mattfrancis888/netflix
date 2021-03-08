@@ -12,7 +12,7 @@ import {
     fireEvent,
 } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-
+//import Modal from "components/Modal";
 import history from "browserHistory";
 let pushSpy: jest.SpyInstance;
 let app: RenderResult;
@@ -49,3 +49,19 @@ test("Media sections exist", async () => {
     expect(app.getByText("Netflix Originals")).toBeInTheDocument();
     expect(app.getByText("Popular On Netflix")).toBeInTheDocument();
 });
+
+// test("modal shows the children", () => {
+//Tried to solved with: https://stackoverflow.com/questions/39986178/testing-react-target-container-is-not-a-dom-element
+//However, none of the solutions worked
+//     // Arrange
+//     const handleClose = jest.fn();
+
+//     // Act
+//     const { getByText } = render(
+//         <Modal onDismiss={handleClose}>
+//             <div>test</div>
+//         </Modal>
+//     );
+//     // Assert
+//     expect(getByText("test")).toBeTruthy();
+// });

@@ -9,7 +9,7 @@ import Modal from "./Modal";
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
-    content: JSX.Element;
+    content?: JSX.Element;
     actions?: JSX.Element;
 }
 
