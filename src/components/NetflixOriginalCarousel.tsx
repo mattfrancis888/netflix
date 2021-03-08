@@ -13,8 +13,10 @@ import LazyLoad from "react-lazyload";
 import { useHistory } from "react-router-dom";
 
 import useWindowDimensions from "../windowDimensions";
-
-const NetflixOriginalCarousel: React.FC<{}> = (props) => {
+import { MediaAndNetflixOriginalCarouselProps } from "./Browse";
+const NetflixOriginalCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
+    props
+) => {
     const history = useHistory();
     const { width } = useWindowDimensions();
     const [style, setStyle] = useState({ opacity: "1" });
@@ -55,7 +57,12 @@ const NetflixOriginalCarousel: React.FC<{}> = (props) => {
                                         ></img>
                                         <div className="mediaOutlineDownContainer">
                                             <div className="outlineDownWrap">
-                                                <AiOutlineDown className="outlineDown" />
+                                                <AiOutlineDown
+                                                    className="outlineDown"
+                                                    onClick={() => {
+                                                        props.modalShow();
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -70,7 +77,12 @@ const NetflixOriginalCarousel: React.FC<{}> = (props) => {
                                         ></img>
                                         <div className="mediaOutlineDownContainer">
                                             <div className="outlineDownWrap">
-                                                <AiOutlineDown className="outlineDown" />
+                                                <AiOutlineDown
+                                                    className="outlineDown"
+                                                    onClick={() => {
+                                                        props.modalShow();
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +97,12 @@ const NetflixOriginalCarousel: React.FC<{}> = (props) => {
                                         ></img>
                                         <div className="mediaOutlineDownContainer">
                                             <div className="outlineDownWrap">
-                                                <AiOutlineDown className="outlineDown" />
+                                                <AiOutlineDown
+                                                    className="outlineDown"
+                                                    onClick={() => {
+                                                        props.modalShow();
+                                                    }}
+                                                />
                                             </div>
                                         </div>
                                     </div>

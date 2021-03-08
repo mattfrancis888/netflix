@@ -49,18 +49,11 @@
     @media screen and (min-width: $sm_breakpoint) {
         margin: 0 0.5rem;
     }
-    z-index: 0;
-    &:hover {
-        // padding: 0;
-
-        transition: all 0.3s ease;
-    }
-    // opacity: 0;
 }
 .mediaOutlineDownContainer {
     position: absolute;
     bottom: 0;
-    right: 0rem;
+    right: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -94,10 +87,12 @@
         font-size: 1.2rem;
         @media screen and (min-width: $sm_breakpoint) {
             font-size: 2rem;
+            padding-bottom: 0.4rem;
         }
 
         @media screen and (min-width: $lg_breakpoint) {
             font-size: 2.3rem;
+            padding-bottom: 0.4rem;
         }
         right: 1rem;
     }
