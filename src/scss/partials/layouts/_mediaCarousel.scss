@@ -35,9 +35,74 @@
 
 .mediaContainerCarousel {
     position: relative;
+    z-index: 0;
+    &:hover {
+        // padding: 0;
+        z-index: 2;
+        transform: scale(1.1, 1.1);
+        transition: all 0.3s ease;
+    }
 
+    margin: 0 0.25rem;
+    transition: all 0.3s ease;
+    border-radius: 1rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        margin: 0 0.5rem;
+    }
+    z-index: 0;
+    &:hover {
+        // padding: 0;
+
+        transition: all 0.3s ease;
+    }
     // opacity: 0;
 }
+.mediaOutlineDownContainer {
+    position: absolute;
+    bottom: 0;
+    right: 0rem;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    // background-image: linear-gradient(
+    //     to bottom,
+    //     rgba(0, 0, 0, 0.7) 10%,
+    //     rgba(0, 0, 0, 0)
+    // );
+
+    transition: opacity 0.5s;
+    &:hover {
+        opacity: 1;
+        transition: opacity 0.5s;
+    }
+}
+.outlineDownWrap {
+    background: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.2rem;
+    @media screen and (min-width: $md_breakpoint) {
+        padding: 0.5rem;
+    }
+    .outlineDown {
+        cursor: pointer;
+        color: white;
+        font-size: 1.2rem;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 2rem;
+        }
+
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 2.3rem;
+        }
+        right: 1rem;
+    }
+}
+
 // .moviePosterTitleFade {
 //     position: absolute;
 //     top: 0;

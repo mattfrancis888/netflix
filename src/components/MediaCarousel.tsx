@@ -8,7 +8,7 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
-import { IconContext } from "react-icons";
+import { AiOutlineDown } from "react-icons/ai";
 import LazyLoad from "react-lazyload";
 import { useHistory } from "react-router-dom";
 
@@ -18,6 +18,7 @@ const MoviesCarousel: React.FC<{}> = (props) => {
     const history = useHistory();
     const { width } = useWindowDimensions();
     const [style, setStyle] = useState({ opacity: "1" });
+
     const renderCarousel = (): JSX.Element | JSX.Element[] => {
         return (
             <div
@@ -30,7 +31,7 @@ const MoviesCarousel: React.FC<{}> = (props) => {
             >
                 <CarouselProvider
                     naturalSlideWidth={100}
-                    naturalSlideHeight={50}
+                    naturalSlideHeight={55}
                     totalSlides={5}
                     className="mediaCarouselWrap"
                     visibleSlides={width < 900 ? 3 : 5}
@@ -53,6 +54,11 @@ const MoviesCarousel: React.FC<{}> = (props) => {
                                             src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKu3dDN-pDHe0IvQ4LNtbONhqii1apdDPYyIo2md7qVZ2KCD8hRNrvBsD-M2X4GXjQAezSV5LPxK-BkGw_pYfEmHrETmdk6ASeOn5GJvoBzhRCidWlrvqRJ4s8c5H0LuQ.webp?r=158"
                                             alt="movie poster"
                                         ></img>
+                                        <div className="mediaOutlineDownContainer">
+                                            <div className="outlineDownWrap">
+                                                <AiOutlineDown className="outlineDown" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </LazyLoad>
                             </Slide>
@@ -64,6 +70,11 @@ const MoviesCarousel: React.FC<{}> = (props) => {
                                             alt="movie poster"
                                         ></img>
                                     </div>
+                                    <div className="mediaOutlineDownContainer">
+                                        <div className="outlineDownWrap">
+                                            <AiOutlineDown className="outlineDown" />
+                                        </div>
+                                    </div>
                                 </LazyLoad>
                             </Slide>
                             <Slide index={2}>
@@ -73,6 +84,11 @@ const MoviesCarousel: React.FC<{}> = (props) => {
                                             src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABXKu3dDN-pDHe0IvQ4LNtbONhqii1apdDPYyIo2md7qVZ2KCD8hRNrvBsD-M2X4GXjQAezSV5LPxK-BkGw_pYfEmHrETmdk6ASeOn5GJvoBzhRCidWlrvqRJ4s8c5H0LuQ.webp?r=158"
                                             alt="movie poster"
                                         ></img>
+                                        <div className="mediaOutlineDownContainer">
+                                            <div className="outlineDownWrap">
+                                                <AiOutlineDown className="outlineDown" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </LazyLoad>
                             </Slide>

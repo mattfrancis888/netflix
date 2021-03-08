@@ -8,7 +8,7 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
-import { IconContext } from "react-icons";
+import { AiOutlineDown } from "react-icons/ai";
 import LazyLoad from "react-lazyload";
 import { useHistory } from "react-router-dom";
 
@@ -48,11 +48,16 @@ const NetflixOriginalCarousel: React.FC<{}> = (props) => {
                                 //https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187
                             >
                                 <LazyLoad>
-                                    <div className="mediaContainerCarousel movieOne">
+                                    <div className="mediaContainerCarousel movieTwo">
                                         <img
                                             src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187"
                                             alt="movie poster"
                                         ></img>
+                                        <div className="mediaOutlineDownContainer">
+                                            <div className="outlineDownWrap">
+                                                <AiOutlineDown className="outlineDown" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </LazyLoad>
                             </Slide>
@@ -63,6 +68,11 @@ const NetflixOriginalCarousel: React.FC<{}> = (props) => {
                                             src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187"
                                             alt="movie poster"
                                         ></img>
+                                        <div className="mediaOutlineDownContainer">
+                                            <div className="outlineDownWrap">
+                                                <AiOutlineDown className="outlineDown" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </LazyLoad>
                             </Slide>
@@ -73,6 +83,11 @@ const NetflixOriginalCarousel: React.FC<{}> = (props) => {
                                             src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187"
                                             alt="movie poster"
                                         ></img>
+                                        <div className="mediaOutlineDownContainer">
+                                            <div className="outlineDownWrap">
+                                                <AiOutlineDown className="outlineDown" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </LazyLoad>
                             </Slide>
