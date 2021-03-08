@@ -23,10 +23,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     }, []);
 
     return (
-        <div
-            className="browseHeaderContainer"
-            data-testid="netflixLogoForRegisterAndSignIn"
-        >
+        <div className="browseHeaderContainer" data-testid="netflixBrowseLogo">
             <svg
                 viewBox="0 0 111 30"
                 focusable="true"
