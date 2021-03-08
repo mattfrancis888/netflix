@@ -37,6 +37,6 @@ var router = express_1.Router();
 //Go through passsport strategy middleware first, if succesfull, will be continuted to signIn middleware
 router.post("/signin", requireSignIn, authentication_1.signIn);
 router.post("/signup", authentication_1.signUp);
-//router.post("/token", refreshToken);
+router.post("/token", authentication_1.refreshToken);
 router.post("/signout", authentication_1.signOut);
 exports.default = router;

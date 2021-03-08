@@ -1,5 +1,10 @@
 import { Router, Request, Response } from "express";
-import { signUp, signIn, signOut } from "../controllers/authentication";
+import {
+    signUp,
+    signIn,
+    signOut,
+    refreshToken,
+} from "../controllers/authentication";
 import { localLogin } from "../services/passport";
 import passport from "passport";
 import jwt from "jsonwebtoken";
@@ -40,7 +45,7 @@ const router = Router();
 //Go through passsport strategy middleware first, if succesfull, will be continuted to signIn middleware
 router.post("/signin", requireSignIn, signIn);
 router.post("/signup", signUp);
-//router.post("/token", refreshToken);
+router.post("/token", refreshToken);
 router.post("/signout", signOut);
 
 export default router;
