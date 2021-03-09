@@ -26,6 +26,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
             return (
                 <Slide
                     index={index}
+                    key={content.media_id}
                     // onClick={() =>
                     //     history.push(
                     //         `movies/${props.movies[0].movie_name_for_url}`

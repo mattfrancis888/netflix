@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMedias = void 0;
+exports.getMediaGenreAndCast = exports.getMedias = void 0;
 var databasePool_1 = __importDefault(require("../databasePool"));
 var constants_1 = require("../constants");
 var getMedias = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -55,10 +55,44 @@ var getMedias = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
-                console.log(error_1);
+                databasePool_1.default.query("ROLLBACK");
                 return [2 /*return*/, res.sendStatus(constants_1.INTERNAL_SERVER_ERROR_STATUS)];
             case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.getMedias = getMedias;
+var getMediaGenreAndCast = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var mediaId, genreResponse, castResponse, results, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 4, , 5]);
+                mediaId = req.params.mediaId;
+                //Transaction
+                return [4 /*yield*/, databasePool_1.default.query("BEGIN")];
+            case 1:
+                //Transaction
+                _a.sent();
+                return [4 /*yield*/, databasePool_1.default.query("SELECT genre_name FROM lookup_media_genre\n            NATURAL JOIN genre WHERE media_id = $1;", [mediaId])];
+            case 2:
+                genreResponse = _a.sent();
+                return [4 /*yield*/, databasePool_1.default.query("SELECT actor_first_name, actor_last_name FROM lookup_media_actor\n            NATURAL JOIN actor WHERE media_id = $1;", [mediaId])];
+            case 3:
+                castResponse = _a.sent();
+                databasePool_1.default.query("COMMIT");
+                results = {};
+                results.casts = castResponse.rows;
+                results.genres = genreResponse.rows;
+                res.send(results);
+                return [3 /*break*/, 5];
+            case 4:
+                error_2 = _a.sent();
+                databasePool_1.default.query("ROLLBACK");
+                console.log("ROLLBACK TRIGGERED");
+                return [2 /*return*/, res.sendStatus(constants_1.INTERNAL_SERVER_ERROR_STATUS)];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getMediaGenreAndCast = getMediaGenreAndCast;

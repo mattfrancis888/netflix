@@ -6,13 +6,14 @@ import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import { FaPlay } from "react-icons/fa";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
-import { fetchMedias, Media } from "../actions";
+import { fetchMedias, Media, fetchMediaGenreAndCast } from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
 import { MediaStateResponse } from "../reducers/mediasReducer";
 import Loading from "./Loading";
 import { ErrorStateResponse } from "reducers/errorReducer";
 import _ from "lodash";
+import { MediaGenreAndCastStateResponse } from "reducers/mediaGenreAndCastReducer";
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -22,14 +23,15 @@ export interface ModalProps {
 
 export interface MediaAndNetflixOriginalCarouselProps {
     modalShow: any;
-    // content: Media[];
     content: Media[];
 }
 
 interface BrowseProps {
     medias: MediaStateResponse;
+    mediaGenreAndCast: MediaGenreAndCastStateResponse;
     errors: ErrorStateResponse;
     fetchMedias(): void;
+    fetchMediaGenreAndCast(mediaId: number): void;
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
@@ -82,6 +84,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
         console.log(clickedMedia);
         setShowFilterModal(true);
         setShowModalContent({ ...clickedMedia });
+        props.fetchMediaGenreAndCast(clickedMedia.media_id);
     };
     const modalOnCancel = () => {
         setShowFilterModal(false);
@@ -129,19 +132,54 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     </div>
                     <div className="modalTextSection">
                         <div className="modalCastAndGenre">
-                            <div className="modalMediaCastWrap">
-                                <p className="modalGreyTextInfo">Cast: </p>
-                                <p>Name, more</p>
-                            </div>
-                            <div className="modalMediaGenreWrap">
-                                <p className="modalGreyTextInfo">Genres: </p>
-                                <p>Action</p>
-                            </div>
+                            {renderGenreAndCast()}
                         </div>
                     </div>
                 </div>
             </div>
         );
+    };
+
+    const renderGenreAndCast = () => {
+        if (!props.mediaGenreAndCast) {
+            return (
+                <React.Fragment>
+                    <div className="modalMediaCastWrap">
+                        <p className="modalGreyTextInfo">Cast: </p>
+                        <p>Loading</p>
+                    </div>
+                    <div className="modalMediaGenreWrap">
+                        <p className="modalGreyTextInfo">Genres: </p>
+                        <p>Loading</p>
+                    </div>
+                </React.Fragment>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <div className="modalMediaCastWrap">
+                        <p className="modalGreyTextInfo">Cast: </p>
+                        <p>
+                            {props.mediaGenreAndCast.data?.casts.map(
+                                (actor, index) => {
+                                    return ` ${actor.actor_first_name}  ${actor.actor_last_name},`;
+                                }
+                            )}
+                        </p>
+                    </div>
+                    <div className="modalMediaGenreWrap">
+                        <p className="modalGreyTextInfo">Genres: </p>
+                        <p>
+                            {props.mediaGenreAndCast.data?.genres.map(
+                                (genre, index) => {
+                                    return ` ${genre.genre_name},`;
+                                }
+                            )}
+                        </p>
+                    </div>
+                </React.Fragment>
+            );
+        }
     };
 
     return (
@@ -181,8 +219,12 @@ const Browse: React.FC<BrowseProps> = (props) => {
 const mapStateToProps = (state: StoreState) => {
     return {
         medias: state.medias,
+        mediaGenreAndCast: state.mediaGenreAndCast,
         errors: state.errors,
     };
 };
 
-export default connect(mapStateToProps, { fetchMedias })(requireAuth(Browse));
+export default connect(mapStateToProps, {
+    fetchMedias,
+    fetchMediaGenreAndCast,
+})(requireAuth(Browse));

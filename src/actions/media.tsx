@@ -14,6 +14,11 @@ export interface FetchMediasAction {
     payload: FetchMediaResponse;
 }
 
+export interface FetchMediaGenreAndCastAction {
+    type: ActionTypes.FETCH_MEDIA_GENRE_AND_CAST;
+    payload: FetchMediaGenreCastResponse;
+}
+
 export interface MediaErrorAction {
     type: ActionTypes.MEDIA_ERROR;
     payload: ServerError;
@@ -29,8 +34,20 @@ export interface Media {
     name_tokens: string;
 }
 
+export interface Cast {
+    actor_first_name: string;
+    actor_last_name: string;
+}
+export interface Genre {
+    genre_name: string;
+}
 export interface FetchMediaResponse {
     medias: Media[];
+}
+
+export interface FetchMediaGenreCastResponse {
+    casts: Cast[];
+    genres: Genre[];
 }
 
 export const fetchMedias = () => async (dispatch: Dispatch) => {
@@ -38,6 +55,25 @@ export const fetchMedias = () => async (dispatch: Dispatch) => {
         const response = await axios.get<FetchMediaResponse>(`/api/medias`);
         dispatch<FetchMediasAction>({
             type: ActionTypes.FETCH_MEDIAS,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch<MediaErrorAction>({
+            type: ActionTypes.MEDIA_ERROR,
+            payload: { error: SERVER_ERROR_MESSAGE },
+        });
+    }
+};
+
+export const fetchMediaGenreAndCast = (mediaId: number) => async (
+    dispatch: Dispatch
+) => {
+    try {
+        const response = await axios.get<FetchMediaGenreCastResponse>(
+            `/api/genre-cast/${mediaId}`
+        );
+        dispatch<FetchMediaGenreAndCastAction>({
+            type: ActionTypes.FETCH_MEDIA_GENRE_AND_CAST,
             payload: response.data,
         });
     } catch (error) {
