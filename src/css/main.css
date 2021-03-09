@@ -792,6 +792,7 @@ body {
 .mediaContainerCarousel {
   position: relative;
   z-index: 0;
+  opacity: 0;
   margin: 0 0.25rem;
   transition: all 0.3s ease;
   border-radius: 1rem;

@@ -6,12 +6,13 @@ import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import { FaPlay } from "react-icons/fa";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
-import { fetchMedias } from "../actions";
+import { fetchMedias, Media } from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
 import { MediaStateResponse } from "../reducers/mediasReducer";
 import Loading from "./Loading";
 import { ErrorStateResponse } from "reducers/errorReducer";
+import _ from "lodash";
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -21,6 +22,8 @@ export interface ModalProps {
 
 export interface MediaAndNetflixOriginalCarouselProps {
     modalShow: any;
+    // content: Media[];
+    content: Media[];
 }
 
 interface BrowseProps {
@@ -28,10 +31,10 @@ interface BrowseProps {
     errors: ErrorStateResponse;
     fetchMedias(): void;
 }
+
 const Browse: React.FC<BrowseProps> = (props) => {
     const renderMedias = () => {
         if (props.errors.data?.error) {
-            console.log("error block");
             return (
                 <div className="serverErrorContainer">
                     <h3 className="serverErrorText">
@@ -46,16 +49,20 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 </div>
             );
         } else {
+            let mediaContentSplit = _.chunk(props.medias.data?.medias, 3);
             return (
                 <React.Fragment>
                     <h3 className="carouselTitle">Continue Watching</h3>
-                    <MediaCarousel modalShow={() => modalShow()} />
+                    <MediaCarousel
+                        content={mediaContentSplit[0]}
+                        modalShow={() => modalShow()}
+                    />
                     <h3 className="carouselTitle">TV Shows</h3>
-                    <MediaCarousel modalShow={() => modalShow()} />
+                    {/* <MediaCarousel modalShow={() => modalShow()} /> */}
                     <h3 className="carouselTitle">Netflix Originals</h3>
-                    <NetflixOriginalCarousel modalShow={() => modalShow()} />
+                    {/* <NetflixOriginalCarousel modalShow={() => modalShow()} /> */}
                     <h3 className="carouselTitle">Popular On Netflix</h3>
-                    <MediaCarousel modalShow={() => modalShow()} />
+                    {/* <MediaCarousel modalShow={() => modalShow()} /> */}
                 </React.Fragment>
             );
         }
