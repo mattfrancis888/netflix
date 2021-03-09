@@ -1,11 +1,11 @@
 .browseHeaderContainer {
     position: sticky;
     top: 0;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.7) 10%,
-        rgba(0, 0, 0, 0)
-    );
+    // background-image: linear-gradient(
+    //     to bottom,
+    //     rgba(0, 0, 0, 0.7) 10%,
+    //     rgba(0, 0, 0, 0)
+    // );
     display: flex;
     align-items: center;
     padding: 1rem 2rem;
@@ -21,7 +21,18 @@
         @media screen and (min-width: $md_breakpoint) {
             font-size: 1.8rem;
         }
+        cursor: pointer;
     }
+}
+.browseHeaderTransparent {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7) 10%,
+        rgba(0, 0, 0, 0)
+    );
+}
+.browseHeaderUntransparent {
+    background: black;
 }
 .netflixBrowseLogo {
     width: 4rem;

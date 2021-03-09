@@ -60,7 +60,7 @@ export const signOut = () => async (dispatch: Dispatch) => {
             payload: response.data,
         });
         history.push("/");
-        alert("Logged out succesfully");
+        // alert("Logged out succesfully");
     } catch (err) {
         alert("Log out failed, try again");
     }

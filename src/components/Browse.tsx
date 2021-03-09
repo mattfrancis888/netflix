@@ -89,7 +89,7 @@ const Browse: React.FC<{}> = (props) => {
             {renderModal()}
             <div className="browseBannerContainer">
                 <div className="floatBrowseHeader">
-                    <BrowseHeader artistName="Netflix" />
+                    <BrowseHeader />
                 </div>
                 <div className="browseBannerImageWrap">
                     <img
