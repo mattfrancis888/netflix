@@ -50,7 +50,9 @@ const BrowseHeader: React.FC<IHeader> = (props) => {
                     ></path>
                 </g>
             </svg>
-            <h1 onClick={() => props.signOut()}>Sign Out</h1>
+            <h1 data-testid="signOutText" onClick={() => props.signOut()}>
+                Sign Out
+            </h1>
         </div>
     );
 };

@@ -253,6 +253,7 @@ const RegisterPlan: React.FC<RegisterPlanProps> = (props) => {
                     </table>
                     <button
                         className="authButton"
+                        data-testid="planContinueButton"
                         onClick={() => {
                             history.push("/browse");
                         }}

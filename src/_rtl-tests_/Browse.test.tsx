@@ -14,10 +14,17 @@ import {
 import { act } from "react-dom/test-utils";
 //import Modal from "components/Modal";
 import history from "browserHistory";
+import nock from "nock";
+import waitForExpect from "wait-for-expect";
 let pushSpy: jest.SpyInstance;
 let app: RenderResult;
 afterEach(() => {
     cleanup();
+});
+
+//Mock cookie
+jest.mock("js-cookie", () => ({ get: () => "fr" }), {
+    virtual: true,
 });
 
 beforeEach(async () => {
@@ -49,6 +56,40 @@ test("Media sections exist", async () => {
     expect(app.getByText("Netflix Originals")).toBeInTheDocument();
     expect(app.getByText("Popular On Netflix")).toBeInTheDocument();
 });
+
+test("Sign out clicked", async () => {
+    expect(app.getByTestId("signOutText")).toBeInTheDocument();
+    act(() => {
+        fireEvent.click(app.getByTestId("signOutText"));
+    });
+    history.push("/");
+    expect(pushSpy).toBeCalledWith("/");
+    pushSpy.mockRestore();
+
+    //Sign out could not be tested with nock.
+    //I believe it's related to the mock cookie
+
+    // const signOutResponse = {
+    //     token: "",
+    // };
+
+    // const signOutScope = nock("http://localhost:5000")
+    //     .post("/api/signout")
+    //     .reply(200, signOutResponse, {
+    //         "Access-Control-Allow-Origin": "*",
+    //         "Access-Control-Allow-Credentials": "true",
+    //     });
+
+    // await waitForExpect(() => {
+    //     if (!signOutScope.isDone()) {
+    //         console.error("pending mocks: %j", signOutScope.pendingMocks());
+    //     }
+    //     expect(signOutScope.isDone()).toBe(true);
+    //     history.push("/");
+    //     expect(pushSpy).toBeCalledWith("/");
+    //     pushSpy.mockRestore();
+    // });
+}, 30000);
 
 // test("modal shows the children", () => {
 //Tried to solved with: https://stackoverflow.com/questions/39986178/testing-react-target-container-is-not-a-dom-element

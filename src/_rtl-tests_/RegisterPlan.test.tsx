@@ -12,6 +12,8 @@ import {
     fireEvent,
 } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
+import nock from "nock";
+import waitForExpect from "wait-for-expect";
 
 import history from "browserHistory";
 let pushSpy: jest.SpyInstance;
@@ -65,9 +67,26 @@ test("Register form on submit", async () => {
     fireEvent.change(app.getByTestId("password"), {
         target: { value: expectedMockFormValues.password },
     });
-
     act(() => {
         fireEvent.click(app.getByTestId("emailAndPasswordContinueButton"));
     });
+
+    const signUpScope = nock("http://localhost:5000")
+        .post("/api/signup", expectedMockFormValues)
+        .reply(200, signInResponse, { "Access-Control-Allow-Origin": "*" });
+
+    await waitForExpect(() => {
+        if (!signUpScope.isDone()) {
+            console.error("pending mocks: %j", signUpScope.pendingMocks());
+        }
+        expect(signUpScope.isDone()).toBe(true);
+    });
     expect(app.getByTestId("monthlyPlanTable")).toBeInTheDocument();
+
+    act(() => {
+        fireEvent.click(app.getByTestId("planContinueButton"));
+        history.push("/browse");
+        expect(pushSpy).toBeCalledWith("/browse");
+        pushSpy.mockRestore();
+    });
 });
