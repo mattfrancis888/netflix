@@ -12,6 +12,7 @@ if (process.env.NODE_ENV !== "production") {
     dotenv_1.default.config();
 }
 var routes_1 = __importDefault(require("./routes"));
+var media_1 = __importDefault(require("./routes/media"));
 var app = express_1.default();
 // middleware for parsing bodies from URL
 app.use(body_parser_1.default.urlencoded({ extended: true }));
@@ -28,6 +29,7 @@ app.use("/api/test", function (req, res) {
     res.send("hi");
 });
 app.use("/api", routes_1.default);
+app.use("/api", media_1.default);
 var port = 5000;
 app.listen(port, function () {
     console.log("App running on port " + port + ".");

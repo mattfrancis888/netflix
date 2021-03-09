@@ -121,7 +121,7 @@ const NetflixOriginalCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = 
         );
     };
 
-    return <div data-testid="movieCarousel">{renderCarousel()}</div>;
+    return <div>{renderCarousel()}</div>;
 };
 
 export default NetflixOriginalCarousel;

@@ -3,10 +3,15 @@ import BrowseHeader from "./BrowseHeader";
 import history from "../browserHistory";
 import MediaCarousel from "./MediaCarousel";
 import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
-import useWindowDimensions from "../windowDimensions";
 import { FaPlay } from "react-icons/fa";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
+import { fetchMedias } from "../actions";
+import { connect } from "react-redux";
+import { StoreState } from "../reducers";
+import { MediaStateResponse } from "../reducers/mediasReducer";
+import Loading from "./Loading";
+import { ErrorStateResponse } from "reducers/errorReducer";
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -17,7 +22,48 @@ export interface ModalProps {
 export interface MediaAndNetflixOriginalCarouselProps {
     modalShow: any;
 }
-const Browse: React.FC<{}> = (props) => {
+
+interface BrowseProps {
+    medias: MediaStateResponse;
+    errors: ErrorStateResponse;
+    fetchMedias(): void;
+}
+const Browse: React.FC<BrowseProps> = (props) => {
+    const renderMedias = () => {
+        if (props.errors.data?.error) {
+            console.log("error block");
+            return (
+                <div className="serverErrorContainer">
+                    <h3 className="serverErrorText">
+                        {props.errors.data?.error}
+                    </h3>
+                </div>
+            );
+        } else if (!props.medias.data?.medias) {
+            return (
+                <div className="loadingCenter">
+                    <Loading />
+                </div>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <h3 className="carouselTitle">Continue Watching</h3>
+                    <MediaCarousel modalShow={() => modalShow()} />
+                    <h3 className="carouselTitle">TV Shows</h3>
+                    <MediaCarousel modalShow={() => modalShow()} />
+                    <h3 className="carouselTitle">Netflix Originals</h3>
+                    <NetflixOriginalCarousel modalShow={() => modalShow()} />
+                    <h3 className="carouselTitle">Popular On Netflix</h3>
+                    <MediaCarousel modalShow={() => modalShow()} />
+                </React.Fragment>
+            );
+        }
+    };
+    useEffect(() => {
+        props.fetchMedias();
+        document.body.style.background = "black";
+    }, []);
     const [showFilterModal, setShowFilterModal] = useState(false);
     const modalShow = () => {
         setShowFilterModal(true);
@@ -112,20 +158,17 @@ const Browse: React.FC<{}> = (props) => {
                     </button>
                 </div>
             </div>
-            <div className="browseContainer">
-                <h3>Continue Watching</h3>
-                <MediaCarousel modalShow={() => modalShow()} />
-                <h3>TV Shows</h3>
-                <MediaCarousel modalShow={() => modalShow()} />
-                <h3>Netflix Originals</h3>
-                <NetflixOriginalCarousel modalShow={() => modalShow()} />
-                <h3>Popular On Netflix</h3>
-                <MediaCarousel modalShow={() => modalShow()} />
 
-                <div className="mediaRowWrap"></div>
-            </div>
+            <div className="browseContainer">{renderMedias()}</div>
         </React.Fragment>
     );
 };
 
-export default requireAuth(Browse);
+const mapStateToProps = (state: StoreState) => {
+    return {
+        medias: state.medias,
+        errors: state.errors,
+    };
+};
+
+export default connect(mapStateToProps, { fetchMedias })(requireAuth(Browse));

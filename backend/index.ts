@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== "production") {
     dotenv.config();
 }
 import route from "./routes";
+import mediaRouter from "./routes/media";
 const app = express();
 // middleware for parsing bodies from URL
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,6 +27,7 @@ app.use("/api/test", (req, res) => {
     res.send("hi");
 });
 app.use("/api", route);
+app.use("/api", mediaRouter);
 
 const port = 5000;
 
