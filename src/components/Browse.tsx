@@ -33,6 +33,11 @@ interface BrowseProps {
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
+    useEffect(() => {
+        props.fetchMedias();
+        document.body.style.background = "black";
+    }, []);
+
     const renderMedias = () => {
         if (props.errors.data?.error) {
             return (
@@ -55,7 +60,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     <h3 className="carouselTitle">Continue Watching</h3>
                     <MediaCarousel
                         content={mediaContentSplit[0]}
-                        modalShow={() => modalShow()}
+                        modalShow={modalShow}
                     />
                     <h3 className="carouselTitle">TV Shows</h3>
                     {/* <MediaCarousel modalShow={() => modalShow()} /> */}
@@ -67,13 +72,16 @@ const Browse: React.FC<BrowseProps> = (props) => {
             );
         }
     };
-    useEffect(() => {
-        props.fetchMedias();
-        document.body.style.background = "black";
-    }, []);
+
     const [showFilterModal, setShowFilterModal] = useState(false);
-    const modalShow = () => {
+    const [showModalContent, setShowModalContent] = useState<Media | null>(
+        null
+    );
+
+    const modalShow = (clickedMedia: Media) => {
+        console.log(clickedMedia);
         setShowFilterModal(true);
+        setShowModalContent({ ...clickedMedia });
     };
     const modalOnCancel = () => {
         setShowFilterModal(false);
@@ -95,20 +103,15 @@ const Browse: React.FC<BrowseProps> = (props) => {
             <div className="modalContentContainer">
                 <div className="modalBannerContainer">
                     <div className="modalBannerImageWrap">
-                        <img
-                            src="https://wallpaperaccess.com/full/4674.jpg"
-                            alt=""
-                        ></img>
+                        <img src={showModalContent?.banner_image} alt=""></img>
 
                         <div className="modalFade"></div>
                     </div>
                     <div className="browseBannerTitleImageAndInfoWrap">
-                        <img src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABTk2XN7GLRTLHV9pVLOUV7ZWdTgnQqitxdYryNH-ZwAkyO2vJRtwtlrgt1_iDdjZQrOJ0E_BN1NdSFtWQm4L7qmxDs2we2VVen4.webp?r=5b7"></img>
-                        <p>
-                            An all-star lineup of superheroes -- including Iron
-                            Man, the Incredible Hulk and Captain America -- team
-                            up to save the world from certain doom.
-                        </p>
+                        <img
+                            src={showModalContent?.banner_title_image}
+                            alt=""
+                        ></img>
                         <button className="modalWatchButton">
                             <FaPlay className="playIcon" />
                             Watch Now
@@ -117,8 +120,12 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 </div>
                 <div className="modalInfoWrap">
                     <div className="modalTextSection">
-                        <p className="modalMediaDate">2015</p>
-                        <p className="modalMediaDesc">Description of media</p>
+                        <p className="modalMediaDate">
+                            {showModalContent?.media_date}
+                        </p>
+                        <p className="modalMediaDesc">
+                            {showModalContent?.media_description}
+                        </p>
                     </div>
                     <div className="modalTextSection">
                         <div className="modalCastAndGenre">

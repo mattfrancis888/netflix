@@ -22,7 +22,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
     const { width } = useWindowDimensions();
     const [style, setStyle] = useState({ opacity: "1" });
     const renderSlides = () => {
-        return props.content.map((array, index) => {
+        return props.content.map((content, index) => {
             return (
                 <Slide
                     index={index}
@@ -53,7 +53,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                             }}
                         >
                             <img
-                                src={props.content[index].banner_image}
+                                src={content.banner_image}
                                 alt="movie poster"
                             ></img>
                             <div className="mediaOutlineDownContainer">
@@ -61,7 +61,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                                     <AiOutlineDown
                                         className="outlineDown"
                                         onClick={() => {
-                                            props.modalShow();
+                                            props.modalShow(content);
                                         }}
                                     />
                                 </div>

@@ -793,6 +793,7 @@ body {
   position: relative;
   z-index: 0;
   opacity: 0;
+  cursor: pointer;
   margin: 0 0.25rem;
   transition: all 0.3s ease;
   border-radius: 1rem;
@@ -855,6 +856,11 @@ body {
     padding-bottom: 0.4rem;
   }
 }
+@media screen and (min-width: 1200px) {
+  .outlineDownWrap .outlineDown {
+    padding-bottom: 0.6rem;
+  }
+}
 
 .modal {
   display: flex;
@@ -867,6 +873,7 @@ body {
   height: 100%;
   background-color: rgba(52, 49, 49, 0.4);
   cursor: pointer;
+  z-index: 2;
 }
 
 .modalBox {
@@ -880,23 +887,14 @@ body {
     width: 80%;
   }
 }
+.modalBox h2 {
+  display: none;
+}
 
 .centerLoadingForModal {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.modalAcceptButton {
-  background-color: red;
-  color: white;
-  cursor: pointer;
-}
-
-.modalCancelButton {
-  background-color: red;
-  color: black;
-  cursor: pointer;
 }
 
 .modalBannerImageWrap {
@@ -906,6 +904,11 @@ body {
   width: 100%;
   max-height: 32rem;
   object-fit: cover;
+}
+@media screen and (min-width: 992px) {
+  .modalBannerImageWrap img {
+    max-height: 40rem;
+  }
 }
 
 .modalBannerTitleImageAndInfoWrap {
@@ -980,6 +983,7 @@ body {
   font-size: 0.7rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
+  margin-top: 1rem;
 }
 @media screen and (min-width: 420px) {
   .modalWatchButton {
@@ -1001,6 +1005,16 @@ body {
 .modalWatchButton:hover {
   background-color: rgba(255, 255, 255, 0.75);
   transition: all 0.3s ease;
+}
+@media screen and (min-width: 520px) {
+  .modalWatchButton {
+    margin-top: 2rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .modalWatchButton {
+    margin-top: 4rem;
+  }
 }
 
 .modalInfoWrap {
