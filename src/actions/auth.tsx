@@ -39,6 +39,7 @@ export const signIn = (formValues: any) => async (dispatch: Dispatch) => {
             type: ActionTypes.AUTH_USER,
             payload: response.data,
         });
+        history.push("/browse");
     } catch (err) {
         // if (err.message === "Network Error") {
         //     console.log("check error", err);
