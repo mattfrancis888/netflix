@@ -526,7 +526,7 @@ body {
 .createAuthInputs {
   padding: 1rem;
   border: 1px solid #e2e2e5;
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: 100%;
   margin-bottom: 0.5rem;
 }
@@ -538,19 +538,16 @@ body {
 }
 @media screen and (min-width: 520px) {
   .createAuthInputs {
-    padding: 0.5rem;
     font-size: 1.5rem;
   }
 }
 @media screen and (min-width: 768px) {
   .createAuthInputs {
-    padding: 0.8rem;
     font-size: 1.7rem;
   }
 }
 @media screen and (min-width: 992px) {
   .createAuthInputs {
-    padding: 1rem;
     font-size: 1.9rem;
   }
 }
@@ -1385,6 +1382,8 @@ body {
 }
 
 .registerSectionWrap {
+  background: black;
+  z-index: -1;
   text-align: center;
   padding: 0.5rem 1rem;
   max-width: 65rem;
@@ -1539,13 +1538,17 @@ body {
     font-size: 2.3rem;
   }
 }
+.registerPlanStepWrap h1 {
+  margin-right: 0.2rem;
+}
+.registerPlanStepWrap h1,
 .registerPlanStepWrap h3 {
   font-size: 1.4rem;
-  margin-bottom: 0.5rem;
   font-weight: normal;
 }
 @media screen and (min-width: 520px) {
-  .registerPlanStepWrap h3 {
+  .registerPlanStepWrap h1,
+.registerPlanStepWrap h3 {
     font-size: 1.6rem;
   }
 }

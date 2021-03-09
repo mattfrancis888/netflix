@@ -1,5 +1,9 @@
 import React from "react";
 import Header from "./Header";
+import { signUp } from "../actions";
+import { StoreState } from "../reducers";
+import { connect } from "react-redux";
+import history from "../browserHistory";
 const Register: React.FC<{}> = (props) => {
     return (
         <React.Fragment>
@@ -17,6 +21,9 @@ const Register: React.FC<{}> = (props) => {
                         <button
                             className="registerButton"
                             data-testid="registerNowButton"
+                            onClick={() => {
+                                history.push("/plan");
+                            }}
                         >
                             Register Now
                         </button>
@@ -113,4 +120,9 @@ const Register: React.FC<{}> = (props) => {
     );
 };
 
-export default Register;
+const mapStateToProps = (state: StoreState) => {
+    return {
+        authStatus: state.authStatus.authenticated,
+    };
+};
+export default connect(mapStateToProps, { signUp })(Register);
