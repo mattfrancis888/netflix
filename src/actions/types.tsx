@@ -7,6 +7,7 @@ export enum ActionTypes {
     FETCH_CATEGORIES_FOR_LISTING_ERROR,
     FETCH_MEDIAS,
     FETCH_MEDIA_GENRE_AND_CAST,
+    FETCH_MEDIA_WATCHING_BY_USER,
     MEDIA_ERROR,
 }
 export type AuthActions = AuthUserAction | AuthErrorAction;

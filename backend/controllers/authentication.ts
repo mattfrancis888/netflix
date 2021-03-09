@@ -16,7 +16,7 @@ const generateAccessToken = (email: string, privateKey: string) => {
     //for example, if our email variable is super long, our token might be super long
 
     return jwt.sign({ subject: email }, privateKey, {
-        expiresIn: "15s",
+        expiresIn: "10d",
     });
 };
 

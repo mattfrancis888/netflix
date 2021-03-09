@@ -39,9 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMediaGenreAndCast = exports.getMedias = void 0;
+exports.getMediaWatchingByUser = exports.getMediaGenreAndCast = exports.getMedias = void 0;
 var databasePool_1 = __importDefault(require("../databasePool"));
 var constants_1 = require("../constants");
+var jwt_decode_1 = __importDefault(require("jwt-decode"));
 var getMedias = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var response_1, error_1;
     return __generator(this, function (_a) {
@@ -96,3 +97,29 @@ var getMediaGenreAndCast = function (req, res) { return __awaiter(void 0, void 0
     });
 }); };
 exports.getMediaGenreAndCast = getMediaGenreAndCast;
+var getMediaWatchingByUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var decodedJwt, email, response_2, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                decodedJwt = jwt_decode_1.default(req.cookies.ACCESS_TOKEN);
+                email = decodedJwt.subject;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, databasePool_1.default.query("SELECT * from lookup_media_watching\n            NATURAL JOIN  media WHERE email = $1", [email])];
+            case 2:
+                response_2 = _a.sent();
+                // if (!response.rows[0]) {
+                //     throw new Error("User does not own this listing");
+                // }
+                res.send({ watching: response_2.rows });
+                return [3 /*break*/, 4];
+            case 3:
+                error_3 = _a.sent();
+                return [2 /*return*/, res.sendStatus(constants_1.INTERNAL_SERVER_ERROR_STATUS)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getMediaWatchingByUser = getMediaWatchingByUser;

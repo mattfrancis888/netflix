@@ -2,7 +2,8 @@ import { Request, Response, NextFunction, response } from "express";
 import pool from "../databasePool";
 import { FORBIDDEN_STATUS, INTERNAL_SERVER_ERROR_STATUS } from "../constants";
 import media from "../backend-build/routes/media";
-
+import _ from "lodash";
+import jwt_decode from "jwt-decode";
 interface genreAndCast {
     casts?: any;
     genres?: any;
@@ -48,6 +49,27 @@ export const getMediaGenreAndCast = async (req: Request, res: Response) => {
         pool.query("ROLLBACK");
         console.log("ROLLBACK TRIGGERED");
 
+        return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
+    }
+};
+
+export const getMediaWatchingByUser = async (req: any, res: Response) => {
+    const decodedJwt = jwt_decode(req.cookies.ACCESS_TOKEN);
+    //@ts-ignore
+    const email = decodedJwt.subject;
+
+    try {
+        const response = await pool.query(
+            `SELECT * from lookup_media_watching
+            NATURAL JOIN  media WHERE email = $1`,
+            [email]
+        );
+        // if (!response.rows[0]) {
+        //     throw new Error("User does not own this listing");
+        // }
+
+        res.send({ watching: response.rows });
+    } catch (error) {
         return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
     }
 };

@@ -6,7 +6,13 @@ import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import { FaPlay } from "react-icons/fa";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
-import { fetchMedias, Media, fetchMediaGenreAndCast } from "../actions";
+import {
+    fetchMedias,
+    Media,
+    fetchMediaGenreAndCast,
+    fetchMediaWatchingByUser,
+    WatchingInfo,
+} from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
 import { MediaStateResponse } from "../reducers/mediasReducer";
@@ -14,6 +20,7 @@ import Loading from "./Loading";
 import { ErrorStateResponse } from "reducers/errorReducer";
 import _ from "lodash";
 import { MediaGenreAndCastStateResponse } from "reducers/mediaGenreAndCastReducer";
+import { WatchingStateResponse } from "reducers/watchingReducer";
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -23,21 +30,25 @@ export interface ModalProps {
 
 export interface MediaAndNetflixOriginalCarouselProps {
     modalShow: any;
-    content: Media[];
+    content: Media[] | WatchingInfo[];
+    // content: any;
 }
 
 interface BrowseProps {
     medias: MediaStateResponse;
     mediaGenreAndCast: MediaGenreAndCastStateResponse;
+    watching: WatchingStateResponse;
     errors: ErrorStateResponse;
     fetchMedias(): void;
     fetchMediaGenreAndCast(mediaId: number): void;
+    fetchMediaWatchingByUser(): void;
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
     useEffect(() => {
-        props.fetchMedias();
         document.body.style.background = "black";
+        props.fetchMedias();
+        props.fetchMediaWatchingByUser();
     }, []);
 
     const renderMedias = () => {
@@ -49,26 +60,38 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     </h3>
                 </div>
             );
-        } else if (!props.medias.data?.medias) {
+        } else if (!props.medias.data && !props.watching.data) {
             return (
                 <div className="loadingCenter">
                     <Loading />
                 </div>
             );
-        } else {
+        } else if (props.medias.data?.medias && props.watching.data?.watching) {
             let mediaContentSplit = _.chunk(props.medias.data?.medias, 3);
+
             return (
                 <React.Fragment>
-                    <h3 className="carouselTitle">Continue Watching</h3>
+                    {props.watching.data?.watching.length > 0 && (
+                        <React.Fragment>
+                            <h3 className="carouselTitle">Continue Watching</h3>
+                            <MediaCarousel
+                                // content={
+                                //     _.chunk(props.watching.data?.watching, 3)[0]
+                                // }
+                                content={props.watching.data?.watching}
+                                modalShow={modalShow}
+                            />
+                        </React.Fragment>
+                    )}
+                    <h3 className="carouselTitle">Popular On Netflix</h3>
                     <MediaCarousel
                         content={mediaContentSplit[0]}
                         modalShow={modalShow}
                     />
-                    <h3 className="carouselTitle">TV Shows</h3>
-                    {/* <MediaCarousel modalShow={() => modalShow()} /> */}
                     <h3 className="carouselTitle">Netflix Originals</h3>
                     {/* <NetflixOriginalCarousel modalShow={() => modalShow()} /> */}
-                    <h3 className="carouselTitle">Popular On Netflix</h3>
+
+                    <h3 className="carouselTitle">TV Shows</h3>
                     {/* <MediaCarousel modalShow={() => modalShow()} /> */}
                 </React.Fragment>
             );
@@ -81,7 +104,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
     );
 
     const modalShow = (clickedMedia: Media) => {
-        console.log(clickedMedia);
         setShowFilterModal(true);
         setShowModalContent({ ...clickedMedia });
         props.fetchMediaGenreAndCast(clickedMedia.media_id);
@@ -220,6 +242,7 @@ const mapStateToProps = (state: StoreState) => {
     return {
         medias: state.medias,
         mediaGenreAndCast: state.mediaGenreAndCast,
+        watching: state.watching,
         errors: state.errors,
     };
 };
@@ -227,4 +250,5 @@ const mapStateToProps = (state: StoreState) => {
 export default connect(mapStateToProps, {
     fetchMedias,
     fetchMediaGenreAndCast,
+    fetchMediaWatchingByUser,
 })(requireAuth(Browse));

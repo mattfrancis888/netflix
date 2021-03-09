@@ -53,7 +53,7 @@ var generateAccessToken = function (email, privateKey) {
     //create token with these properties below and privatekey
     //for example, if our email variable is super long, our token might be super long
     return jsonwebtoken_1.default.sign({ subject: email }, privateKey, {
-        expiresIn: "15s",
+        expiresIn: "10d",
     });
 };
 var generateRefreshToken = function (email, privateKey) {

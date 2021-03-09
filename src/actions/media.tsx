@@ -19,6 +19,11 @@ export interface FetchMediaGenreAndCastAction {
     payload: FetchMediaGenreCastResponse;
 }
 
+export interface FetchMediaWatchingByUserAction {
+    type: ActionTypes.FETCH_MEDIA_WATCHING_BY_USER;
+    payload: FetchMediaWatchingByUserResponse;
+}
+
 export interface MediaErrorAction {
     type: ActionTypes.MEDIA_ERROR;
     payload: ServerError;
@@ -41,6 +46,11 @@ export interface Cast {
 export interface Genre {
     genre_name: string;
 }
+
+export interface WatchingInfo extends Media {
+    email: string;
+}
+
 export interface FetchMediaResponse {
     medias: Media[];
 }
@@ -50,6 +60,9 @@ export interface FetchMediaGenreCastResponse {
     genres: Genre[];
 }
 
+export interface FetchMediaWatchingByUserResponse {
+    watching: WatchingInfo[];
+}
 export const fetchMedias = () => async (dispatch: Dispatch) => {
     try {
         const response = await axios.get<FetchMediaResponse>(`/api/medias`);
@@ -74,6 +87,23 @@ export const fetchMediaGenreAndCast = (mediaId: number) => async (
         );
         dispatch<FetchMediaGenreAndCastAction>({
             type: ActionTypes.FETCH_MEDIA_GENRE_AND_CAST,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch<MediaErrorAction>({
+            type: ActionTypes.MEDIA_ERROR,
+            payload: { error: SERVER_ERROR_MESSAGE },
+        });
+    }
+};
+
+export const fetchMediaWatchingByUser = () => async (dispatch: Dispatch) => {
+    try {
+        const response = await axios.get<FetchMediaWatchingByUserResponse>(
+            `/api/watching`
+        );
+        dispatch<FetchMediaWatchingByUserAction>({
+            type: ActionTypes.FETCH_MEDIA_WATCHING_BY_USER,
             payload: response.data,
         });
     } catch (error) {
