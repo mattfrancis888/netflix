@@ -491,19 +491,10 @@ body {
 
 .authFormFieldTitleEmailInUse {
   margin: 0;
-  font-size: 0.8rem;
   color: red;
   margin-left: 0.3rem;
-}
-@media screen and (min-width: 520px) {
-  .authFormFieldTitleEmailInUse {
-    font-size: 1.2rem;
-  }
-}
-@media screen and (min-width: 992px) {
-  .authFormFieldTitleEmailInUse {
-    font-size: 1.3rem;
-  }
+  font-size: 1.4rem;
+  font-weight: normal;
 }
 
 .errorText {
@@ -526,7 +517,7 @@ body {
 .createAuthInputs {
   padding: 1rem;
   border: 1px solid #e2e2e5;
-  font-size: 1rem;
+  font-size: 1.2rem;
   width: 100%;
   margin-bottom: 0.5rem;
 }
@@ -538,19 +529,16 @@ body {
 }
 @media screen and (min-width: 520px) {
   .createAuthInputs {
-    padding: 0.5rem;
     font-size: 1.5rem;
   }
 }
 @media screen and (min-width: 768px) {
   .createAuthInputs {
-    padding: 0.8rem;
     font-size: 1.7rem;
   }
 }
 @media screen and (min-width: 992px) {
   .createAuthInputs {
-    padding: 1rem;
     font-size: 1.9rem;
   }
 }
@@ -671,7 +659,6 @@ body {
 .browseHeaderContainer {
   position: sticky;
   top: 0;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0));
   display: flex;
   align-items: center;
   padding: 1rem 2rem;
@@ -687,11 +674,20 @@ body {
 .browseHeaderContainer h1 {
   font-size: 1rem;
   font-weight: normal;
+  cursor: pointer;
 }
 @media screen and (min-width: 768px) {
   .browseHeaderContainer h1 {
     font-size: 1.8rem;
   }
+}
+
+.browseHeaderTransparent {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0));
+}
+
+.browseHeaderUntransparent {
+  background: black;
 }
 
 .netflixBrowseLogo {
@@ -1111,6 +1107,39 @@ body {
   height: 100vh;
 }
 
+.newToNetflixWrap {
+  display: flex;
+  margin-bottom: 2rem;
+}
+
+.newToNetflixText {
+  color: #737373;
+  font-size: 1.4rem;
+  margin: 0;
+  margin-right: 1rem;
+}
+@media screen and (min-width: 520px) {
+  .newToNetflixText {
+    font-size: 1.7rem;
+  }
+}
+
+.signUpNowText {
+  font-weight: bold;
+  font-size: 1.4rem;
+  font-family: "Netflix Sans Bold";
+  margin: 0;
+  cursor: pointer;
+}
+@media screen and (min-width: 520px) {
+  .signUpNowText {
+    font-size: 1.7rem;
+  }
+}
+.signUpNowText:hover {
+  text-decoration: underline;
+}
+
 .browseBannerImageWrap {
   width: 100vw;
   background: black;
@@ -1256,7 +1285,8 @@ body {
 }
 
 .floatBrowseHeader {
-  position: absolute;
+  position: fixed;
+  z-index: 1;
   width: 100%;
 }
 
@@ -1385,6 +1415,8 @@ body {
 }
 
 .registerSectionWrap {
+  background: black;
+  z-index: -1;
   text-align: center;
   padding: 0.5rem 1rem;
   max-width: 65rem;
@@ -1539,13 +1571,17 @@ body {
     font-size: 2.3rem;
   }
 }
+.registerPlanStepWrap h1 {
+  margin-right: 0.2rem;
+}
+.registerPlanStepWrap h1,
 .registerPlanStepWrap h3 {
   font-size: 1.4rem;
-  margin-bottom: 0.5rem;
   font-weight: normal;
 }
 @media screen and (min-width: 520px) {
-  .registerPlanStepWrap h3 {
+  .registerPlanStepWrap h1,
+.registerPlanStepWrap h3 {
     font-size: 1.6rem;
   }
 }

@@ -12,7 +12,8 @@ import {
     fireEvent,
 } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-
+import nock from "nock";
+import waitForExpect from "wait-for-expect";
 import history from "browserHistory";
 let pushSpy: jest.SpyInstance;
 let app: RenderResult;
@@ -52,3 +53,43 @@ test("Netflix logo clicked", async () => {
 test("Sign In box exists", async () => {
     expect(app.getByTestId("signInBox")).toBeInTheDocument();
 });
+
+test("Sign in form on submit", async () => {
+    const signInResponse = {
+        token: "asdfsadf12",
+        refreshToken: "asdufahsfd",
+    };
+
+    const expectedMockFormValues = {
+        email: "hi@gmail.com",
+        password: "123",
+    };
+
+    fireEvent.change(app.getByTestId("email"), {
+        target: { value: expectedMockFormValues.email },
+    });
+    fireEvent.change(app.getByTestId("password"), {
+        target: { value: expectedMockFormValues.password },
+    });
+
+    act(() => {
+        fireEvent.click(app.getByTestId("signInButton"));
+    });
+
+    const signInScope = nock("http://localhost:5000")
+        .post("/api/signin", expectedMockFormValues)
+        .reply(200, signInResponse, {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Credentials": "true",
+        });
+
+    await waitForExpect(() => {
+        if (!signInScope.isDone()) {
+            console.error("pending mocks: %j", signInScope.pendingMocks());
+        }
+        expect(signInScope.isDone()).toBe(true);
+
+        expect(pushSpy).toBeCalledWith("/browse");
+        pushSpy.mockRestore();
+    });
+}, 30000);

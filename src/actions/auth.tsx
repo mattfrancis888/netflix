@@ -39,7 +39,7 @@ export const signIn = (formValues: any) => async (dispatch: Dispatch) => {
             type: ActionTypes.AUTH_USER,
             payload: response.data,
         });
-        history.push("/listings/1");
+        history.push("/browse");
     } catch (err) {
         // if (err.message === "Network Error") {
         //     console.log("check error", err);
@@ -60,7 +60,7 @@ export const signOut = () => async (dispatch: Dispatch) => {
             payload: response.data,
         });
         history.push("/");
-        alert("Logged out succesfully");
+        // alert("Logged out succesfully");
     } catch (err) {
         alert("Log out failed, try again");
     }

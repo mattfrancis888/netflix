@@ -4,6 +4,9 @@ import { EmailAndPasswordFormValues } from "./EmailAndPasswordForm";
 import PlanHeader from "./PlanHeader";
 import { BsCheck } from "react-icons/bs";
 import history from "../browserHistory";
+import { signUp } from "../actions";
+import { connect } from "react-redux";
+import { StoreState } from "../reducers";
 export interface RegisterFormProps {
     onSubmit(formValues: any): void;
     authStatus?: string | null;
@@ -14,7 +17,7 @@ export interface RegisterPlanProps {
     authStatus?: string | null;
 }
 
-const RegisterPlan: React.FC<{}> = (props) => {
+const RegisterPlan: React.FC<RegisterPlanProps> = (props) => {
     const [step1ButtonClicked, setStep1ButtonClicked] = useState(false);
 
     const [planValues, setPlanValues] = useState({
@@ -24,8 +27,11 @@ const RegisterPlan: React.FC<{}> = (props) => {
     });
 
     const onSubmitRegister = async (formValues: EmailAndPasswordFormValues) => {
-        // props.signUp(formValues);
-        setStep1ButtonClicked(true);
+        props.signUp(formValues);
+        if (props.authStatus) {
+            console.log(props.authStatus);
+            setStep1ButtonClicked(true);
+        }
     };
 
     return (
@@ -247,8 +253,9 @@ const RegisterPlan: React.FC<{}> = (props) => {
                     </table>
                     <button
                         className="authButton"
+                        data-testid="planContinueButton"
                         onClick={() => {
-                            history.push("/");
+                            history.push("/browse");
                         }}
                     >
                         Continue
@@ -258,4 +265,10 @@ const RegisterPlan: React.FC<{}> = (props) => {
         </React.Fragment>
     );
 };
-export default RegisterPlan;
+
+const mapStateToProps = (state: StoreState) => {
+    return {
+        authStatus: state.authStatus.authenticated,
+    };
+};
+export default connect(mapStateToProps, { signUp })(RegisterPlan);

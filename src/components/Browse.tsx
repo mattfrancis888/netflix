@@ -6,6 +6,7 @@ import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import useWindowDimensions from "../windowDimensions";
 import { FaPlay } from "react-icons/fa";
 import Modal from "./Modal";
+import requireAuth from "./requireAuth";
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -88,7 +89,7 @@ const Browse: React.FC<{}> = (props) => {
             {renderModal()}
             <div className="browseBannerContainer">
                 <div className="floatBrowseHeader">
-                    <BrowseHeader artistName="Netflix" />
+                    <BrowseHeader />
                 </div>
                 <div className="browseBannerImageWrap">
                     <img
@@ -127,4 +128,4 @@ const Browse: React.FC<{}> = (props) => {
     );
 };
 
-export default Browse;
+export default requireAuth(Browse);

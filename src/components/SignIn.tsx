@@ -2,16 +2,30 @@ import React, { useEffect } from "react";
 // import netflixBgMd from "../img/netflixBgMd.jpg";
 import Header from "./Header";
 import SignInForm, { SignInFormValues } from "./SignInForm";
-
+import history from "../browserHistory";
+import { signIn } from "../actions";
+import { StoreState } from "../reducers";
+import { connect } from "react-redux";
 export interface SignInFormProps {
     onSubmit(formValues: any): void;
     authStatus?: string | null;
 }
 
-const SignIn: React.FC<{}> = (props) => {
+export interface SignInProps {
+    signIn(formValues: any): void;
+    authStatus?: string | null;
+}
+
+const SignIn: React.FC<SignInProps> = (props) => {
     const onSubmitSignIn = async (formValues: SignInFormValues) => {
-        // props.signUp(formValues);
+        props.signIn(formValues);
     };
+    useEffect(() => {
+        //If user is already logged in, they should be unable to visit this page
+        if (props.authStatus) {
+            history.push("/browse");
+        }
+    }, []);
 
     return (
         <React.Fragment>
@@ -31,10 +45,26 @@ const SignIn: React.FC<{}> = (props) => {
                             onSubmitSignIn(formValues)
                         }
                     />
+                    <div className="newToNetflixWrap">
+                        <p className="newToNetflixText">New to Netflix? </p>
+                        <p
+                            className="signUpNowText"
+                            onClick={() => {
+                                history.push("/register");
+                            }}
+                        >
+                            Sign up now
+                        </p>
+                    </div>
                 </div>
             </div>
         </React.Fragment>
     );
 };
+const mapStateToProps = (state: StoreState) => {
+    return {
+        authStatus: state.authStatus.authenticated,
+    };
+};
 
-export default SignIn;
+export default connect(mapStateToProps, { signIn })(SignIn);

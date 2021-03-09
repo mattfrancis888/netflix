@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-interface HeaderProps {
-    artistName: string;
+import { signOut } from "../actions";
+import { StoreState } from "../reducers";
+import { connect } from "react-redux";
+interface IHeader {
+    authStatus?: string | null;
+    signOut(): void;
 }
 
-const Header: React.FC<HeaderProps> = (props) => {
+const BrowseHeader: React.FC<IHeader> = (props) => {
     const history = useHistory();
-    const [artistNameVisibility, setArtistName] = useState("artistNameHide");
+    const [headerUntransparent, setHeaderUnTranspsarent] = useState(false);
 
     const listenScrollEvent = () => {
-        // if (window.scrollY < 73) {
-        //     return setArtistName("artistNameHide");
-        // } else if (window.scrollY > 70) {
-        //     return setArtistName("artistNameOnScroll");
-        // }
+        if (window.scrollY < 73) {
+            return setHeaderUnTranspsarent(false);
+        } else if (window.scrollY > 70) {
+            return setHeaderUnTranspsarent(true);
+        }
     };
 
     useEffect(() => {
@@ -23,7 +27,14 @@ const Header: React.FC<HeaderProps> = (props) => {
     }, []);
 
     return (
-        <div className="browseHeaderContainer" data-testid="netflixBrowseLogo">
+        <div
+            className={
+                headerUntransparent
+                    ? "browseHeaderContainer browseHeaderUntransparent"
+                    : "browseHeaderContainer browseHeaderTransparent"
+            }
+            data-testid="netflixBrowseLogo"
+        >
             <svg
                 viewBox="0 0 111 30"
                 focusable="true"
@@ -39,9 +50,16 @@ const Header: React.FC<HeaderProps> = (props) => {
                     ></path>
                 </g>
             </svg>
-            <h1>Sign Out</h1>
+            <h1 data-testid="signOutText" onClick={() => props.signOut()}>
+                Sign Out
+            </h1>
         </div>
     );
 };
+const mapStateToProps = (state: StoreState) => {
+    return {
+        authStatus: state.authStatus.authenticated,
+    };
+};
 
-export default Header;
+export default connect(mapStateToProps, { signOut })(BrowseHeader);
