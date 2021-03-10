@@ -61,29 +61,38 @@
         max-width: 30%;
     }
 }
-.watchButton {
-    padding: 1rem;
+.bannerButtonWrap {
+    display: flex;
+}
+.bannerButton {
     color: black;
     border-radius: 0.4rem;
     background-color: white;
     display: flex;
     align-items: center;
     text-align: center;
-    padding: 0.5rem;
     font-family: "Netflix Sans Bold";
     font-weight: bold;
-    font-size: 0.7rem;
-    padding: 0.5rem 1rem;
+    font-size: 0.6rem;
+    padding: 0.5rem 0.4rem;
+    margin-right: 0.1rem;
     @media screen and (min-width: 420px) {
+        padding: 0.5rem 1rem;
         font-size: 0.9rem;
+        margin-right: 0.3rem;
     }
     @media screen and (min-width: $sm_breakpoint) {
         font-size: 1rem;
-        padding: 1rem 2rem;
+        padding: 1rem;
+        margin-right: 0.5rem;
     }
     @media screen and (min-width: $md_breakpoint) {
+        font-size: 1.2rem;
+        margin-right: 0.8rem;
+    }
+    @media screen and (min-width: $lg_breakpoint) {
         font-size: 1.4rem;
-        padding: 1rem 4rem;
+        margin-right: 1.2rem;
     }
     cursor: pointer;
     &:hover {
@@ -91,9 +100,29 @@
         transition: all 0.3s ease;
     }
 }
+.bannerButtonInfo {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: white;
+    &:hover {
+        background-color: rgba(109, 109, 110, 0.4);
+    }
+}
+
+.bannerButtonIcon {
+    margin-right: 0.4rem;
+    @media screen and (min-width: $md_breakpoint) {
+        margin-right: 0.8rem;
+    }
+    @media screen and (min-width: $lg_breakpoint) {
+        margin-right: 1.2rem;
+    }
+    box-shadow: none !important;
+    border: none;
+}
 .playIcon {
     margin-right: 1rem;
 }
+
 .browseContainer {
     background: black;
     background-image: linear-gradient(
@@ -107,24 +136,29 @@
         font-weight: bold;
         font-size: 1.1rem;
         margin: 0;
-        padding: 3rem 0 0.5rem 0;
+
+        padding-top: 3rem;
+        padding-bottom: 0.5rem;
         @media screen and (min-width: $sm_breakpoint) {
             font-size: 1.3rem;
-            padding: 4rem 0 1rem 0;
+            padding-bottom: 0.75rem;
         }
         @media screen and (min-width: $md_breakpoint) {
             font-size: 1.6rem;
+            padding-bottom: 1rem;
         }
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 2rem;
+            padding-bottom: 2rem;
+        }
+        @include sidePaddingForCarouselAndTitle;
     }
-    padding: 0 1rem;
-    @media screen and (min-width: $sm_breakpoint) {
-        padding: 0 1.5rem;
-    }
+    padding-bottom: 5rem;
     @media screen and (min-width: $md_breakpoint) {
-        padding: 0 3rem;
+        padding-bottom: 8rem;
     }
     @media screen and (min-width: $lg_breakpoint) {
-        padding: 0 5rem;
+        padding-bottom: 10rem;
     }
 }
 

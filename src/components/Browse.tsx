@@ -4,6 +4,7 @@ import history from "../browserHistory";
 import MediaCarousel from "./MediaCarousel";
 import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import { FaPlay } from "react-icons/fa";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
 import anime from "animejs/lib/anime.es.js";
@@ -403,13 +404,31 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         the Incredible Hulk and Captain America -- team up to
                         save the world from certain doom.
                     </p>
-                    <button
-                        className="watchButton"
-                        onClick={() => addToWatching(12)}
-                    >
-                        <FaPlay className="playIcon" />
-                        Watch Now
-                    </button>
+                    <div className="bannerButtonWrap">
+                        <button
+                            className="bannerButton"
+                            onClick={() => addToWatching(12)}
+                        >
+                            <FaPlay className="bannerButtonIcon" />
+                            Watch Now
+                        </button>
+                        <button
+                            className="bannerButton bannerButtonInfo"
+                            onClick={() => {
+                                Number.isInteger(showModalContent?.media_id)
+                                    ? //@ts-ignore Small TS warning, too lazy to fix
+                                      addToWatching(showModalContent?.media_id)
+                                    : //   modalOnCancel();
+                                      alert(
+                                          "Trouble adding your movie to your watch list..."
+                                      );
+                                modalOnCancel();
+                            }}
+                        >
+                            <AiOutlineInfoCircle className="bannerButtonIcon " />
+                            More Info
+                        </button>
+                    </div>
                 </div>
             </div>
 

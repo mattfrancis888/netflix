@@ -719,6 +719,26 @@ body {
 
 .sliderAndButtonWrap {
   position: relative;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+@media screen and (min-width: 520px) {
+  .sliderAndButtonWrap {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .sliderAndButtonWrap {
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .sliderAndButtonWrap {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
 }
 
 .mediaNextButton {
@@ -873,7 +893,7 @@ body {
   z-index: 1;
   position: absolute;
   top: 0.2rem;
-  right: 0;
+  right: 0.4rem;
   cursor: pointer;
   color: white;
   font-size: 1.2rem;
@@ -883,12 +903,13 @@ body {
   .removeWatchingIcon {
     font-size: 1.8rem;
     top: 0.5rem;
-    right: 0.3rem;
+    right: 0.5rem;
   }
 }
 @media screen and (min-width: 768px) {
   .removeWatchingIcon {
     top: 0.8rem;
+    right: 0.7rem;
   }
 }
 @media screen and (min-width: 992px) {
@@ -1318,41 +1339,77 @@ body {
   }
 }
 
-.watchButton {
-  padding: 1rem;
+.bannerButtonWrap {
+  display: flex;
+}
+
+.bannerButton {
   color: black;
   border-radius: 0.4rem;
   background-color: white;
   display: flex;
   align-items: center;
   text-align: center;
-  padding: 0.5rem;
   font-family: "Netflix Sans Bold";
   font-weight: bold;
-  font-size: 0.7rem;
-  padding: 0.5rem 1rem;
+  font-size: 0.6rem;
+  padding: 0.5rem 0.4rem;
+  margin-right: 0.1rem;
   cursor: pointer;
 }
 @media screen and (min-width: 420px) {
-  .watchButton {
+  .bannerButton {
+    padding: 0.5rem 1rem;
     font-size: 0.9rem;
+    margin-right: 0.3rem;
   }
 }
 @media screen and (min-width: 520px) {
-  .watchButton {
+  .bannerButton {
     font-size: 1rem;
-    padding: 1rem 2rem;
+    padding: 1rem;
+    margin-right: 0.5rem;
   }
 }
 @media screen and (min-width: 768px) {
-  .watchButton {
-    font-size: 1.4rem;
-    padding: 1rem 4rem;
+  .bannerButton {
+    font-size: 1.2rem;
+    margin-right: 0.8rem;
   }
 }
-.watchButton:hover {
+@media screen and (min-width: 992px) {
+  .bannerButton {
+    font-size: 1.4rem;
+    margin-right: 1.2rem;
+  }
+}
+.bannerButton:hover {
   background-color: rgba(255, 255, 255, 0.75);
   transition: all 0.3s ease;
+}
+
+.bannerButtonInfo {
+  background-color: rgba(109, 109, 110, 0.7);
+  color: white;
+}
+.bannerButtonInfo:hover {
+  background-color: rgba(109, 109, 110, 0.4);
+}
+
+.bannerButtonIcon {
+  margin-right: 0.4rem;
+  box-shadow: none !important;
+  border: none;
+}
+@media screen and (min-width: 768px) {
+  .bannerButtonIcon {
+    margin-right: 0.8rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .bannerButtonIcon {
+    margin-right: 1.2rem;
+  }
 }
 
 .playIcon {
@@ -1363,39 +1420,62 @@ body {
   background: black;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0));
   color: white;
-  padding: 0 1rem;
+  padding-bottom: 5rem;
 }
 .browseContainer .carouselTitle {
   font-family: "Netflix Sans Bold";
   font-weight: bold;
   font-size: 1.1rem;
   margin: 0;
-  padding: 3rem 0 0.5rem 0;
+  padding-top: 3rem;
+  padding-bottom: 0.5rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 @media screen and (min-width: 520px) {
   .browseContainer .carouselTitle {
     font-size: 1.3rem;
-    padding: 4rem 0 1rem 0;
+    padding-bottom: 0.75rem;
   }
 }
 @media screen and (min-width: 768px) {
   .browseContainer .carouselTitle {
     font-size: 1.6rem;
+    padding-bottom: 1rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .browseContainer .carouselTitle {
+    font-size: 2rem;
+    padding-bottom: 2rem;
   }
 }
 @media screen and (min-width: 520px) {
-  .browseContainer {
-    padding: 0 1.5rem;
+  .browseContainer .carouselTitle {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .browseContainer .carouselTitle {
+    padding-left: 4.5rem;
+    padding-right: 4.5rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .browseContainer .carouselTitle {
+    padding-left: 5rem;
+    padding-right: 5rem;
   }
 }
 @media screen and (min-width: 768px) {
   .browseContainer {
-    padding: 0 3rem;
+    padding-bottom: 8rem;
   }
 }
 @media screen and (min-width: 992px) {
   .browseContainer {
-    padding: 0 5rem;
+    padding-bottom: 10rem;
   }
 }
 
