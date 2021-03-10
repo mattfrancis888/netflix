@@ -814,7 +814,9 @@ body {
   bottom: 0;
   right: 0;
   width: 100%;
+  height: 100%;
   opacity: 0;
+  z-index: 0;
   transition: opacity 0.5s;
 }
 .mediaOutlineDownContainer:hover {
@@ -822,7 +824,13 @@ body {
   transition: opacity 0.5s;
 }
 
+.clickForWatch {
+  width: 100%;
+  height: 100%;
+}
+
 .outlineDownWrap {
+  z-index: 1;
   background: rgba(0, 0, 0, 0.6);
   position: absolute;
   width: 100%;

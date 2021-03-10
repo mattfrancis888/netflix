@@ -22,6 +22,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
     const history = useHistory();
     const { width } = useWindowDimensions();
     const [style, setStyle] = useState({ opacity: "1" });
+
     const renderSlides = () => {
         return props.content.map((content: Media, index: number) => {
             return (
@@ -57,11 +58,14 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                             <img
                                 src={content.banner_image}
                                 alt="movie poster"
-                                onClick={() => props.onMediaClick(content)}
                             ></img>
                             <div className="mediaOutlineDownContainer">
                                 <div
-                                    className="outlineDownWrap"
+                                    className="clickForWatch"
+                                    onClick={() => props.onMediaClick(content)}
+                                ></div>
+                                <div
+                                    className="outlineDownWrap "
                                     onClick={() => {
                                         props.modalShow(content);
                                     }}
