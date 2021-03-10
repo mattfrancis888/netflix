@@ -21,7 +21,11 @@ export interface FetchMediaGenreAndCastAction {
 
 export interface FetchMediaWatchingByUserAction {
     type: ActionTypes.FETCH_MEDIA_WATCHING_BY_USER;
-    payload: FetchMediaWatchingByUserResponse;
+    payload: WatchingByUserResponse;
+}
+export interface InsertMediaWatchingByUserAction {
+    type: ActionTypes.INSERT_MEDIA_WATCHING_BY_USER;
+    payload: WatchingByUserResponse;
 }
 
 export interface MediaErrorAction {
@@ -47,10 +51,6 @@ export interface Genre {
     genre_name: string;
 }
 
-export interface WatchingInfo extends Media {
-    email: string;
-}
-
 export interface FetchMediaResponse {
     medias: Media[];
 }
@@ -60,8 +60,8 @@ export interface FetchMediaGenreCastResponse {
     genres: Genre[];
 }
 
-export interface FetchMediaWatchingByUserResponse {
-    watching: WatchingInfo[];
+export interface WatchingByUserResponse {
+    watching: Media[];
 }
 export const fetchMedias = () => async (dispatch: Dispatch) => {
     try {
@@ -99,7 +99,7 @@ export const fetchMediaGenreAndCast = (mediaId: number) => async (
 
 export const fetchMediaWatchingByUser = () => async (dispatch: Dispatch) => {
     try {
-        const response = await axios.get<FetchMediaWatchingByUserResponse>(
+        const response = await axios.get<WatchingByUserResponse>(
             `/api/watching`
         );
         dispatch<FetchMediaWatchingByUserAction>({
@@ -107,6 +107,27 @@ export const fetchMediaWatchingByUser = () => async (dispatch: Dispatch) => {
             payload: response.data,
         });
     } catch (error) {
+        dispatch<MediaErrorAction>({
+            type: ActionTypes.MEDIA_ERROR,
+            payload: { error: SERVER_ERROR_MESSAGE },
+        });
+    }
+};
+
+export const insertMediaWatchingByUser = (mediaId: number) => async (
+    dispatch: Dispatch
+) => {
+    try {
+        const response = await axios.post<WatchingByUserResponse>(
+            `/api/add-to-watching/${mediaId}`
+        );
+        console.log("response", response.data);
+        dispatch<InsertMediaWatchingByUserAction>({
+            type: ActionTypes.INSERT_MEDIA_WATCHING_BY_USER,
+            payload: response.data,
+        });
+    } catch (error) {
+        console.log("hi", error);
         dispatch<MediaErrorAction>({
             type: ActionTypes.MEDIA_ERROR,
             payload: { error: SERVER_ERROR_MESSAGE },

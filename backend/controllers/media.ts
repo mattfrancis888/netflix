@@ -60,7 +60,9 @@ export const getMediaWatchingByUser = async (req: any, res: Response) => {
 
     try {
         const response = await pool.query(
-            `SELECT * from lookup_media_watching
+            `SELECT media_id, media_title,
+            media_date,media_description,banner_title_image
+            ,banner_image,name_tokens from lookup_media_watching
             NATURAL JOIN  media WHERE email = $1`,
             [email]
         );
@@ -70,6 +72,42 @@ export const getMediaWatchingByUser = async (req: any, res: Response) => {
 
         res.send({ watching: response.rows });
     } catch (error) {
+        return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
+    }
+};
+
+export const addToWatchingByUser = async (req: any, res: Response) => {
+    const decodedJwt = jwt_decode(req.cookies.ACCESS_TOKEN);
+    //@ts-ignore
+    const email = decodedJwt.subject;
+    const mediaId = req.params.mediaId;
+    try {
+        //Transaction
+        await pool.query("BEGIN");
+        //Insert if it does not exist on table
+        await pool.query(
+            `INSERT INTO lookup_media_watching(email, media_id)
+                SELECT $1, $2
+                WHERE
+                    NOT EXISTS (
+                    SELECT email FROM lookup_media_watching 
+                    WHERE email = $3 AND media_id = $4
+                );`,
+            [email, mediaId, email, mediaId]
+        );
+        const response = await pool.query(
+            `SELECT * from lookup_media_watching
+            NATURAL JOIN media WHERE email = $1`,
+            [email]
+        );
+        // if (!response.rows[0]) {
+        //     throw new Error("User does not own this listing");
+        // }
+        pool.query("COMMIT");
+        res.send({ watching: response.rows });
+    } catch (error) {
+        pool.query("ROLLBACK");
+        console.log("ROLLBACK TRIGGERED", error);
         return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
     }
 };

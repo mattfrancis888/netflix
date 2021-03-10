@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMediaWatchingByUser = exports.getMediaGenreAndCast = exports.getMedias = void 0;
+exports.addToWatchingByUser = exports.getMediaWatchingByUser = exports.getMediaGenreAndCast = exports.getMedias = void 0;
 var databasePool_1 = __importDefault(require("../databasePool"));
 var constants_1 = require("../constants");
 var jwt_decode_1 = __importDefault(require("jwt-decode"));
@@ -107,7 +107,7 @@ var getMediaWatchingByUser = function (req, res) { return __awaiter(void 0, void
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, databasePool_1.default.query("SELECT * from lookup_media_watching\n            NATURAL JOIN  media WHERE email = $1", [email])];
+                return [4 /*yield*/, databasePool_1.default.query("SELECT media_id, media_title,\n            media_date,media_description,banner_title_image\n            ,banner_image,name_tokens from lookup_media_watching\n            NATURAL JOIN  media WHERE email = $1", [email])];
             case 2:
                 response_2 = _a.sent();
                 // if (!response.rows[0]) {
@@ -123,3 +123,43 @@ var getMediaWatchingByUser = function (req, res) { return __awaiter(void 0, void
     });
 }); };
 exports.getMediaWatchingByUser = getMediaWatchingByUser;
+var addToWatchingByUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var decodedJwt, email, mediaId, response_3, error_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                decodedJwt = jwt_decode_1.default(req.cookies.ACCESS_TOKEN);
+                email = decodedJwt.subject;
+                mediaId = req.params.mediaId;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 5, , 6]);
+                //Transaction
+                return [4 /*yield*/, databasePool_1.default.query("BEGIN")];
+            case 2:
+                //Transaction
+                _a.sent();
+                //Insert if it does not exist on table
+                return [4 /*yield*/, databasePool_1.default.query("INSERT INTO lookup_media_watching(email, media_id)\n                SELECT $1, $2\n                WHERE\n                    NOT EXISTS (\n                    SELECT email FROM lookup_media_watching \n                    WHERE email = $3 AND media_id = $4\n                );", [email, mediaId, email, mediaId])];
+            case 3:
+                //Insert if it does not exist on table
+                _a.sent();
+                return [4 /*yield*/, databasePool_1.default.query("SELECT * from lookup_media_watching\n            NATURAL JOIN media WHERE email = $1", [email])];
+            case 4:
+                response_3 = _a.sent();
+                // if (!response.rows[0]) {
+                //     throw new Error("User does not own this listing");
+                // }
+                databasePool_1.default.query("COMMIT");
+                res.send({ watching: response_3.rows });
+                return [3 /*break*/, 6];
+            case 5:
+                error_4 = _a.sent();
+                databasePool_1.default.query("ROLLBACK");
+                console.log("ROLLBACK TRIGGERED", error_4);
+                return [2 /*return*/, res.sendStatus(constants_1.INTERNAL_SERVER_ERROR_STATUS)];
+            case 6: return [2 /*return*/];
+        }
+    });
+}); };
+exports.addToWatchingByUser = addToWatchingByUser;

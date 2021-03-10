@@ -11,7 +11,7 @@ import {
     Media,
     fetchMediaGenreAndCast,
     fetchMediaWatchingByUser,
-    WatchingInfo,
+    insertMediaWatchingByUser,
 } from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
@@ -30,7 +30,8 @@ export interface ModalProps {
 
 export interface MediaAndNetflixOriginalCarouselProps {
     modalShow: any;
-    content: Media[] | WatchingInfo[];
+    content: Media[];
+    onMediaClick: any;
     // content: any;
 }
 
@@ -42,6 +43,7 @@ interface BrowseProps {
     fetchMedias(): void;
     fetchMediaGenreAndCast(mediaId: number): void;
     fetchMediaWatchingByUser(): void;
+    insertMediaWatchingByUser(mediaId: number): void;
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
@@ -68,7 +70,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
             );
         } else if (props.medias.data?.medias && props.watching.data?.watching) {
             let mediaContentSplit = _.chunk(props.medias.data?.medias, 3);
-
+            console.log(_.omit(props.watching.data?.watching, "email"));
             return (
                 <React.Fragment>
                     {props.watching.data?.watching.length > 0 && (
@@ -80,11 +82,13 @@ const Browse: React.FC<BrowseProps> = (props) => {
                                 // }
                                 content={props.watching.data?.watching}
                                 modalShow={modalShow}
+                                onMediaClick={addToWatching}
                             />
                         </React.Fragment>
                     )}
                     <h3 className="carouselTitle">Popular On Netflix</h3>
                     <MediaCarousel
+                        onMediaClick={addToWatching}
                         content={mediaContentSplit[0]}
                         modalShow={modalShow}
                     />
@@ -102,6 +106,15 @@ const Browse: React.FC<BrowseProps> = (props) => {
     const [showModalContent, setShowModalContent] = useState<Media | null>(
         null
     );
+
+    const addToWatching = (clickedMedia: Media) => {
+        try {
+            props.insertMediaWatchingByUser(clickedMedia.media_id);
+            alert("Success");
+        } catch {
+            alert("Error");
+        }
+    };
 
     const modalShow = (clickedMedia: Media) => {
         setShowFilterModal(true);
@@ -251,4 +264,5 @@ export default connect(mapStateToProps, {
     fetchMedias,
     fetchMediaGenreAndCast,
     fetchMediaWatchingByUser,
+    insertMediaWatchingByUser,
 })(requireAuth(Browse));

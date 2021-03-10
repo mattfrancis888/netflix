@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 import useWindowDimensions from "../windowDimensions";
 import { MediaAndNetflixOriginalCarouselProps } from "./Browse";
 import anime from "animejs/lib/anime.es.js";
-import { Media, WatchingInfo } from "actions";
+import { Media } from "actions";
 const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
     props
 ) => {
@@ -23,58 +23,57 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
     const { width } = useWindowDimensions();
     const [style, setStyle] = useState({ opacity: "1" });
     const renderSlides = () => {
-        return props.content.map(
-            (content: Media | WatchingInfo, index: number) => {
-                return (
-                    <Slide
-                        index={index}
-                        key={content.media_id}
-                        // onClick={() =>
-                        //     history.push(
-                        //         `movies/${props.movies[0].movie_name_for_url}`
-                        //     )
-                        // }
-                        //https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187
-                    >
-                        <LazyLoad>
-                            <div
-                                className={`mediaContainerCarousel mediaAnime${index}`}
-                                onLoad={() => {
-                                    anime({
-                                        targets: `.mediaAnime${index}`,
-                                        // Properties
-                                        // Animation Parameters
+        return props.content.map((content: Media, index: number) => {
+            return (
+                <Slide
+                    index={index}
+                    key={content.media_id}
+                    // onClick={() =>
+                    //     history.push(
+                    //         `movies/${props.movies[0].movie_name_for_url}`
+                    //     )
+                    // }
+                    //https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187
+                >
+                    <LazyLoad>
+                        <div
+                            className={`mediaContainerCarousel mediaAnime${index}`}
+                            onLoad={() => {
+                                anime({
+                                    targets: `.mediaAnime${index}`,
+                                    // Properties
+                                    // Animation Parameters
 
-                                        opacity: [
-                                            {
-                                                value: [0, 1],
-                                                duration: 250,
-                                                easing: "easeOutQuad",
-                                            },
-                                        ],
-                                    });
-                                }}
-                            >
-                                <img
-                                    src={content.banner_image}
-                                    alt="movie poster"
-                                ></img>
-                                <div className="mediaOutlineDownContainer">
-                                    <div className="outlineDownWrap">
-                                        <AiOutlineDown
-                                            className="outlineDown"
-                                            onClick={() => {
-                                                props.modalShow(content);
-                                            }}
-                                        />
-                                    </div>
+                                    opacity: [
+                                        {
+                                            value: [0, 1],
+                                            duration: 250,
+                                            easing: "easeOutQuad",
+                                        },
+                                    ],
+                                });
+                            }}
+                        >
+                            <img
+                                src={content.banner_image}
+                                alt="movie poster"
+                                onClick={() => props.onMediaClick(content)}
+                            ></img>
+                            <div className="mediaOutlineDownContainer">
+                                <div
+                                    className="outlineDownWrap"
+                                    onClick={() => {
+                                        props.modalShow(content);
+                                    }}
+                                >
+                                    <AiOutlineDown className="outlineDown" />
                                 </div>
                             </div>
-                        </LazyLoad>
-                    </Slide>
-                );
-            }
-        );
+                        </div>
+                    </LazyLoad>
+                </Slide>
+            );
+        });
     };
     const renderCarousel = (): JSX.Element | JSX.Element[] => {
         return (
