@@ -8,10 +8,9 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { RiArrowRightSLine, RiArrowLeftSLine } from "react-icons/ri";
-import { AiOutlineDown } from "react-icons/ai";
+import { AiOutlineDown, AiOutlineClose } from "react-icons/ai";
 import LazyLoad from "react-lazyload";
 import { useHistory } from "react-router-dom";
-
 import useWindowDimensions from "../windowDimensions";
 import { MediaAndNetflixOriginalCarouselProps } from "./Browse";
 import anime from "animejs/lib/anime.es.js";
@@ -72,6 +71,14 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                                 >
                                     <AiOutlineDown className="outlineDown" />
                                 </div>
+                                {props.onRemoveClick && (
+                                    <AiOutlineClose
+                                        className="removeWatchingIcon"
+                                        onClick={() => {
+                                            props.onRemoveClick(content);
+                                        }}
+                                    />
+                                )}
                             </div>
                         </div>
                     </LazyLoad>

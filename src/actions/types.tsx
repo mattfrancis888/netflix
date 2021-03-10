@@ -9,6 +9,7 @@ export enum ActionTypes {
     FETCH_MEDIA_GENRE_AND_CAST,
     FETCH_MEDIA_WATCHING_BY_USER,
     INSERT_MEDIA_WATCHING_BY_USER,
+    REMOVE_MEDIA_WATCHING_BY_USER,
     MEDIA_ERROR,
 }
 export type AuthActions = AuthUserAction | AuthErrorAction;

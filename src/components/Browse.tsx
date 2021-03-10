@@ -12,6 +12,7 @@ import {
     fetchMediaGenreAndCast,
     fetchMediaWatchingByUser,
     insertMediaWatchingByUser,
+    removeMediaWatchingByUser,
 } from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
@@ -32,6 +33,7 @@ export interface MediaAndNetflixOriginalCarouselProps {
     modalShow: any;
     content: Media[];
     onMediaClick: any;
+    onRemoveClick?: any;
     // content: any;
 }
 
@@ -44,6 +46,7 @@ interface BrowseProps {
     fetchMediaGenreAndCast(mediaId: number): void;
     fetchMediaWatchingByUser(): void;
     insertMediaWatchingByUser(mediaId: number): void;
+    removeMediaWatchingByUser(mediaId: number): void;
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
@@ -70,7 +73,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
             );
         } else if (props.medias.data?.medias && props.watching.data?.watching) {
             let mediaContentSplit = _.chunk(props.medias.data?.medias, 3);
-            console.log(_.omit(props.watching.data?.watching, "email"));
+
             return (
                 <React.Fragment>
                     {props.watching.data?.watching.length > 0 && (
@@ -83,6 +86,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                                 content={props.watching.data?.watching}
                                 modalShow={modalShow}
                                 onMediaClick={addToWatching}
+                                onRemoveClick={removeFromWatching}
                             />
                         </React.Fragment>
                     )}
@@ -110,9 +114,18 @@ const Browse: React.FC<BrowseProps> = (props) => {
     const addToWatching = (clickedMedia: Media) => {
         try {
             props.insertMediaWatchingByUser(clickedMedia.media_id);
-            alert("Success");
+            // alert("Success");
         } catch {
-            alert("Error");
+            // alert("Error");
+        }
+    };
+
+    const removeFromWatching = (clickedMedia: Media) => {
+        try {
+            props.removeMediaWatchingByUser(clickedMedia.media_id);
+            // alert("Success");
+        } catch {
+            // alert("Error");
         }
     };
 
@@ -265,4 +278,5 @@ export default connect(mapStateToProps, {
     fetchMediaGenreAndCast,
     fetchMediaWatchingByUser,
     insertMediaWatchingByUser,
+    removeMediaWatchingByUser,
 })(requireAuth(Browse));

@@ -27,6 +27,10 @@ export interface InsertMediaWatchingByUserAction {
     type: ActionTypes.INSERT_MEDIA_WATCHING_BY_USER;
     payload: WatchingByUserResponse;
 }
+export interface RemovieMediaWatchingByUserAction {
+    type: ActionTypes.REMOVE_MEDIA_WATCHING_BY_USER;
+    payload: WatchingByUserResponse;
+}
 
 export interface MediaErrorAction {
     type: ActionTypes.MEDIA_ERROR;
@@ -121,13 +125,30 @@ export const insertMediaWatchingByUser = (mediaId: number) => async (
         const response = await axios.post<WatchingByUserResponse>(
             `/api/add-to-watching/${mediaId}`
         );
-        console.log("response", response.data);
         dispatch<InsertMediaWatchingByUserAction>({
             type: ActionTypes.INSERT_MEDIA_WATCHING_BY_USER,
             payload: response.data,
         });
     } catch (error) {
-        console.log("hi", error);
+        dispatch<MediaErrorAction>({
+            type: ActionTypes.MEDIA_ERROR,
+            payload: { error: SERVER_ERROR_MESSAGE },
+        });
+    }
+};
+
+export const removeMediaWatchingByUser = (mediaId: number) => async (
+    dispatch: Dispatch
+) => {
+    try {
+        const response = await axios.delete<WatchingByUserResponse>(
+            `/api/remove-from-watching/${mediaId}`
+        );
+        dispatch<RemovieMediaWatchingByUserAction>({
+            type: ActionTypes.REMOVE_MEDIA_WATCHING_BY_USER,
+            payload: response.data,
+        });
+    } catch (error) {
         dispatch<MediaErrorAction>({
             type: ActionTypes.MEDIA_ERROR,
             payload: { error: SERVER_ERROR_MESSAGE },

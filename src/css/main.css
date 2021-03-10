@@ -838,7 +838,8 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 0.2rem;
+  padding: 0.3rem;
+  padding-bottom: 0.6rem;
 }
 @media screen and (min-width: 768px) {
   .outlineDownWrap {
@@ -860,12 +861,44 @@ body {
 @media screen and (min-width: 992px) {
   .outlineDownWrap .outlineDown {
     font-size: 2.3rem;
-    padding-bottom: 0.4rem;
   }
 }
 @media screen and (min-width: 1200px) {
   .outlineDownWrap .outlineDown {
     padding-bottom: 0.6rem;
+  }
+}
+
+.removeWatchingIcon {
+  z-index: 1;
+  position: absolute;
+  top: 0.2rem;
+  right: 0;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  padding-top: 0.2rem;
+}
+@media screen and (min-width: 520px) {
+  .removeWatchingIcon {
+    font-size: 1.8rem;
+    top: 0.5rem;
+    right: 0.3rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .removeWatchingIcon {
+    top: 0.8rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .removeWatchingIcon {
+    font-size: 2.3rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .removeWatchingIcon {
+    top: 1rem;
   }
 }
 
