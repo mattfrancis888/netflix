@@ -1201,11 +1201,40 @@ body {
 .browseBannerImageWrap {
   width: 100%;
   background: black;
+  opacity: 0;
 }
 .browseBannerImageWrap img {
   width: 100%;
   max-height: 72rem;
   object-fit: cover;
+}
+
+.browseBannerImageWrapTempHeight {
+  height: 32rem;
+}
+@media screen and (min-width: 520px) {
+  .browseBannerImageWrapTempHeight {
+    height: 42rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .browseBannerImageWrapTempHeight {
+    height: 52rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .browseBannerImageWrapTempHeight {
+    height: 62rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .browseBannerImageWrapTempHeight {
+    height: 72rem;
+  }
+}
+
+.browseBannerImageWrapHeightAuto {
+  height: auto;
 }
 
 .browseBannerContainer {
@@ -1346,6 +1375,17 @@ body {
   position: fixed;
   z-index: 1;
   width: 100%;
+}
+
+.continueWatchingShow {
+  opacity: 1;
+  position: relative;
+  transition: all 0.5s ease-in;
+}
+
+.continueWatchingHide {
+  opacity: 0;
+  position: absolute;
 }
 
 .registerContainer {

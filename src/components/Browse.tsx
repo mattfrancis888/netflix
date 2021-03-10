@@ -6,6 +6,7 @@ import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import { FaPlay } from "react-icons/fa";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
+import anime from "animejs/lib/anime.es.js";
 import {
     fetchMedias,
     Media,
@@ -76,20 +77,25 @@ const Browse: React.FC<BrowseProps> = (props) => {
 
             return (
                 <React.Fragment>
-                    {props.watching.data?.watching.length > 0 && (
-                        <React.Fragment>
-                            <h3 className="carouselTitle">Continue Watching</h3>
-                            <MediaCarousel
-                                // content={
-                                //     _.chunk(props.watching.data?.watching, 3)[0]
-                                // }
-                                content={props.watching.data?.watching}
-                                modalShow={modalShow}
-                                onMediaClick={addToWatching}
-                                onRemoveClick={removeFromWatching}
-                            />
-                        </React.Fragment>
-                    )}
+                    <div
+                        className={
+                            props.watching.data?.watching.length > 0
+                                ? "continueWatchingShow"
+                                : "continueWatchingHide"
+                        }
+                    >
+                        <h3 className="carouselTitle">Continue Watching</h3>
+                        <MediaCarousel
+                            // content={
+                            //     _.chunk(props.watching.data?.watching, 3)[0]
+                            // }
+                            content={props.watching.data?.watching}
+                            modalShow={modalShow}
+                            onMediaClick={addToWatching}
+                            onRemoveClick={removeFromWatching}
+                        />
+                    </div>
+
                     <h3 className="carouselTitle">Popular On Netflix</h3>
                     <MediaCarousel
                         onMediaClick={addToWatching}
@@ -110,6 +116,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
     const [showModalContent, setShowModalContent] = useState<Media | null>(
         null
     );
+    const [bannerHeightAuto, setBannerHeightAuto] = useState(false);
 
     const addToWatching = (clickedMedia: Media) => {
         try {
@@ -237,16 +244,57 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 <div className="floatBrowseHeader">
                     <BrowseHeader />
                 </div>
-                <div className="browseBannerImageWrap">
+                <div
+                    className={
+                        bannerHeightAuto
+                            ? `browseBannerImageWrap browseBannerImageWrapHeightAuto`
+                            : `browseBannerImageWrap browseBannerImageWrapTempHeight`
+                    }
+                    onLoad={() => {
+                        setBannerHeightAuto(true);
+                        anime({
+                            targets: ".browseBannerImageWrap",
+                            // Properties
+                            // Animation Parameters
+
+                            opacity: [
+                                {
+                                    value: [0, 1],
+                                    duration: 1000,
+                                    easing: "easeOutQuad",
+                                },
+                            ],
+                        });
+                    }}
+                >
                     <img
                         src="https://wallpaperaccess.com/full/4674.jpg"
-                        alt=""
+                        alt="banner"
                     ></img>
 
                     <div className="registerFade"></div>
                 </div>
                 <div className="browseBannerTitleImageAndInfoWrap">
-                    <img src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABTk2XN7GLRTLHV9pVLOUV7ZWdTgnQqitxdYryNH-ZwAkyO2vJRtwtlrgt1_iDdjZQrOJ0E_BN1NdSFtWQm4L7qmxDs2we2VVen4.webp?r=5b7"></img>
+                    <img
+                        className="animeBannerTitle"
+                        src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABTk2XN7GLRTLHV9pVLOUV7ZWdTgnQqitxdYryNH-ZwAkyO2vJRtwtlrgt1_iDdjZQrOJ0E_BN1NdSFtWQm4L7qmxDs2we2VVen4.webp?r=5b7"
+                        onLoad={() => {
+                            anime({
+                                targets: ".animeBannerTitle",
+                                // Properties
+                                // Animation Parameters
+
+                                opacity: [
+                                    {
+                                        value: [0, 1],
+                                        duration: 500,
+                                        easing: "easeOutQuad",
+                                    },
+                                ],
+                            });
+                        }}
+                        alt="banner title"
+                    ></img>
                     <p>
                         An all-star lineup of superheroes -- including Iron Man,
                         the Incredible Hulk and Captain America -- team up to
