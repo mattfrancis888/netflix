@@ -920,18 +920,15 @@ body {
   position: relative;
   cursor: initial;
   background-color: #181818;
-  width: 90%;
+  width: 0%;
+  overflow: hidden;
   border-radius: 0.8rem 0.8rem;
-}
-@media screen and (min-width: 768px) {
-  .modalBox {
-    width: 80%;
-  }
 }
 .modalBox h2 {
   display: none;
 }
 .modalBox .modalCloseIcon {
+  cursor: pointer;
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -1096,8 +1093,8 @@ body {
 }
 
 .modalTextSection {
-  width: 50%;
   font-size: 0.8rem;
+  overflow: hidden;
 }
 @media screen and (min-width: 520px) {
   .modalTextSection {
@@ -1107,12 +1104,26 @@ body {
 @media screen and (min-width: 768px) {
   .modalTextSection {
     font-size: 1.4rem;
+    margin-right: 4rem;
   }
 }
 @media screen and (min-width: 1200px) {
   .modalTextSection {
     font-size: 1.6rem;
   }
+}
+
+.modalTextDateAndDescSection {
+  width: 70%;
+}
+@media screen and (min-width: 520px) {
+  .modalTextDateAndDescSection {
+    margin-right: 2rem;
+  }
+}
+
+.modalTextCastAndGenreSection {
+  width: 30%;
 }
 
 .modalMediaDate {
@@ -1125,7 +1136,6 @@ body {
 
 .modalMediaCastWrap,
 .modalMediaGenreWrap {
-  align-items: center;
   display: flex;
 }
 

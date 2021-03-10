@@ -23,6 +23,9 @@ import { ErrorStateResponse } from "reducers/errorReducer";
 import _ from "lodash";
 import { MediaGenreAndCastStateResponse } from "reducers/mediaGenreAndCastReducer";
 import { WatchingStateResponse } from "reducers/watchingReducer";
+import useWindowDimensions from "../windowDimensions";
+import { MED_SCREEN_SIZE } from "../constants";
+
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -51,6 +54,8 @@ interface BrowseProps {
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
+    const { width } = useWindowDimensions();
+
     useEffect(() => {
         document.body.style.background = "black";
         props.fetchMedias();
@@ -146,9 +151,9 @@ const Browse: React.FC<BrowseProps> = (props) => {
     );
     const [bannerHeightAuto, setBannerHeightAuto] = useState(false);
 
-    const addToWatching = (clickedMedia: Media) => {
+    const addToWatching = (clickedMediaId: number) => {
         try {
-            props.insertMediaWatchingByUser(clickedMedia.media_id);
+            props.insertMediaWatchingByUser(clickedMediaId);
             alert(
                 `Let's pretend that you are watching your show / movie! It's now added to 'Continue Watching' on the top of the page. You can remove it from 'Currently Watching' by hovering over it.`
             );
@@ -172,7 +177,28 @@ const Browse: React.FC<BrowseProps> = (props) => {
         props.fetchMediaGenreAndCast(clickedMedia.media_id);
     };
     const modalOnCancel = () => {
-        setShowModal(false);
+        anime({
+            targets: ".modalBox",
+            // Properties
+            // Animation Parameters
+            width: "0%",
+            scale: [1, 0],
+            duration: 450,
+
+            easing: "easeOutQuad",
+        });
+        anime({
+            targets: ".modalTextSection",
+            // Properties
+            // Animation Parameters
+            width: "0%",
+            duration: 10,
+
+            easing: "easeOutQuad",
+        });
+        setTimeout(() => {
+            setShowModal(false);
+        }, 450);
     };
     const renderModal = () => {
         if (!showModal) return null;
@@ -188,7 +214,42 @@ const Browse: React.FC<BrowseProps> = (props) => {
 
     const renderModalContent = () => {
         return (
-            <div className="modalContentContainer">
+            <div
+                className="modalContentContainer"
+                onLoad={() => {
+                    if (width < MED_SCREEN_SIZE) {
+                        anime({
+                            targets: ".modalBox",
+                            // Properties
+                            // Animation Parameters
+                            width: ["0%", "90%"],
+                            scale: [0, 1],
+                            duration: 750,
+                            easing: "easeOutQuad",
+                        });
+                    } else {
+                        anime({
+                            targets: ".modalBox",
+                            // Properties
+                            // Animation Parameters
+                            width: ["0%", "80%"],
+                            scale: [0, 1],
+                            duration: 750,
+
+                            easing: "easeOutQuad",
+                        });
+                    }
+                    anime({
+                        targets: ".modalTextSection",
+                        // Properties
+                        // Animation Parameters
+
+                        duration: 750,
+                        scale: [0, 1],
+                        easing: "easeOutQuad",
+                    });
+                }}
+            >
                 <div className="modalBannerContainer">
                     <div className="modalBannerImageWrap">
                         <img src={showModalContent?.banner_image} alt=""></img>
@@ -200,14 +261,26 @@ const Browse: React.FC<BrowseProps> = (props) => {
                             src={showModalContent?.banner_title_image}
                             alt=""
                         ></img>
-                        <button className="modalWatchButton">
+                        <button
+                            className="modalWatchButton"
+                            onClick={() => {
+                                Number.isInteger(showModalContent?.media_id)
+                                    ? //@ts-ignore Small TS warning, too lazy to fix
+                                      addToWatching(showModalContent?.media_id)
+                                    : //   modalOnCancel();
+                                      alert(
+                                          "Trouble adding your movie to your watch list..."
+                                      );
+                                modalOnCancel();
+                            }}
+                        >
                             <FaPlay className="playIcon" />
                             Watch Now
                         </button>
                     </div>
                 </div>
                 <div className="modalInfoWrap">
-                    <div className="modalTextSection">
+                    <div className="modalTextSection modalTextDateAndDescSection">
                         <p className="modalMediaDate">
                             {showModalContent?.media_date}
                         </p>
@@ -215,7 +288,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                             {showModalContent?.media_description}
                         </p>
                     </div>
-                    <div className="modalTextSection">
+                    <div className="modalTextSection modalTextCastAndGenreSection">
                         <div className="modalCastAndGenre">
                             {renderGenreAndCast()}
                         </div>
@@ -330,7 +403,10 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         the Incredible Hulk and Captain America -- team up to
                         save the world from certain doom.
                     </p>
-                    <button className="watchButton">
+                    <button
+                        className="watchButton"
+                        onClick={() => addToWatching(12)}
+                    >
                         <FaPlay className="playIcon" />
                         Watch Now
                     </button>

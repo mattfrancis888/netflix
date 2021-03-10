@@ -52,7 +52,9 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                             <div className="mediaOutlineDownContainer">
                                 <div
                                     className="clickForWatch"
-                                    onClick={() => props.onMediaClick(content)}
+                                    onClick={() =>
+                                        props.onMediaClick(content.media_id)
+                                    }
                                 ></div>
                                 <div
                                     className="outlineDownWrap "

@@ -15,15 +15,15 @@
     position: relative;
     cursor: initial;
     background-color: #181818;
-    width: 90%;
+    width: 0%;
+    overflow: hidden;
     border-radius: 0.8rem 0.8rem;
-    @media screen and (min-width: $md_breakpoint) {
-        width: 80%;
-    }
+
     h2 {
         display: none;
     }
     .modalCloseIcon {
+        cursor: pointer;
         position: absolute;
         top: 1rem;
         right: 1rem;
@@ -150,6 +150,7 @@
 .modalInfoWrap {
     display: flex;
     padding: 1rem;
+
     @media screen and (min-width: $sm_breakpoint) {
         padding: 2rem;
     }
@@ -158,19 +159,28 @@
     }
 }
 .modalTextSection {
-    width: 50%;
     font-size: 0.8rem;
+    overflow: hidden;
     @media screen and (min-width: $sm_breakpoint) {
         font-size: 1.2rem;
     }
     @media screen and (min-width: $md_breakpoint) {
         font-size: 1.4rem;
+        margin-right: 4rem;
     }
     @media screen and (min-width: $xl_breakpoint) {
         font-size: 1.6rem;
     }
 }
-
+.modalTextDateAndDescSection {
+    width: 70%;
+    @media screen and (min-width: $sm_breakpoint) {
+        margin-right: 2rem;
+    }
+}
+.modalTextCastAndGenreSection {
+    width: 30%;
+}
 .modalMediaDate {
     font-weight: bold;
 }
@@ -180,7 +190,6 @@
 
 .modalMediaCastWrap,
 .modalMediaGenreWrap {
-    align-items: center;
     display: flex;
 }
 
