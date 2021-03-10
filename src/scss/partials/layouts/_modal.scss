@@ -12,6 +12,7 @@
     z-index: 2;
 }
 .modalBox {
+    position: relative;
     cursor: initial;
     background-color: #181818;
     width: 90%;
@@ -21,6 +22,22 @@
     }
     h2 {
         display: none;
+    }
+    .modalCloseIcon {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1;
+        font-size: 1.2rem;
+        @media screen and (min-width: $sm_breakpoint) {
+            font-size: 1.4rem;
+        }
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 1.6rem;
+        }
+        @media screen and (min-width: $lg_breakpoint) {
+            font-size: 2rem;
+        }
     }
 }
 

@@ -49,7 +49,7 @@ var getMedias = function (req, res) { return __awaiter(void 0, void 0, void 0, f
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, databasePool_1.default.query("SELECT * FROM media")];
+                return [4 /*yield*/, databasePool_1.default.query("Select media_id, media_title,\n            media_date,media_description,banner_title_image\n            , banner_image,name_tokens, media_type_name from media NATURAL JOIN lookup_media_type NATURAL JOIN media_type")];
             case 1:
                 response_1 = _a.sent();
                 res.send({ medias: response_1.rows });

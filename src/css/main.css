@@ -917,6 +917,7 @@ body {
 }
 
 .modalBox {
+  position: relative;
   cursor: initial;
   background-color: #181818;
   width: 90%;
@@ -929,6 +930,28 @@ body {
 }
 .modalBox h2 {
   display: none;
+}
+.modalBox .modalCloseIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1;
+  font-size: 1.2rem;
+}
+@media screen and (min-width: 520px) {
+  .modalBox .modalCloseIcon {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .modalBox .modalCloseIcon {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .modalBox .modalCloseIcon {
+    font-size: 2rem;
+  }
 }
 
 .centerLoadingForModal {

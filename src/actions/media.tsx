@@ -45,6 +45,7 @@ export interface Media {
     banner_title_image: string;
     banner_image: string;
     name_tokens: string;
+    media_type_name: string;
 }
 
 export interface Cast {

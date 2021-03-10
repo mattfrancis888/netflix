@@ -11,7 +11,11 @@ interface genreAndCast {
 
 export const getMedias = async (req: Request, res: Response) => {
     try {
-        const response = await pool.query(`SELECT * FROM media`);
+        const response = await pool.query(
+            `Select media_id, media_title,
+            media_date,media_description,banner_title_image
+            , banner_image,name_tokens, media_type_name from media NATURAL JOIN lookup_media_type NATURAL JOIN media_type`
+        );
         res.send({ medias: response.rows });
         // res.send({...response.rows})
     } catch (error) {

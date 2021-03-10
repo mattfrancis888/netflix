@@ -73,7 +73,20 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 </div>
             );
         } else if (props.medias.data?.medias && props.watching.data?.watching) {
-            let mediaContentSplit = _.chunk(props.medias.data?.medias, 3);
+            let movies = _.filter(props.medias.data?.medias, {
+                media_type_name: "Movie",
+            });
+            let moviesContentSplit = _.chunk(movies, 8);
+
+            let netflixOrig = _.filter(props.medias.data?.medias, {
+                media_type_name: "Netflix Original",
+            });
+            let netflixOrigSplit = _.chunk(netflixOrig, 8);
+
+            let tvShows = _.filter(props.medias.data?.medias, {
+                media_type_name: "TV",
+            });
+            let tvShowsSplit = _.chunk(tvShows, 8);
 
             return (
                 <React.Fragment>
@@ -88,7 +101,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         <MediaCarousel
                             // content={
                             //     _.chunk(props.watching.data?.watching, 3)[0]
-                            // }
+                            // }x
                             content={props.watching.data?.watching}
                             modalShow={modalShow}
                             onMediaClick={addToWatching}
@@ -99,20 +112,35 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     <h3 className="carouselTitle">Popular On Netflix</h3>
                     <MediaCarousel
                         onMediaClick={addToWatching}
-                        content={mediaContentSplit[0]}
+                        content={moviesContentSplit[0]}
                         modalShow={modalShow}
                     />
+                    <h3 className="carouselTitle">Movies Loved By Many</h3>
+                    <MediaCarousel
+                        onMediaClick={addToWatching}
+                        content={moviesContentSplit[1]}
+                        modalShow={modalShow}
+                    />
+
                     <h3 className="carouselTitle">Netflix Originals</h3>
-                    {/* <NetflixOriginalCarousel modalShow={() => modalShow()} /> */}
+                    <NetflixOriginalCarousel
+                        onMediaClick={addToWatching}
+                        content={netflixOrigSplit[0]}
+                        modalShow={modalShow}
+                    />
 
                     <h3 className="carouselTitle">TV Shows</h3>
-                    {/* <MediaCarousel modalShow={() => modalShow()} /> */}
+                    <MediaCarousel
+                        onMediaClick={addToWatching}
+                        content={tvShowsSplit[0]}
+                        modalShow={modalShow}
+                    />
                 </React.Fragment>
             );
         }
     };
 
-    const [showFilterModal, setShowFilterModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     const [showModalContent, setShowModalContent] = useState<Media | null>(
         null
     );
@@ -121,7 +149,9 @@ const Browse: React.FC<BrowseProps> = (props) => {
     const addToWatching = (clickedMedia: Media) => {
         try {
             props.insertMediaWatchingByUser(clickedMedia.media_id);
-            // alert("Success");
+            alert(
+                `Let's pretend that you are watching your show / movie! It's now added to 'Continue Watching' on the top of the page. You can remove it from 'Currently Watching' by hovering over it.`
+            );
         } catch {
             // alert("Error");
         }
@@ -137,15 +167,15 @@ const Browse: React.FC<BrowseProps> = (props) => {
     };
 
     const modalShow = (clickedMedia: Media) => {
-        setShowFilterModal(true);
+        setShowModal(true);
         setShowModalContent({ ...clickedMedia });
         props.fetchMediaGenreAndCast(clickedMedia.media_id);
     };
     const modalOnCancel = () => {
-        setShowFilterModal(false);
+        setShowModal(false);
     };
     const renderModal = () => {
-        if (!showFilterModal) return null;
+        if (!showModal) return null;
         else {
             return (
                 <Modal

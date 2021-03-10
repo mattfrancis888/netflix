@@ -25,16 +25,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
     const renderSlides = () => {
         return props.content.map((content: Media, index: number) => {
             return (
-                <Slide
-                    index={index}
-                    key={content.media_id}
-                    // onClick={() =>
-                    //     history.push(
-                    //         `movies/${props.movies[0].movie_name_for_url}`
-                    //     )
-                    // }
-                    //https://occ-0-724-116.1.nflxso.net/dnm/api/v6/ifCRgpXJMAE_puF509EDR7a7mqU/AAAABQmL45nJNIgGUsePchJnmY393Y14AergOtZVaVI3rltbnmzm6T2gZBSvXoubVUAiWuTkxHef1gZl6aFLqtHbNgDftai1nBu71ee6_DcyPRanQC9hCrTMlr8ugA0C_GYJAErHVhNwbOs9Qh1lJ7fKG8Fv7wMkeJUodUn-KCcZCJ03EKrSywDWh7INCxatzrb-Ur21KVas.webp?r=187
-                >
+                <Slide index={index} key={content.media_id}>
                     <LazyLoad>
                         <div
                             className={`mediaContainerCarousel mediaAnime${index}`}
@@ -99,10 +90,11 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                 <CarouselProvider
                     naturalSlideWidth={100}
                     naturalSlideHeight={55}
-                    totalSlides={5}
+                    totalSlides={8}
                     className="mediaCarouselWrap"
                     visibleSlides={width < 900 ? 3 : 5}
                     infinite={true}
+                    step={3}
                 >
                     <div className="sliderAndButtonWrap">
                         <Slider>{renderSlides()}</Slider>
