@@ -122,7 +122,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
         try {
             props.insertMediaWatchingByUser(clickedMediaId);
             alert(
-                `Let's pretend that you are watching your show / movie! It's now added to 'Continue Watching' on the top of the page. You can remove it from 'Currently Watching' by hovering over it.`
+                `Let's pretend that you are watching your show / movie! It's now added to 'Continue Watching' on the homepage. You can remove it from 'Currently Watching' by hovering over it.`
             );
         } catch {
             // alert("Error");

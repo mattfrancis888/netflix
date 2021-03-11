@@ -3,8 +3,15 @@ import history from "../browserHistory";
 import { AiOutlineSearch } from "react-icons/ai";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
+import { fetchMediasByKeyword, Media } from "../actions";
 import anime from "animejs/lib/anime.es.js";
-const Searchbar: React.FC<{}> = () => {
+import { connect } from "react-redux";
+import { StoreState } from "../reducers";
+interface SearchbarProps {
+    fetchMediasByKeyword?(searchKeyword: string): void;
+}
+
+const Searchbar: React.FC<SearchbarProps> = (props) => {
     const [searchIconFirstClick, setSearchIconFirstClick] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -12,14 +19,12 @@ const Searchbar: React.FC<{}> = () => {
         const delayDebounceFn = setTimeout(() => {
             console.log(searchTerm);
             // Send Axios request here
+            if (props.fetchMediasByKeyword && searchIconFirstClick)
+                props.fetchMediasByKeyword(searchTerm);
         }, 3000);
 
         return () => clearTimeout(delayDebounceFn);
     }, [searchTerm]);
-
-    //For Query Strings:
-    const { search } = useLocation();
-    const queryValues = queryString.parse(search);
 
     useEffect(() => {
         // if (queryValues.category) setFilterCategory(queryValues.category);
@@ -110,4 +115,10 @@ const Searchbar: React.FC<{}> = () => {
     );
 };
 
-export default Searchbar;
+const mapStateToProps = (state: StoreState) => {
+    return {
+        medias: state.medias,
+    };
+};
+
+export default connect(mapStateToProps, { fetchMediasByKeyword })(Searchbar);

@@ -151,3 +151,19 @@ export const removeFromWatchingByUser = async (req: any, res: Response) => {
         return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
     }
 };
+
+export const getMediasBySearch = async (req: Request, res: Response) => {
+    const searchKeyword = req.params.searchKeyword;
+    try {
+        const response = await pool.query(
+            `SELECT media_title FROM media  
+            WHERE name_tokens @@ to_tsquery($1);`,
+            [searchKeyword]
+        );
+        res.send({ medias: response.rows });
+        // res.send({...response.rows})
+    } catch (error) {
+        pool.query("ROLLBACK");
+        return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
+    }
+};

@@ -1,7 +1,7 @@
 .searchResultContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 5rem 1rem;
+    padding: 6rem 1rem;
 
     @media screen and (min-width: $sm_breakpoint) {
         padding: 8rem 1rem;

@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeFromWatchingByUser = exports.addToWatchingByUser = exports.getMediaWatchingByUser = exports.getMediaGenreAndCast = exports.getMedias = void 0;
+exports.getMediasBySearch = exports.removeFromWatchingByUser = exports.addToWatchingByUser = exports.getMediaWatchingByUser = exports.getMediaGenreAndCast = exports.getMedias = void 0;
 var databasePool_1 = __importDefault(require("../databasePool"));
 var constants_1 = require("../constants");
 var jwt_decode_1 = __importDefault(require("jwt-decode"));
@@ -204,3 +204,26 @@ var removeFromWatchingByUser = function (req, res) { return __awaiter(void 0, vo
     });
 }); };
 exports.removeFromWatchingByUser = removeFromWatchingByUser;
+var getMediasBySearch = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var searchKeyword, response_5, error_6;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                searchKeyword = req.params.searchKeyword;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, databasePool_1.default.query("SELECT media_title FROM media  \n            WHERE name_tokens @@ to_tsquery($1);", [searchKeyword])];
+            case 2:
+                response_5 = _a.sent();
+                res.send({ medias: response_5.rows });
+                return [3 /*break*/, 4];
+            case 3:
+                error_6 = _a.sent();
+                databasePool_1.default.query("ROLLBACK");
+                return [2 /*return*/, res.sendStatus(constants_1.INTERNAL_SERVER_ERROR_STATUS)];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); };
+exports.getMediasBySearch = getMediasBySearch;
