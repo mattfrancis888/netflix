@@ -23,9 +23,12 @@ axiosConfig.interceptors.request.use(
         //Note: this won't affect /token because we are using the http-only cookie not authorization header :) (look at backend)
         // console.log("INTERCEPTOR REQ", config);
         const token = Cookies.get(ACCESS_TOKEN);
-        if (token) {
-            config.headers["Authorization"] = token;
-        }
+        //ME TOMMOROW: I COMMENTED OUT HTIS
+        //TODO:
+        //Don't need to send headers (we are not using authenticateToken approach; our refreshToken middleware validates our token)
+        // if (token) {
+        //     config.headers["Authorization"] = token;
+        // }
         return config;
     },
     (error) => {

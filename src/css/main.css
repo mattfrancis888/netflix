@@ -1175,6 +1175,7 @@ body {
   color: white;
   font-size: 1.1rem;
   font-weight: normal;
+  padding: 3rem;
 }
 @media screen and (min-width: 768px) {
   .serverErrorContainer h3 {

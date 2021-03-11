@@ -26,10 +26,10 @@
         "react-dom": "^17.0.1",
         "react-icons": "^4.2.0",
         "react-lazyload": "^3.2.0",
+        "react-loader-spinner": "^4.0.0",
         "react-redux": "^7.2.2",
         "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
-        "react-spinners": "^0.10.6",
         "redux": "^4.0.5",
         "redux-devtools-extension": "^2.13.9",
         "redux-form": "^8.3.7",
@@ -66,5 +66,11 @@
     },
     "devDependencies": {
         "@types/react-redux": "^7.1.16"
+    },
+    "jest": {
+        "transformIgnorePatterns": [
+            "<rootDir>/node_modules/?!(animejs)",
+            "<rootDir>/node_modules/?!(react-spinners)"
+        ]
     }
 }

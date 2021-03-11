@@ -1,5 +1,17 @@
-import PuffLoader from "react-spinners/PuffLoader";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import useWindowDimensions from "../windowDimensions";
+import { MED_SCREEN_SIZE } from "../constants";
 const Loading = (): JSX.Element => {
-    return <PuffLoader color={"white"} loading={true} />;
+    const { width } = useWindowDimensions();
+    return (
+        <Loader
+            type="ThreeDots"
+            color="white"
+            height={width < MED_SCREEN_SIZE ? 50 : 75}
+            width={width < MED_SCREEN_SIZE ? 50 : 75}
+            timeout={3000} //3 secs
+        />
+    );
 };
 export default Loading;

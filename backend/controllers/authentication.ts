@@ -96,6 +96,8 @@ export const authenticateToken = async (
     res: Response,
     next: NextFunction
 ) => {
+    //Note to me, this is not used because our refreshToken middleware handles if our acess token is sitll valid/ has not expired!
+    //This is just used as a reference. If you want to ever use this, make sure to send headers in your axios interceptors
     const token = req.headers["authorization"];
     if (PRIVATE_KEY && token) {
         try {

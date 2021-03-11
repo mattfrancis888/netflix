@@ -72,12 +72,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     </h3>
                 </div>
             );
-        } else if (!props.medias.data && !props.watching.data) {
-            return (
-                <div className="loadingCenter">
-                    <Loading />
-                </div>
-            );
         } else if (props.medias.data?.medias && props.watching.data?.watching) {
             let movies = _.filter(props.medias.data?.medias, {
                 media_type_name: "Movie",
@@ -105,9 +99,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     >
                         <h3 className="carouselTitle">Continue Watching</h3>
                         <MediaCarousel
-                            // content={
-                            //     _.chunk(props.watching.data?.watching, 3)[0]
-                            // }x
                             content={props.watching.data?.watching}
                             modalShow={modalShow}
                             onMediaClick={addToWatching}
@@ -143,7 +134,31 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     />
                 </React.Fragment>
             );
+        } else if (!props.medias.data && !props.watching.data) {
+            return (
+                <div className="loadingCenter">
+                    <Loading />
+                </div>
+            );
         }
+
+        //This block would appear in testing
+        // else if (props.medias.data?.medias) {
+        //     return (
+        //         <div>
+        //             <p>{props.medias.data?.medias[0].media_title}</p>
+        //             {/* <p>{props.watching.data?.watching[0].media_title}</p> */}
+        //         </div>
+        //     );
+        //This block will not appear in testing,  I believe it's because the API tries to read the cookie
+        // } else if (props.watching.data?.watching) {
+        //     return (
+        //         <div>
+        //             <p>Hi</p>
+        //             {/* <p>{props.watching.data?.watching[0].media_title}</p> */}
+        //         </div>
+        //     );
+        // }
     };
 
     const [showModal, setShowModal] = useState(false);
