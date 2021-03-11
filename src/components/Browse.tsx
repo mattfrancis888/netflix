@@ -372,7 +372,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     }}
                 >
                     <img
-                        src="https://wallpaperaccess.com/full/4674.jpg"
+                        src="https://res.cloudinary.com/du8n2aa4p/image/upload/v1615345150/netflix/logo/avengers_banner.jpg"
                         alt="banner"
                     ></img>
 
@@ -381,7 +381,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 <div className="browseBannerTitleImageAndInfoWrap">
                     <img
                         className="animeBannerTitle"
-                        src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/tx1O544a9T7n8Z_G12qaboulQQE/AAAABTk2XN7GLRTLHV9pVLOUV7ZWdTgnQqitxdYryNH-ZwAkyO2vJRtwtlrgt1_iDdjZQrOJ0E_BN1NdSFtWQm4L7qmxDs2we2VVen4.webp?r=5b7"
+                        src="https://res.cloudinary.com/du8n2aa4p/image/upload/v1615345142/netflix/logo/avengers_logo.webp"
                         onLoad={() => {
                             anime({
                                 targets: ".animeBannerTitle",

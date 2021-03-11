@@ -79,6 +79,7 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
             );
         });
     };
+
     const renderCarousel = (): JSX.Element | JSX.Element[] => {
         return (
             <div
@@ -92,10 +93,10 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                 <CarouselProvider
                     naturalSlideWidth={100}
                     naturalSlideHeight={55}
-                    totalSlides={8}
+                    totalSlides={props.content.length}
                     className="mediaCarouselWrap"
                     visibleSlides={width < 900 ? 3 : 5}
-                    infinite={true}
+                    infinite={props.content.length < 3 ? false : true}
                     step={3}
                 >
                     <div className="sliderAndButtonWrap">
