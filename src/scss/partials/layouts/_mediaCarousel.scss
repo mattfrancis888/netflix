@@ -7,6 +7,7 @@
 }
 .sliderAndButtonWrap {
     position: relative;
+    @include sidePaddingForCarouselAndTitle;
 }
 
 .mediaNextButton {
@@ -36,6 +37,9 @@
 .mediaContainerCarousel {
     position: relative;
     z-index: 0;
+    opacity: 0;
+    cursor: pointer;
+
     &:hover {
         // padding: 0;
         z-index: 2;
@@ -57,6 +61,7 @@
     width: 100%;
     height: 100%;
     opacity: 0;
+    z-index: 0;
     // background-image: linear-gradient(
     //     to bottom,
     //     rgba(0, 0, 0, 0.7) 10%,
@@ -69,7 +74,12 @@
         transition: opacity 0.5s;
     }
 }
+.clickForWatch {
+    width: 100%;
+    height: 100%;
+}
 .outlineDownWrap {
+    z-index: 1;
     background: rgba(0, 0, 0, 0.6);
     position: absolute;
     width: 100%;
@@ -77,7 +87,8 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0.2rem;
+    padding: 0.3rem;
+    padding-bottom: 0.6rem;
     @media screen and (min-width: $md_breakpoint) {
         padding: 0.5rem;
     }
@@ -92,53 +103,37 @@
 
         @media screen and (min-width: $lg_breakpoint) {
             font-size: 2.3rem;
-            padding-bottom: 0.4rem;
+        }
+        @media screen and (min-width: $xl_breakpoint) {
+            padding-bottom: 0.6rem;
         }
         right: 1rem;
     }
 }
 
-// .moviePosterTitleFade {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     height: 100%;
-//     width: 100%;
-//     z-index: 0;
-//     background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0, transparent 34%);
-// }
+.removeWatchingIcon {
+    z-index: 1;
+    position: absolute;
+    top: 0.2rem;
+    right: 0.4rem;
+    cursor: pointer;
+    color: white;
+    font-size: 1.2rem;
+    padding-top: 0.2rem;
+    @media screen and (min-width: $sm_breakpoint) {
+        font-size: 1.8rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    @media screen and (min-width: $md_breakpoint) {
+        top: 0.8rem;
+        right: 0.7rem;
+    }
 
-// .movieOverlay {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     cursor: pointer;
-//     background: rgba(0, 0, 0, 0.6);
-//     h3 {
-//         position: absolute;
-//         top: 50%;
-//         left: 50%;
-//         transform: translate(-50%, -50%);
-//         color: white;
-//         text-transform: uppercase;
-//         font-size: 0.8rem;
-//         @media screen and (min-width: $sm_breakpoint) {
-//             font-size: 1.3rem;
-//         }
-//         @media screen and (min-width: $md_breakpoint) {
-//             font-size: 1.6rem;
-//         }
-//         @media screen and (min-width: $lg_breakpoint) {
-//             font-size: 2rem;
-//         }
-//         filter: none;
-//     }
-//     // opacity: 0;
-//     transition: all 0.3s ease;
-
-//     &:hover {
-//         opacity: 1;
-//     }
-// }
+    @media screen and (min-width: $lg_breakpoint) {
+        font-size: 2.3rem;
+    }
+    @media screen and (min-width: $xl_breakpoint) {
+        top: 1rem;
+    }
+}

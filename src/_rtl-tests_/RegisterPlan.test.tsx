@@ -89,4 +89,4 @@ test("Register form on submit", async () => {
         expect(pushSpy).toBeCalledWith("/browse");
         pushSpy.mockRestore();
     });
-});
+}, 30000);

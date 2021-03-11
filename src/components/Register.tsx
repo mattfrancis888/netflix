@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./Header";
 import { signUp } from "../actions";
 import { StoreState } from "../reducers";
 import { connect } from "react-redux";
 import history from "../browserHistory";
 const Register: React.FC<{}> = (props) => {
+    useEffect(() => {
+        document.body.style.background = "black";
+    }, []);
     return (
         <React.Fragment>
             <Header />

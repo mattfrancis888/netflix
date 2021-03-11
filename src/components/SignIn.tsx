@@ -21,6 +21,7 @@ const SignIn: React.FC<SignInProps> = (props) => {
         props.signIn(formValues);
     };
     useEffect(() => {
+        document.body.style.background = "black";
         //If user is already logged in, they should be unable to visit this page
         if (props.authStatus) {
             history.push("/browse");

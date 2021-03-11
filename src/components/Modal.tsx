@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ModalProps } from "./Browse";
+import { AiOutlineClose } from "react-icons/ai";
 //We use portals + modals instead of directly creating a component and use it
 //inside the component tree structure because if a parent component
 //uses position:relative; the z-index of all the child's component
@@ -16,6 +17,10 @@ const Modal: React.FC<ModalProps> = (props) => {
                 }}
                 className="modalBox"
             >
+                <AiOutlineClose
+                    className="modalCloseIcon"
+                    onClick={props.onDismiss}
+                />
                 <h2>{props.title}</h2>
                 {props.content}
                 {/*{props.actions} */}

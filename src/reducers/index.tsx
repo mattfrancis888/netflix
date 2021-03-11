@@ -1,22 +1,27 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer, FormStateMap } from "redux-form";
-import authReducer from "./authReducer";
-import { AuthStateResponse } from "./authReducer";
-// import categoryReducer from "./categoryReducer";
-// import listingReducer, { ListingDataResponse } from "./listingReducer";
-// import profileReducer, { UserProfileDataResponse } from "./profileReducer";
+
+import authReducer, { AuthStateResponse } from "./authReducer";
+import mediasReducer, { MediaStateResponse } from "./mediasReducer";
+import errorReducer, { ErrorStateResponse } from "./errorReducer";
+import mediaGenreAndCastReducer, {
+    MediaGenreAndCastStateResponse,
+} from "./mediaGenreAndCastReducer";
+import watchingReducer, { WatchingStateResponse } from "./watchingReducer";
 
 export interface StoreState {
     authStatus: AuthStateResponse;
-    // categories: string[];
-    // listingInfo: ListingDataResponse;
-    // profileInfo: UserProfileDataResponse;
+    medias: MediaStateResponse;
+    mediaGenreAndCast: MediaGenreAndCastStateResponse;
+    watching: WatchingStateResponse;
+    errors: ErrorStateResponse;
     form: FormStateMap;
 }
 export default combineReducers<StoreState>({
     authStatus: authReducer,
-    // categories: categoryReducer,
-    // listingInfo: listingReducer,
-    // profileInfo: profileReducer,
+    medias: mediasReducer,
+    watching: watchingReducer,
+    errors: errorReducer,
+    mediaGenreAndCast: mediaGenreAndCastReducer,
     form: formReducer,
 });
