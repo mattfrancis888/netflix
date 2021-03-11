@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { signOut } from "../actions";
 import { StoreState } from "../reducers";
 import { connect } from "react-redux";
+import Searchbar from "./Searchbar";
 interface IHeader {
     authStatus?: string | null;
     signOut(): void;
@@ -50,9 +51,12 @@ const BrowseHeader: React.FC<IHeader> = (props) => {
                     ></path>
                 </g>
             </svg>
-            <h1 data-testid="signOutText" onClick={() => props.signOut()}>
-                Sign Out
-            </h1>
+            <div className="searchbarAndSignOutWrap">
+                <Searchbar />
+                <h1 data-testid="signOutText" onClick={() => props.signOut()}>
+                    Sign Out
+                </h1>
+            </div>
         </div>
     );
 };

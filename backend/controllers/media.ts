@@ -103,8 +103,8 @@ export const addToWatchingByUser = async (req: any, res: Response) => {
         const response = await pool.query(
             `SELECT media_id, media_title,
             media_date,media_description,banner_title_image
-            ,banner_image,name_tokens FROM lookup_media_watching
-            NATURAL JOIN media WHERE email = $1`,
+            ,banner_image,name_tokens, added_date FROM lookup_media_watching
+            NATURAL JOIN media WHERE email = $1 ORDER BY added_date`,
             [email]
         );
         // if (!response.rows[0]) {

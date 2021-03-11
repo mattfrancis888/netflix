@@ -145,7 +145,7 @@ var addToWatchingByUser = function (req, res) { return __awaiter(void 0, void 0,
             case 3:
                 //Insert if it does not exist on table
                 _a.sent();
-                return [4 /*yield*/, databasePool_1.default.query("SELECT media_id, media_title,\n            media_date,media_description,banner_title_image\n            ,banner_image,name_tokens FROM lookup_media_watching\n            NATURAL JOIN media WHERE email = $1", [email])];
+                return [4 /*yield*/, databasePool_1.default.query("SELECT media_id, media_title,\n            media_date,media_description,banner_title_image\n            ,banner_image,name_tokens, added_date FROM lookup_media_watching\n            NATURAL JOIN media WHERE email = $1 ORDER BY added_date", [email])];
             case 4:
                 response_3 = _a.sent();
                 // if (!response.rows[0]) {
