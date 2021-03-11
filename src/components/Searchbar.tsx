@@ -5,8 +5,18 @@ import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
 const Searchbar: React.FC<{}> = () => {
-    const [searchValue, setSearchValue] = useState("");
     const [searchIconFirstClick, setSearchIconFirstClick] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+            console.log(searchTerm);
+            // Send Axios request here
+        }, 3000);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchTerm]);
+
     //For Query Strings:
     const { search } = useLocation();
     const queryValues = queryString.parse(search);
@@ -91,10 +101,8 @@ const Searchbar: React.FC<{}> = () => {
                 // }
                 type="search"
                 placeholder="Search titles"
-                // aria-label="Search"
-                value={searchValue}
                 name="search"
-                onChange={(event) => setSearchValue(event.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={handleKeyDown}
                 autoComplete="off"
             />

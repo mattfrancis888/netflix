@@ -15,6 +15,7 @@ import useWindowDimensions from "../windowDimensions";
 import { MediaAndNetflixOriginalCarouselProps } from "./Browse";
 import anime from "animejs/lib/anime.es.js";
 import { Media } from "actions";
+import MediaContent from "./MediaContent";
 const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
     props
 ) => {
@@ -26,8 +27,8 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
         return props.content.map((content: Media, index: number) => {
             return (
                 <Slide index={index} key={content.media_id}>
-                    <LazyLoad>
-                        <div
+                    {/* <LazyLoad> 
+                         <div
                             className={`mediaContainerCarousel mediaAnime${index}`}
                             onLoad={() => {
                                 anime({
@@ -73,8 +74,15 @@ const MediaCarousel: React.FC<MediaAndNetflixOriginalCarouselProps> = (
                                     />
                                 )}
                             </div>
-                        </div>
-                    </LazyLoad>
+                        </div> 
+                         </LazyLoad>*/}
+                    <MediaContent
+                        content={content}
+                        index={index}
+                        onMediaClick={props.onMediaClick}
+                        onRemoveClick={props.onRemoveClick}
+                        modalShow={props.modalShow}
+                    />
                 </Slide>
             );
         });

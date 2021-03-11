@@ -1276,10 +1276,6 @@ body {
   }
 }
 
-.searchBarInputHide {
-  width: 0%;
-}
-
 [type=search]::-webkit-search-cancel-button,
 [type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -2071,6 +2067,31 @@ body {
   .checkMark {
     font-size: 2.5rem;
   }
+}
+
+.searchResultContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 5rem 1rem;
+}
+@media screen and (min-width: 520px) {
+  .searchResultContainer {
+    padding: 8rem 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .searchResultContainer {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10rem 3rem;
+  }
+}
+.searchResultContainer .searchResultContentWrap {
+  width: 100%;
+}
+.searchResultContainer .searchResultContentWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=main.css.map */
