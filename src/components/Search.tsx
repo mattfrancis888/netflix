@@ -46,6 +46,7 @@ export interface SearchQueryValues {
 
 const Browse: React.FC<BrowseProps> = (props) => {
     const { width } = useWindowDimensions();
+    const [errorOrNoResult, setErrorOrNoResult] = useState(false);
 
     useEffect(() => {
         document.body.style.background = "black";
@@ -58,6 +59,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
 
     const renderMedias = () => {
         if (props.errors.data?.error) {
+            if (!errorOrNoResult) setErrorOrNoResult(true);
             return (
                 <div className="serverErrorContainer">
                     <h3 className="serverErrorText">
@@ -66,10 +68,16 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 </div>
             );
         } else if (props.medias.data?.medias) {
+            if (props.medias.data?.medias.length === 0) {
+                if (!errorOrNoResult) setErrorOrNoResult(true);
+                return (
+                    <h1 className="noResultsText">{`No results found for "${queryValues.q}"`}</h1>
+                );
+            }
+            if (errorOrNoResult) setErrorOrNoResult(false);
             let medias = _.chunk(props.medias.data?.medias, 8);
-            console.log(medias[0][0].media_title);
             return (
-                <React.Fragment>
+                <div>
                     {medias[0].map((content, index) => {
                         return (
                             <div className="searchResultContentWrap">
@@ -83,9 +91,10 @@ const Browse: React.FC<BrowseProps> = (props) => {
                             </div>
                         );
                     })}
-                </React.Fragment>
+                </div>
             );
         } else if (!props.medias.data?.medias) {
+            if (!errorOrNoResult) setErrorOrNoResult(true);
             return (
                 <div className="loadingCenter">
                     <Loading />
@@ -278,12 +287,20 @@ const Browse: React.FC<BrowseProps> = (props) => {
             );
         }
     };
-
+    console.log(errorOrNoResult);
     return (
         <React.Fragment>
             {renderModal()}
-
-            <div className="searchResultContainer">{renderMedias()}</div>
+            <h1 className="searchedForText">{`Searched for "${queryValues.q}"`}</h1>
+            <div
+                className={`searchResultContainer ${
+                    errorOrNoResult
+                        ? "searchResultContainerErrorOrNoResult"
+                        : ""
+                }`}
+            >
+                {renderMedias()}
+            </div>
         </React.Fragment>
     );
 };

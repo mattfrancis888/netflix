@@ -1,14 +1,14 @@
 .searchResultContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 6rem 1rem;
+    padding: 1rem 1rem;
 
     @media screen and (min-width: $sm_breakpoint) {
-        padding: 8rem 1rem;
+        padding: 2rem 1rem;
     }
     @media screen and (min-width: $md_breakpoint) {
         grid-template-columns: repeat(4, 1fr);
-        padding: 10rem 3rem;
+        padding: 2rem 3rem;
     }
 
     .searchResultContentWrap {
@@ -17,6 +17,48 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+    }
+}
+.searchedForText {
+    font-size: 1.2rem;
+    font-family: "Netflix Sans Bold";
+
+    padding: 6rem 1rem;
+    padding-bottom: 0;
+    @media screen and (min-width: $sm_breakpoint) {
+        padding: 8rem 1rem;
+        padding-bottom: 0;
+        font-size: 1.6rem;
+    }
+    @media screen and (min-width: $md_breakpoint) {
+        padding: 10rem 3rem;
+        padding-bottom: 0;
+    }
+    @media screen and (min-width: $lg_breakpoint) {
+        font-size: 1.9rem;
+    }
+}
+.searchResultContainerErrorOrNoResult {
+    display: flex;
+    flex-direction: column;
+
+    .noResultsText {
+        text-align: center;
+        margin-top: 5rem;
+        font-size: 1.2rem;
+        font-weight: normal;
+        @media screen and (min-width: $sm_breakpoint) {
+            margin-top: 8rem;
+            font-size: 1.6rem;
+        }
+        @media screen and (min-width: $md_breakpoint) {
+            font-size: 1.9rem;
+        }
+
+        @media screen and (min-width: $lg_breakpoint) {
+            margin-top: 10rem;
+            font-size: 1.9rem;
         }
     }
 }

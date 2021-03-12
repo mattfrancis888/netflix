@@ -19,8 +19,10 @@ const Searchbar: React.FC<SearchbarProps> = (props) => {
         const delayDebounceFn = setTimeout(() => {
             console.log(searchTerm);
             // Send Axios request here
-            if (props.fetchMediasByKeyword && searchIconFirstClick)
-                props.fetchMediasByKeyword(searchTerm);
+            if (props.fetchMediasByKeyword && searchIconFirstClick) {
+                // props.fetchMediasByKeyword(searchTerm);
+                history.push(`/search?q=${searchTerm}`);
+            }
         }, 3000);
 
         return () => clearTimeout(delayDebounceFn);

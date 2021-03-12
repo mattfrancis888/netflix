@@ -2072,17 +2072,17 @@ body {
 .searchResultContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 6rem 1rem;
+  padding: 1rem 1rem;
 }
 @media screen and (min-width: 520px) {
   .searchResultContainer {
-    padding: 8rem 1rem;
+    padding: 2rem 1rem;
   }
 }
 @media screen and (min-width: 768px) {
   .searchResultContainer {
     grid-template-columns: repeat(4, 1fr);
-    padding: 10rem 3rem;
+    padding: 2rem 3rem;
   }
 }
 .searchResultContainer .searchResultContentWrap {
@@ -2092,6 +2092,59 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.searchedForText {
+  font-size: 1.2rem;
+  font-family: "Netflix Sans Bold";
+  padding: 6rem 1rem;
+  padding-bottom: 0;
+}
+@media screen and (min-width: 520px) {
+  .searchedForText {
+    padding: 8rem 1rem;
+    padding-bottom: 0;
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .searchedForText {
+    padding: 10rem 3rem;
+    padding-bottom: 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .searchedForText {
+    font-size: 1.9rem;
+  }
+}
+
+.searchResultContainerErrorOrNoResult {
+  display: flex;
+  flex-direction: column;
+}
+.searchResultContainerErrorOrNoResult .noResultsText {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+@media screen and (min-width: 520px) {
+  .searchResultContainerErrorOrNoResult .noResultsText {
+    margin-top: 8rem;
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .searchResultContainerErrorOrNoResult .noResultsText {
+    font-size: 1.9rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .searchResultContainerErrorOrNoResult .noResultsText {
+    margin-top: 10rem;
+    font-size: 1.9rem;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
