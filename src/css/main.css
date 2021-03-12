@@ -388,6 +388,7 @@ body {
   padding: 1rem;
   background-color: transparent;
   position: absolute;
+  z-index: 1;
 }
 @media screen and (min-width: 520px) {
   .headerContainer {
@@ -553,6 +554,7 @@ body {
   color: white;
   width: 90%;
   margin-top: 5rem;
+  z-index: 2;
 }
 @media screen and (min-width: 768px) {
   .signInFormContainer {
@@ -1300,9 +1302,10 @@ body {
   position: absolute;
   background: black;
 }
-.signInBackgroundWrap img {
+.signInBackgroundWrap .animeSignInBackgroundImage {
   min-width: 100%;
   min-height: 100%;
+  opacity: 0;
 }
 
 .signInFade {
@@ -1601,11 +1604,12 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .registerBanner {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 50rem;
 }
 @media screen and (min-width: 520px) {
@@ -1630,6 +1634,10 @@ body {
 .registerBackgroundWrap img {
   min-width: 100%;
   min-height: 100%;
+}
+
+.animeRegisterBackgroundImage {
+  opacity: 0;
 }
 
 .registerFade {
@@ -1733,6 +1741,7 @@ body {
     max-width: none;
     display: flex;
     padding: 0.5rem 5rem;
+    margin-bottom: 10rem;
   }
 }
 
@@ -1800,9 +1809,15 @@ body {
   overflow: hidden;
 }
 
+.tvAnime1,
+.tvAnime2 {
+  opacity: 0;
+}
+
 .registerSectionImg {
   width: 100%;
   height: 100%;
+  opacity: 0;
 }
 
 .registerSectionImgWrap {

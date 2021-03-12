@@ -6,6 +6,9 @@ import history from "../browserHistory";
 import { signIn } from "../actions";
 import { StoreState } from "../reducers";
 import { connect } from "react-redux";
+import netflixBgMd from "../img/netflixBgMd.jpg";
+import netflixBgLg from "../img/netflixBgLg.jpg";
+import anime from "animejs/lib/anime.es.js";
 export interface SignInFormProps {
     onSubmit(formValues: any): void;
     authStatus?: string | null;
@@ -33,9 +36,27 @@ const SignIn: React.FC<SignInProps> = (props) => {
             <Header />
             <div className="signInContainer">
                 <div className="signInBackgroundWrap">
-                    <img
+                    {/* <img
                         src="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg"
-                        srcSet="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w"
+                        srcSet="https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_small.jpg 1000w, https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_medium.jpg 1500w,
+                         https://assets.nflxext.com/ffe/siteui/vlv3/70deccb9-9b6c-4be1-b781-18dd1bcd9264/4b02774c-a587-43ec-b7e4-fdaf1170f261/CA-en-20210301-popsignuptwoweeks-perspective_alpha_website_large.jpg 1800w"
+                        alt=""
+                    ></img> */}
+
+                    <img
+                        className="animeSignInBackgroundImage"
+                        onLoad={() => {
+                            anime({
+                                targets: ".animeSignInBackgroundImage",
+                                // Properties
+                                // Animation Parameters
+                                opacity: [0, 1],
+                                duration: 750,
+                                easing: "easeOutQuad",
+                            });
+                        }}
+                        src={netflixBgLg}
+                        srcSet={`${netflixBgMd} 750w, ${netflixBgLg} 1000w`}
                         alt=""
                     ></img>
                     <div className="signInFade"></div>

@@ -70,8 +70,7 @@
     },
     "jest": {
         "transformIgnorePatterns": [
-            "<rootDir>/node_modules/?!(animejs)",
-            "<rootDir>/node_modules/?!(react-spinners)"
+            "<rootDir>/node_modules/?!(animejs)"
         ]
     }
 }
