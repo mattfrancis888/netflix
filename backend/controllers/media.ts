@@ -153,10 +153,12 @@ export const removeFromWatchingByUser = async (req: any, res: Response) => {
 };
 
 export const getMediasBySearch = async (req: Request, res: Response) => {
-    const searchKeyword = req.params.searchKeyword;
+    const searchKeyword = req.query.q;
     try {
         const response = await pool.query(
-            `SELECT media_title FROM media  
+            `SELECT media_id, media_title,
+            media_date,media_description,banner_title_image
+            , banner_image,name_tokens,  media_type_name from media NATURAL JOIN lookup_media_type NATURAL JOIN media_type
             WHERE name_tokens @@ to_tsquery($1);`,
             [searchKeyword]
         );

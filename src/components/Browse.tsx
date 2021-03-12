@@ -360,9 +360,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
         <React.Fragment>
             {renderModal()}
             <div className="browseBannerContainer">
-                <div className="floatBrowseHeader">
-                    <BrowseHeader />
-                </div>
                 <div
                     className={
                         bannerHeightAuto

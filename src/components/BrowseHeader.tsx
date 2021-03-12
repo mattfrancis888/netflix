@@ -31,8 +31,8 @@ const BrowseHeader: React.FC<IHeader> = (props) => {
         <div
             className={
                 headerUntransparent
-                    ? "browseHeaderContainer browseHeaderUntransparent"
-                    : "browseHeaderContainer browseHeaderTransparent"
+                    ? "floatBrowseHeader browseHeaderContainer browseHeaderUntransparent"
+                    : "floatBrowseHeader browseHeaderContainer browseHeaderTransparent"
             }
             data-testid="netflixBrowseLogo"
         >

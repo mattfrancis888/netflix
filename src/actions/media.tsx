@@ -161,12 +161,12 @@ export const removeMediaWatchingByUser = (mediaId: number) => async (
         });
     }
 };
-export const fetchMediasByKeyword = (searchKeyword: string) => async (
+export const fetchMediasByKeyword = (queryPath: string) => async (
     dispatch: Dispatch
 ) => {
     try {
         const response = await axios.get<FetchMediaResponse>(
-            `/api/search/${searchKeyword}`
+            `/api/search?q=${queryPath}`
         );
         dispatch<FetchMediasByKeywordAction>({
             type: ActionTypes.FETCH_MEDIAS_BY_KEYWORD,

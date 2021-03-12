@@ -209,11 +209,11 @@ var getMediasBySearch = function (req, res) { return __awaiter(void 0, void 0, v
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                searchKeyword = req.params.searchKeyword;
+                searchKeyword = req.query.q;
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, databasePool_1.default.query("SELECT media_title FROM media  \n            WHERE name_tokens @@ to_tsquery($1);", [searchKeyword])];
+                return [4 /*yield*/, databasePool_1.default.query("SELECT media_id, media_title,\n            media_date,media_description,banner_title_image\n            , banner_image,name_tokens,  media_type_name from media NATURAL JOIN lookup_media_type NATURAL JOIN media_type\n            WHERE name_tokens @@ to_tsquery($1);", [searchKeyword])];
             case 2:
                 response_5 = _a.sent();
                 res.send({ medias: response_5.rows });

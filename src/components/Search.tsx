@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import BrowseHeader from "./BrowseHeader";
+
 import history from "../browserHistory";
-import MediaCarousel from "./MediaCarousel";
-import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
 import { FaPlay } from "react-icons/fa";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 import Modal from "./Modal";
 import requireAuth from "./requireAuth";
 import anime from "animejs/lib/anime.es.js";
@@ -14,7 +11,7 @@ import {
     fetchMediaGenreAndCast,
     fetchMediaWatchingByUser,
     insertMediaWatchingByUser,
-    removeMediaWatchingByUser,
+    fetchMediasByKeyword,
 } from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
@@ -27,20 +24,8 @@ import { WatchingStateResponse } from "reducers/watchingReducer";
 import useWindowDimensions from "../windowDimensions";
 import { MED_SCREEN_SIZE } from "../constants";
 import MediaContent from "./MediaContent";
-
-export interface ModalProps {
-    onDismiss(): void;
-    title?: string;
-    content?: JSX.Element;
-    actions?: JSX.Element;
-}
-
-export interface MediaAndNetflixOriginalCarouselProps {
-    modalShow: any;
-    content: Media[];
-    onMediaClick: any;
-    // content: any;
-}
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 interface BrowseProps {
     medias: MediaStateResponse;
@@ -52,6 +37,11 @@ interface BrowseProps {
     fetchMediaWatchingByUser(): void;
     insertMediaWatchingByUser(mediaId: number): void;
     removeMediaWatchingByUser(mediaId: number): void;
+    fetchMediasByKeyword(searchKeyword: string): void;
+}
+
+export interface SearchQueryValues {
+    q?: string;
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
@@ -59,9 +49,12 @@ const Browse: React.FC<BrowseProps> = (props) => {
 
     useEffect(() => {
         document.body.style.background = "black";
-        props.fetchMedias();
-        props.fetchMediaWatchingByUser();
+        if (queryValues.q) props.fetchMediasByKeyword(queryValues.q);
     }, []);
+
+    //For Query Strings:
+    const { search } = useLocation();
+    const queryValues: SearchQueryValues = queryString.parse(search);
 
     const renderMedias = () => {
         if (props.errors.data?.error) {
@@ -72,28 +65,16 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     </h3>
                 </div>
             );
-        } else if (props.medias.data?.medias && props.watching.data?.watching) {
-            let movies = _.filter(props.medias.data?.medias, {
-                media_type_name: "Movie",
-            });
-            let moviesContentSplit = _.chunk(movies, 8);
-
-            let netflixOrig = _.filter(props.medias.data?.medias, {
-                media_type_name: "Netflix Original",
-            });
-            let netflixOrigSplit = _.chunk(netflixOrig, 8);
-
-            let tvShows = _.filter(props.medias.data?.medias, {
-                media_type_name: "TV",
-            });
-            let tvShowsSplit = _.chunk(tvShows, 8);
-
+        } else if (props.medias.data?.medias) {
+            let medias = _.chunk(props.medias.data?.medias, 8);
+            console.log(medias[0][0].media_title);
             return (
                 <React.Fragment>
-                    {tvShows.map((content, index) => {
+                    {medias[0].map((content, index) => {
                         return (
                             <div className="searchResultContentWrap">
                                 <MediaContent
+                                    key={index}
                                     content={content}
                                     index={index}
                                     onMediaClick={addToWatching}
@@ -104,7 +85,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     })}
                 </React.Fragment>
             );
-        } else if (!props.medias.data && !props.watching.data) {
+        } else if (!props.medias.data?.medias) {
             return (
                 <div className="loadingCenter">
                     <Loading />
@@ -302,10 +283,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
         <React.Fragment>
             {renderModal()}
 
-            <div className="floatBrowseHeader">
-                <BrowseHeader />
-            </div>
-
             <div className="searchResultContainer">{renderMedias()}</div>
         </React.Fragment>
     );
@@ -323,6 +300,6 @@ const mapStateToProps = (state: StoreState) => {
 export default connect(mapStateToProps, {
     fetchMedias,
     fetchMediaGenreAndCast,
-    fetchMediaWatchingByUser,
     insertMediaWatchingByUser,
+    fetchMediasByKeyword,
 })(requireAuth(Browse));
