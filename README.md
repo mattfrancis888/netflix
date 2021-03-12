@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# Netflix
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Replication of [Netflix website](https://www.kijiji.ca/). Database is created in BCNF (Boyce Codd Normal Form). Authentication is done via cookies that stores access tokens and refresh tokens (JWTs); users can create, edit, delete a listing, and see all listings by other users. Data is stored on PostgreSQL. Developed with React, Redux, Express, Typescript, React-Testing-Library, Jest, TravisCI, JS, HTML, CSS.
 
-## Available Scripts
+Deployment / Production repo: https://github.com/mattfrancis888/heroku-kijiji
 
-In the project directory, you can run:
+### BCNF database graph:
 
-### `npm start`
+<img src="readmeImg/bcnf-kijiji.png" height="500"/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## External Resources:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+-   pgAdmin 4 for PostgreSQL GUI.
+-   Postman to test API requests.
+-   Prettier to format code and EsLint for linting.
+-   Redux dev tool google chrome extension to check the values of the states.
 
-### `npm test`
+## What It Looks Like
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="readmeImg/browseLg.png" height="350"/>
+<img src="readmeImg/searchLg.png" height="350"/>
+<img src="readmeImg/modalLg.png" height="350"/>
+<img src="readmeImg/signInlg.jpg" height="350"/>
+<img src="readmeImg/registerNowLg.jpg" height="350"/>
+<img src="readmeImg/watchEverywhereLg.png" height="350"/>
+<img src="readmeImg/registerPlan1Sm.png" height="350"/>
+<img src="readmeImg/registerPlan2Lg.png" height="350"/>
+<img src="readmeImg/searchNoneLg.png" height="350"/>
 
-### `npm run build`
+# Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the project. Use `npm install` to install all the dependencies. Go to the client directory, run the project with `npm start` for development or `npm run build` for production.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. OPTIONAL: If you want to make changes locally, on the terminal, go to the `backend` directory. Type `npm run convert` to start the local server. The command would also listen to changes and convert the Express Typescript files to Express Javascript files that will be used for production. Create your own local database by restoring the pg_dump file of the kijiji database given (called ‘kijiji’ in root directory). Configure your own Pool settings in databasePool.
 
-### `npm run eject`
+# Prerequisites
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+What things you need to install the software
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+- Any package manager (npm, yarn)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Versioning
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+None
