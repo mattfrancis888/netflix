@@ -40,7 +40,7 @@ export interface SearchQueryValues {
     q?: string;
 }
 
-const Browse: React.FC<BrowseProps> = (props) => {
+const Search: React.FC<BrowseProps> = (props) => {
     const { width } = useWindowDimensions();
     const [errorOrNoResult, setErrorOrNoResult] = useState(false);
     //For Query Strings:
@@ -318,4 +318,4 @@ export default connect(mapStateToProps, {
     fetchMediaGenreAndCast,
     insertMediaWatchingByUser,
     fetchMediasByKeyword,
-})(requireAuth(Browse));
+})(requireAuth(Search));

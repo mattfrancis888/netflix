@@ -26,6 +26,20 @@ import { WatchingStateResponse } from "reducers/watchingReducer";
 import useWindowDimensions from "../windowDimensions";
 import { MED_SCREEN_SIZE } from "../constants";
 
+const avengersBannerData = {
+    media_id: 12,
+    media_title: "Avengers: Infinity War",
+    media_date: 2018,
+    media_description:
+        "An all-star lineup of superheroes -- including Iron Man, the Incredible Hulk and Captain America -- team up to save the world from certain doom.",
+    banner_title_image:
+        "https://res.cloudinary.com/du8n2aa4p/image/upload/v1615345142/netflix/logo/avengers_logo.webp",
+    banner_image:
+        "https://res.cloudinary.com/du8n2aa4p/image/upload/v1615384076/netflix/avengers_infinity.webp",
+    name_tokens: "'aveng':1 'infin':2 'war':3",
+    media_type_name: "Movie",
+};
+
 export interface ModalProps {
     onDismiss(): void;
     title?: string;
@@ -413,15 +427,13 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         }}
                         alt="banner title"
                     ></img>
-                    <p>
-                        An all-star lineup of superheroes -- including Iron Man,
-                        the Incredible Hulk and Captain America -- team up to
-                        save the world from certain doom.
-                    </p>
+                    <p>{avengersBannerData.media_description}</p>
                     <div className="bannerButtonWrap">
                         <button
                             className="bannerButton"
-                            onClick={() => addToWatching(12)}
+                            onClick={() =>
+                                addToWatching(avengersBannerData.media_id)
+                            }
                         >
                             <FaPlay className="bannerButtonIcon" />
                             Watch Now
@@ -429,14 +441,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         <button
                             className="bannerButton bannerButtonInfo"
                             onClick={() => {
-                                !showModalContent
-                                    ? //@ts-ignore Small TS warning, too lazy to fix
-                                      modalShow(showModalContent)
-                                    : //   modalOnCancel();
-                                      alert(
-                                          "Check your internet connection. Trouble showing movie information."
-                                      );
-                                modalOnCancel();
+                                modalShow(avengersBannerData);
                             }}
                         >
                             <AiOutlineInfoCircle className="bannerButtonIcon " />
