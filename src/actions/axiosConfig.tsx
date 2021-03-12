@@ -23,9 +23,14 @@ axiosConfig.interceptors.request.use(
         //Note: this won't affect /token because we are using the http-only cookie not authorization header :) (look at backend)
         // console.log("INTERCEPTOR REQ", config);
         const token = Cookies.get(ACCESS_TOKEN);
-        //Don't need to send headers (we are not using authenticateToken approach; our refreshToken middleware validates our token)
+        //This is needed for our requireAuth hoc for protected routes.
+        //However, nock mock tests fails if we have req headers so I opted not to have protected routes
+        //to check if a token is still valid. I cannot test anything if I have this on.
+        // Thus, when store.dispatch calls the path below, it will always / our routes are not validated
+        //Flow -> Route that uses requireAuth will call validateToken action creator -> validateToken will call the
+        //protected routes that is setted up in the API with passport's jwtlogin
         // if (token) {
-        //     config.headers["Authorization"] = token;
+        //     config.headers["authorization"] = token;
         // }
         return config;
     },
@@ -74,7 +79,11 @@ axiosConfig.interceptors.response.use(
 
                     //flow:
                     //click on post-ad - > validate token in HOC ->  if post-ad with expired token -> returns 403 -> refrsh token is called
-                    //use refresh token that was sent in a cookie-> trigger post-ad again with store.dispatch(validateToken(..))
+                    //use ACCESS token in Authorization header (via axios interceptor response) -> trigger post-ad again with store.dispatch(validateToken(..))
+
+                    //However, nock mock tests fails if we have req headers so I opted not to have protected routes
+                    //to check if a token is still valid.
+                    // Thus, store.dispatch will fail because there is no protected routes
                 })
                 .catch((error) => {
                     return Promise.reject(error);

@@ -4,9 +4,15 @@ import { signUp } from "../actions";
 import { StoreState } from "../reducers";
 import { connect } from "react-redux";
 import history from "../browserHistory";
-const Register: React.FC<{}> = (props) => {
+export interface RegisterProps {
+    authStatus?: string | null;
+}
+const Register: React.FC<RegisterProps> = (props) => {
     useEffect(() => {
         document.body.style.background = "black";
+        if (props.authStatus) {
+            history.push("/browse");
+        }
     }, []);
     return (
         <React.Fragment>

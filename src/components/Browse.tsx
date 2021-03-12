@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BrowseHeader from "./BrowseHeader";
 import history from "../browserHistory";
 import MediaCarousel from "./MediaCarousel";
 import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
@@ -62,6 +61,8 @@ const Browse: React.FC<BrowseProps> = (props) => {
         props.fetchMedias();
         props.fetchMediaWatchingByUser();
     }, []);
+
+    useEffect(() => {}, []);
 
     const renderMedias = () => {
         if (props.errors.data?.error) {
@@ -143,13 +144,14 @@ const Browse: React.FC<BrowseProps> = (props) => {
         }
 
         //This block would appear in testing
-        // else if (props.medias.data?.medias) {
-        //     return (
-        //         <div>
-        //             <p>{props.medias.data?.medias[0].media_title}</p>
-        //             {/* <p>{props.watching.data?.watching[0].media_title}</p> */}
-        //         </div>
-        //     );
+        else if (props.medias.data?.medias) {
+            return (
+                <div>
+                    <p>{props.medias.data?.medias[0].media_title}</p>
+                    {/* <p>{props.watching.data?.watching[0].media_title}</p> */}
+                </div>
+            );
+        }
         //This block will not appear in testing,  I believe it's because the API tries to read the cookie
         // } else if (props.watching.data?.watching) {
         //     return (
@@ -427,12 +429,12 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         <button
                             className="bannerButton bannerButtonInfo"
                             onClick={() => {
-                                Number.isInteger(showModalContent?.media_id)
+                                !showModalContent
                                     ? //@ts-ignore Small TS warning, too lazy to fix
-                                      addToWatching(showModalContent?.media_id)
+                                      modalShow(showModalContent)
                                     : //   modalOnCancel();
                                       alert(
-                                          "Trouble adding your movie to your watch list..."
+                                          "Check your internet connection. Trouble showing movie information."
                                       );
                                 modalOnCancel();
                             }}
