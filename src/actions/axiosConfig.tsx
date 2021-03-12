@@ -23,8 +23,6 @@ axiosConfig.interceptors.request.use(
         //Note: this won't affect /token because we are using the http-only cookie not authorization header :) (look at backend)
         // console.log("INTERCEPTOR REQ", config);
         const token = Cookies.get(ACCESS_TOKEN);
-        //ME TOMMOROW: I COMMENTED OUT HTIS
-        //TODO:
         //Don't need to send headers (we are not using authenticateToken approach; our refreshToken middleware validates our token)
         // if (token) {
         //     config.headers["Authorization"] = token;
@@ -76,7 +74,7 @@ axiosConfig.interceptors.response.use(
 
                     //flow:
                     //click on post-ad - > validate token in HOC ->  if post-ad with expired token -> returns 403 -> refrsh token is called
-                    //use refresh token in Authorization header (via axios interceptor response) -> trigger post-ad again with store.dispatch(validateToken(..))
+                    //use refresh token that was sent in a cookie-> trigger post-ad again with store.dispatch(validateToken(..))
                 })
                 .catch((error) => {
                     return Promise.reject(error);

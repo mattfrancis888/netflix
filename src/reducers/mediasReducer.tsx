@@ -1,9 +1,4 @@
-import {
-    ActionTypes,
-    FetchMediasAction,
-    FetchMediaResponse,
-    FetchMediasByKeywordAction,
-} from "../actions";
+import { ActionTypes, FetchMediasAction, FetchMediaResponse } from "../actions";
 // import {
 //     Media,
 // } from "../actions";
@@ -14,12 +9,10 @@ export interface MediaStateResponse {
 
 const mediaReducer = (
     state: MediaStateResponse = {},
-    action: FetchMediasAction | FetchMediasByKeywordAction
+    action: FetchMediasAction
 ) => {
     switch (action.type) {
         case ActionTypes.FETCH_MEDIAS:
-            return { ...state, data: action.payload };
-        case ActionTypes.FETCH_MEDIAS_BY_KEYWORD:
             return { ...state, data: action.payload };
         default:
             return state;

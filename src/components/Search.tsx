@@ -9,13 +9,12 @@ import {
     fetchMedias,
     Media,
     fetchMediaGenreAndCast,
-    fetchMediaWatchingByUser,
     insertMediaWatchingByUser,
     fetchMediasByKeyword,
 } from "../actions";
 import { connect } from "react-redux";
 import { StoreState } from "../reducers";
-import { MediaStateResponse } from "../reducers/mediasReducer";
+import { SearchStateResponse } from "../reducers/searchReducer";
 import Loading from "./Loading";
 import { ErrorStateResponse } from "reducers/errorReducer";
 import _ from "lodash";
@@ -28,15 +27,12 @@ import { useLocation } from "react-router-dom";
 import queryString from "query-string";
 
 interface BrowseProps {
-    medias: MediaStateResponse;
+    search: SearchStateResponse;
     mediaGenreAndCast: MediaGenreAndCastStateResponse;
     watching: WatchingStateResponse;
     errors: ErrorStateResponse;
-    fetchMedias(): void;
     fetchMediaGenreAndCast(mediaId: number): void;
-    fetchMediaWatchingByUser(): void;
     insertMediaWatchingByUser(mediaId: number): void;
-    removeMediaWatchingByUser(mediaId: number): void;
     fetchMediasByKeyword(searchKeyword: string): void;
 }
 
@@ -47,15 +43,17 @@ export interface SearchQueryValues {
 const Browse: React.FC<BrowseProps> = (props) => {
     const { width } = useWindowDimensions();
     const [errorOrNoResult, setErrorOrNoResult] = useState(false);
-
+    //For Query Strings:
+    const { search } = useLocation();
+    const queryValues: SearchQueryValues = queryString.parse(search);
     useEffect(() => {
         document.body.style.background = "black";
         if (queryValues.q) props.fetchMediasByKeyword(queryValues.q);
     }, []);
-
-    //For Query Strings:
-    const { search } = useLocation();
-    const queryValues: SearchQueryValues = queryString.parse(search);
+    useEffect(() => {
+        //Needed to change state when user searches for a new query or press back/forward button
+        if (queryValues.q) props.fetchMediasByKeyword(queryValues.q);
+    }, [queryValues.q]);
 
     const renderMedias = () => {
         if (props.errors.data?.error) {
@@ -67,18 +65,18 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     </h3>
                 </div>
             );
-        } else if (props.medias.data?.medias) {
-            if (props.medias.data?.medias.length === 0) {
+        } else if (props.search.data?.medias) {
+            if (props.search.data?.medias.length === 0) {
                 if (!errorOrNoResult) setErrorOrNoResult(true);
                 return (
                     <h1 className="noResultsText">{`No results found for "${queryValues.q}"`}</h1>
                 );
             }
             if (errorOrNoResult) setErrorOrNoResult(false);
-            let medias = _.chunk(props.medias.data?.medias, 8);
+
             return (
                 <div>
-                    {medias[0].map((content, index) => {
+                    {props.search.data?.medias.map((content, index) => {
                         return (
                             <div className="searchResultContentWrap">
                                 <MediaContent
@@ -93,7 +91,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                     })}
                 </div>
             );
-        } else if (!props.medias.data?.medias) {
+        } else if (!props.search.data?.medias) {
             if (!errorOrNoResult) setErrorOrNoResult(true);
             return (
                 <div className="loadingCenter">
@@ -115,7 +113,9 @@ const Browse: React.FC<BrowseProps> = (props) => {
                 `Let's pretend that you are watching your show / movie! It's now added to 'Continue Watching' on the homepage. You can remove it from 'Currently Watching' by hovering over it.`
             );
         } catch {
-            // alert("Error");
+            alert(
+                `Check your internet connection. Unable to add show / movie to your watch list.`
+            );
         }
     };
 
@@ -287,7 +287,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
             );
         }
     };
-    console.log(errorOrNoResult);
+
     return (
         <React.Fragment>
             {renderModal()}
@@ -307,7 +307,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
 
 const mapStateToProps = (state: StoreState) => {
     return {
-        medias: state.medias,
+        search: state.search,
         mediaGenreAndCast: state.mediaGenreAndCast,
         watching: state.watching,
         errors: state.errors,
@@ -315,7 +315,6 @@ const mapStateToProps = (state: StoreState) => {
 };
 
 export default connect(mapStateToProps, {
-    fetchMedias,
     fetchMediaGenreAndCast,
     insertMediaWatchingByUser,
     fetchMediasByKeyword,
