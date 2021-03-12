@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction, response } from "express";
 import pool from "../databasePool";
 import { FORBIDDEN_STATUS, INTERNAL_SERVER_ERROR_STATUS } from "../constants";
-import media from "../backend-build/routes/media";
 import _ from "lodash";
 import jwt_decode from "jwt-decode";
 interface genreAndCast {
@@ -148,6 +147,24 @@ export const removeFromWatchingByUser = async (req: any, res: Response) => {
     } catch (error) {
         pool.query("ROLLBACK");
         console.log("ROLLBACK TRIGGERED", error);
+        return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
+    }
+};
+
+export const getMediasBySearch = async (req: Request, res: Response) => {
+    const searchKeyword = req.query.q;
+    try {
+        const response = await pool.query(
+            `SELECT media_id, media_title,
+            media_date,media_description,banner_title_image
+            , banner_image,name_tokens,  media_type_name from media NATURAL JOIN lookup_media_type NATURAL JOIN media_type
+            WHERE name_tokens @@ to_tsquery($1);`,
+            [searchKeyword]
+        );
+        res.send({ medias: response.rows });
+        // res.send({...response.rows})
+    } catch (error) {
+        pool.query("ROLLBACK");
         return res.sendStatus(INTERNAL_SERVER_ERROR_STATUS);
     }
 };

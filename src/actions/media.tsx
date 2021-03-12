@@ -32,6 +32,11 @@ export interface RemovieMediaWatchingByUserAction {
     payload: WatchingByUserResponse;
 }
 
+export interface FetchMediasByKeywordAction {
+    type: ActionTypes.FETCH_MEDIAS_BY_KEYWORD;
+    payload: FetchMediaResponse;
+}
+
 export interface MediaErrorAction {
     type: ActionTypes.MEDIA_ERROR;
     payload: ServerError;
@@ -147,6 +152,24 @@ export const removeMediaWatchingByUser = (mediaId: number) => async (
         );
         dispatch<RemovieMediaWatchingByUserAction>({
             type: ActionTypes.REMOVE_MEDIA_WATCHING_BY_USER,
+            payload: response.data,
+        });
+    } catch (error) {
+        dispatch<MediaErrorAction>({
+            type: ActionTypes.MEDIA_ERROR,
+            payload: { error: SERVER_ERROR_MESSAGE },
+        });
+    }
+};
+export const fetchMediasByKeyword = (queryPath: string) => async (
+    dispatch: Dispatch
+) => {
+    try {
+        const response = await axios.get<FetchMediaResponse>(
+            `/api/search?q=${queryPath}`
+        );
+        dispatch<FetchMediasByKeywordAction>({
+            type: ActionTypes.FETCH_MEDIAS_BY_KEYWORD,
             payload: response.data,
         });
     } catch (error) {

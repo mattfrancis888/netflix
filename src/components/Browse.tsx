@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import BrowseHeader from "./BrowseHeader";
 import history from "../browserHistory";
 import MediaCarousel from "./MediaCarousel";
 import NetflixOriginalCarousel from "./NetflixOriginalCarousel";
@@ -26,6 +25,20 @@ import { MediaGenreAndCastStateResponse } from "reducers/mediaGenreAndCastReduce
 import { WatchingStateResponse } from "reducers/watchingReducer";
 import useWindowDimensions from "../windowDimensions";
 import { MED_SCREEN_SIZE } from "../constants";
+
+const avengersBannerData = {
+    media_id: 12,
+    media_title: "Avengers: Infinity War",
+    media_date: 2018,
+    media_description:
+        "An all-star lineup of superheroes -- including Iron Man, the Incredible Hulk and Captain America -- team up to save the world from certain doom.",
+    banner_title_image:
+        "https://res.cloudinary.com/du8n2aa4p/image/upload/v1615345142/netflix/logo/avengers_logo.webp",
+    banner_image:
+        "https://res.cloudinary.com/du8n2aa4p/image/upload/v1615384076/netflix/avengers_infinity.webp",
+    name_tokens: "'aveng':1 'infin':2 'war':3",
+    media_type_name: "Movie",
+};
 
 export interface ModalProps {
     onDismiss(): void;
@@ -62,6 +75,8 @@ const Browse: React.FC<BrowseProps> = (props) => {
         props.fetchMedias();
         props.fetchMediaWatchingByUser();
     }, []);
+
+    useEffect(() => {}, []);
 
     const renderMedias = () => {
         if (props.errors.data?.error) {
@@ -143,13 +158,14 @@ const Browse: React.FC<BrowseProps> = (props) => {
         }
 
         //This block would appear in testing
-        // else if (props.medias.data?.medias) {
-        //     return (
-        //         <div>
-        //             <p>{props.medias.data?.medias[0].media_title}</p>
-        //             {/* <p>{props.watching.data?.watching[0].media_title}</p> */}
-        //         </div>
-        //     );
+        else if (props.medias.data?.medias) {
+            return (
+                <div>
+                    <p>{props.medias.data?.medias[0].media_title}</p>
+                    {/* <p>{props.watching.data?.watching[0].media_title}</p> */}
+                </div>
+            );
+        }
         //This block will not appear in testing,  I believe it's because the API tries to read the cookie
         // } else if (props.watching.data?.watching) {
         //     return (
@@ -360,9 +376,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
         <React.Fragment>
             {renderModal()}
             <div className="browseBannerContainer">
-                <div className="floatBrowseHeader">
-                    <BrowseHeader />
-                </div>
                 <div
                     className={
                         bannerHeightAuto
@@ -414,15 +427,13 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         }}
                         alt="banner title"
                     ></img>
-                    <p>
-                        An all-star lineup of superheroes -- including Iron Man,
-                        the Incredible Hulk and Captain America -- team up to
-                        save the world from certain doom.
-                    </p>
+                    <p>{avengersBannerData.media_description}</p>
                     <div className="bannerButtonWrap">
                         <button
                             className="bannerButton"
-                            onClick={() => addToWatching(12)}
+                            onClick={() =>
+                                addToWatching(avengersBannerData.media_id)
+                            }
                         >
                             <FaPlay className="bannerButtonIcon" />
                             Watch Now
@@ -430,14 +441,7 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         <button
                             className="bannerButton bannerButtonInfo"
                             onClick={() => {
-                                Number.isInteger(showModalContent?.media_id)
-                                    ? //@ts-ignore Small TS warning, too lazy to fix
-                                      addToWatching(showModalContent?.media_id)
-                                    : //   modalOnCancel();
-                                      alert(
-                                          "Trouble adding your movie to your watch list..."
-                                      );
-                                modalOnCancel();
+                                modalShow(avengersBannerData);
                             }}
                         >
                             <AiOutlineInfoCircle className="bannerButtonIcon " />

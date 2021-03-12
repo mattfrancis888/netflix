@@ -388,6 +388,7 @@ body {
   padding: 1rem;
   background-color: transparent;
   position: absolute;
+  z-index: 1;
 }
 @media screen and (min-width: 520px) {
   .headerContainer {
@@ -553,6 +554,7 @@ body {
   color: white;
   width: 90%;
   margin-top: 5rem;
+  z-index: 2;
 }
 @media screen and (min-width: 768px) {
   .signInFormContainer {
@@ -1276,10 +1278,6 @@ body {
   }
 }
 
-.searchBarInputHide {
-  width: 0%;
-}
-
 [type=search]::-webkit-search-cancel-button,
 [type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -1304,9 +1302,10 @@ body {
   position: absolute;
   background: black;
 }
-.signInBackgroundWrap img {
+.signInBackgroundWrap .animeSignInBackgroundImage {
   min-width: 100%;
   min-height: 100%;
+  opacity: 0;
 }
 
 .signInFade {
@@ -1605,11 +1604,12 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .registerBanner {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 50rem;
 }
 @media screen and (min-width: 520px) {
@@ -1634,6 +1634,10 @@ body {
 .registerBackgroundWrap img {
   min-width: 100%;
   min-height: 100%;
+}
+
+.animeRegisterBackgroundImage {
+  opacity: 0;
 }
 
 .registerFade {
@@ -1737,6 +1741,7 @@ body {
     max-width: none;
     display: flex;
     padding: 0.5rem 5rem;
+    margin-bottom: 10rem;
   }
 }
 
@@ -1804,9 +1809,15 @@ body {
   overflow: hidden;
 }
 
+.tvAnime1,
+.tvAnime2 {
+  opacity: 0;
+}
+
 .registerSectionImg {
   width: 100%;
   height: 100%;
+  opacity: 0;
 }
 
 .registerSectionImgWrap {
@@ -2070,6 +2081,84 @@ body {
 @media screen and (min-width: 768px) {
   .checkMark {
     font-size: 2.5rem;
+  }
+}
+
+.searchResultContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1rem 1rem;
+}
+@media screen and (min-width: 520px) {
+  .searchResultContainer {
+    padding: 2rem 1rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .searchResultContainer {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 2rem 3rem;
+  }
+}
+.searchResultContainer .searchResultContentWrap {
+  width: 100%;
+}
+.searchResultContainer .searchResultContentWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.searchedForText {
+  font-size: 1.2rem;
+  font-family: "Netflix Sans Bold";
+  padding: 6rem 1rem;
+  padding-bottom: 0;
+}
+@media screen and (min-width: 520px) {
+  .searchedForText {
+    padding: 8rem 1rem;
+    padding-bottom: 0;
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .searchedForText {
+    padding: 10rem 3rem;
+    padding-bottom: 0;
+  }
+}
+@media screen and (min-width: 992px) {
+  .searchedForText {
+    font-size: 1.9rem;
+  }
+}
+
+.searchResultContainerErrorOrNoResult {
+  display: flex;
+  flex-direction: column;
+}
+.searchResultContainerErrorOrNoResult .noResultsText {
+  text-align: center;
+  margin-top: 5rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+@media screen and (min-width: 520px) {
+  .searchResultContainerErrorOrNoResult .noResultsText {
+    margin-top: 8rem;
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .searchResultContainerErrorOrNoResult .noResultsText {
+    font-size: 1.9rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .searchResultContainerErrorOrNoResult .noResultsText {
+    margin-top: 10rem;
+    font-size: 1.9rem;
   }
 }
 

@@ -7,6 +7,7 @@
     color: white;
     z-index: 2;
 }
+
 .signInBackgroundWrap {
     width: 100vw;
     height: 100vh;
@@ -14,9 +15,10 @@
     z-index: -1;
     position: absolute;
 
-    img {
+    .animeSignInBackgroundImage {
         min-width: 100%;
         min-height: 100%;
+        opacity: 0;
     }
     background: black;
 }

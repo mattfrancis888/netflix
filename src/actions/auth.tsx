@@ -5,8 +5,8 @@ import history from "../browserHistory";
 
 export interface JWTType {
     token: string;
+    refreshToken?: string;
     //our api could also return the refresh token, but it dosent matter
-    //I did it for signin, but it means nothing
 }
 export interface AuthUserAction {
     type: ActionTypes.AUTH_USER;
@@ -24,7 +24,6 @@ export const signUp = (formValues: any) => async (dispatch: Dispatch) => {
             type: ActionTypes.AUTH_USER,
             payload: response.data,
         });
-        history.push("/listings/1");
     } catch (err) {
         dispatch<AuthErrorAction>({
             type: ActionTypes.AUTH_ERROR,

@@ -70,46 +70,48 @@ export const localLogin = new LocalStrategy(
 );
 
 //Create strategy that authenticates if a user can log in / acess a specific resource; also known as a "protected route"
-// const jwtOptions = {
-//jwtFromRequest tells the Strategy where to find the token / "payload".
-//We want to find it in "Headers" that's named "authorization"
-//"authorization" contains a JWT token that we generated with subject(the user id) and  and the private key in authentication.ts
-//We can "read" the token / the "payload", which contains the subject and the iat created in authenticaiton.ts.
-//This is demonstrated in jwtLogin
-// jwtFromRequest: ExtractJwt.fromHeader("authorization"),
-//We also want to tell our Strategy what the "secret key" that was used to generate the token in authentication.ts
-// secretOrKey: process.env.privateKey,
-//};
+const jwtOptions = {
+    // jwtFromRequest tells the Strategy where to find the token / "payload".
+    // We want to find it in "Headers" that's named "authorization"
+    // "authorization" contains a JWT token that we generated with subject(the user id) and  and the private key in authentication.ts
+    // We can "read" the token / the "payload", which contains the subject and the iat created in authenticaiton.ts.
+    // This is demonstrated in jwtLogin
+    jwtFromRequest: ExtractJwt.fromHeader("authorization"),
+    //We also want to tell our Strategy what the "secret key" that was used to generate the token in authentication.ts
+    secretOrKey: process.env.privateKey,
+};
 
-//jwtlog in is an optional way to check if user is signed in at x route. We will be using a HOC to check if a user is signed in
-//So this is not needed / another implementation of the same goal.
-// export const jwtLogin = new JWTStrategy(
-//     jwtOptions,
-//     (payload, done: Function) => {
-//         //Refer to comment in jwtOptions. The payload is a token and it's read by JWT. After it's read,
-//         // it recognizes that the token has a subject and iat properties that's defined in authentication.ts
+//jwtlog is used to check if a user's access token is valid at x route.
+//This is related to requireAuth hoc and axios interceptors. Since mock tests requests nocks make fails if we send request headers of Authorizaiton
+//we will not be using this because I will not be able to test at all.
+//The downside of this is that our token will not be validated and a new access token would be given each time a user visits a rotue in the client
+export const jwtLogin = new JWTStrategy(
+    jwtOptions,
+    (payload, done: Function) => {
+        //Refer to comment in jwtOptions. The payload is a token and it's read by JWT. After it's read,
+        // it recognizes that the token has a subject and iat properties that's defined in authentication.ts
 
-//         //Check if token expired
-//         if (Date.now() >= payload.exp * 1000) {
-//             done(null, false);
-//         }
+        //Check if token expired
+        if (Date.now() >= payload.exp * 1000) {
+            done(null, false);
+        }
 
-//         //Check if email in the payload is in our database
-//         //Reminder that 'subject' of JWT paylod is email
-//         console.log(payload);
-//         pool.query(
-//             `SELECT email FROM AUTH WHERE email =  '${payload.subject}'`,
-//             (err, user) => {
-//                 //done() is just a non-official standard name for a function (a.k.a callback)
-//                 //that informs the calling function (parent in stacktrace) that a task is completed.
-//                 if (err) return done(err, false); //Will return "Unauthorized" in the response
-//                 //Second param in done(), it asks if there is a user is returned
-//                 if (user.rows[0]) {
-//                     done(null, user.rows[0]); //user can be accesed as req.user now; as demosntrated in authentication.ts
-//                 } else {
-//                     done(null, false); //Will return "Unauthorized" in the response
-//                 }
-//             }
-//         );
-//     }
-// );
+        //Check if email in the payload is in our database
+        //Reminder that 'subject' of JWT paylod is email
+        console.log(payload);
+        pool.query(
+            `SELECT email FROM AUTH WHERE email =  '${payload.subject}'`,
+            (err, user) => {
+                //done() is just a non-official standard name for a function (a.k.a callback)
+                //that informs the calling function (parent in stacktrace) that a task is completed.
+                if (err) return done(err, false); //Will return "Unauthorized" in the response
+                //Second param in done(), it asks if there is a user is returned
+                if (user.rows[0]) {
+                    done(null, user.rows[0]); //user can be accesed as req.user now; as demosntrated in authentication.ts
+                } else {
+                    done(null, false); //Will return "Unauthorized" in the response
+                }
+            }
+        );
+    }
+);

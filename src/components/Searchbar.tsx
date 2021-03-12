@@ -1,18 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import history from "../browserHistory";
 import { AiOutlineSearch } from "react-icons/ai";
-import queryString from "query-string";
-import { useLocation } from "react-router-dom";
+import { fetchMediasByKeyword } from "../actions";
 import anime from "animejs/lib/anime.es.js";
-const Searchbar: React.FC<{}> = () => {
-    const [searchValue, setSearchValue] = useState("");
+import { connect } from "react-redux";
+import { StoreState } from "../reducers";
+interface SearchbarProps {
+    fetchMediasByKeyword?(searchKeyword: string): void;
+}
+
+const Searchbar: React.FC<SearchbarProps> = (props) => {
+    const searchBarInputRef = useRef<HTMLInputElement>(null);
     const [searchIconFirstClick, setSearchIconFirstClick] = useState(false);
-    //For Query Strings:
-    const { search } = useLocation();
-    const queryValues = queryString.parse(search);
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        // if (queryValues.category) setFilterCategory(queryValues.category);
+        const delayDebounceFn = setTimeout(() => {
+            // Send Axios request here
+            if (props.fetchMediasByKeyword && searchIconFirstClick) {
+                // props.fetchMediasByKeyword(searchTerm);
+
+                if (searchTerm === "") {
+                    history.push("/browse");
+                } else {
+                    history.push(`/search?q=${searchTerm}`);
+                }
+            }
+        }, 850);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchTerm]);
+
+    useEffect(() => {
         anime({
             targets: ".searchBarForm",
             // Properties
@@ -24,35 +43,16 @@ const Searchbar: React.FC<{}> = () => {
         });
     }, [searchIconFirstClick]);
 
-    // const directToListingsPage = () => {
-    //     if (filterQueries && searchValue !== "") {
-    //         // history.push(`/listings/1?search=${searchValue}&${filterQueries}`);
-    //         history.push({
-    //             pathname: "/listings/1",
-    //             search: `?search=${searchValue}&${filterQueries}`,
-    //         });
-    //     } else if (filterQueries) {
-    //         // history.push(`/listings/1?${filterQueries}`);
-    //         history.push({
-    //             pathname: "/listings/1",
-    //             search: `?${filterQueries}`,
-    //         });
-    //     } else if (searchValue) {
-    //         //history.push(`/listings/1?search=${searchValue}`);
-    //         history.push({
-    //             pathname: "/listings/1",
-    //             search: `?search=${searchValue}`,
-    //         });
-    //     } else {
-    //         history.push(`/listings/1`);
-    //     }
-    // };
-
     const handleKeyDown = (event: any) => {
         //https://stackoverflow.com/questions/31272207/to-call-onchange-event-after-pressing-enter-key
         if (event.key === "Enter") {
-            event.preventDefault(); //so ?search= won't automatically be inserted in the query when enter is clicked
-            // directToListingsPage();
+            event.preventDefault();
+
+            if (searchTerm === "") {
+                history.push("/browse");
+            } else {
+                history.push(`/search?q=${searchTerm}`);
+            }
         }
     };
 
@@ -67,39 +67,42 @@ const Searchbar: React.FC<{}> = () => {
                 className="searchBarIcons"
                 data-testid="searchIcon"
                 onClick={() => {
-                    setSearchIconFirstClick(true);
                     // directToListingsPage();
+                    if (!searchIconFirstClick) {
+                        anime({
+                            targets: ".searchBarInput",
+                            // Properties
+                            // Animation Parameters
+                            width: ["0%", "100%"],
+                            duration: 450,
 
-                    anime({
-                        targets: ".searchBarInput",
-                        // Properties
-                        // Animation Parameters
-                        width: ["0%", "100%"],
-                        duration: 450,
+                            easing: "easeOutQuad",
+                        });
+                        searchBarInputRef.current?.focus();
+                    }
 
-                        easing: "easeOutQuad",
-                    });
+                    setSearchIconFirstClick(true);
                 }}
             />
             <input
                 data-testid="searchBarInput"
                 className="searchBarInput"
-                // className={
-                //     !searchIconFirstClick
-                //         ? "searchBarInputHide"
-                //         : "searchBarInput"
-                // }
                 type="search"
                 placeholder="Search titles"
-                // aria-label="Search"
-                value={searchValue}
                 name="search"
-                onChange={(event) => setSearchValue(event.target.value)}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 onKeyDown={handleKeyDown}
                 autoComplete="off"
+                ref={searchBarInputRef}
             />
         </form>
     );
 };
 
-export default Searchbar;
+const mapStateToProps = (state: StoreState) => {
+    return {
+        medias: state.medias,
+    };
+};
+
+export default connect(mapStateToProps, { fetchMediasByKeyword })(Searchbar);

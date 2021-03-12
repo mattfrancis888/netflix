@@ -82,9 +82,14 @@ describe("When data is loaded", () => {
 
         //note to me: POST request in nock's console.error() is just a warning for axios interceptors
         //I am not testing axios interceptors here so dont worry
+        //   reqheaders: {
+        //     Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+        // },
+
         getMediasScope = nock("http://localhost:5000")
             //When the test renders, this will show
             .get("/api/medias")
+
             .reply(200, mockResponse, {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": "true",
@@ -97,6 +102,36 @@ describe("When data is loaded", () => {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Credentials": "true",
             });
+
+        // getMediasScope = nock("http://localhost:5000")
+        //     .persist()
+        //     // .intercept("/api/medias", "OPTIONS")
+
+        //     // .reply(200, mockResponse, {
+        //     //     "Access-Control-Allow-Headers": "*",
+        //     //     "Access-Control-Allow-Origin": "*",
+        //     //     "Access-Control-Allow-Credentials": "true",
+        //     // })
+
+        //     .get("/api/medias")
+        //     .reply(200, mockResponse, {
+        //         "Access-Control-Allow-Headers": "*",
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Credentials": "true",
+        //     })
+        //     // .intercept("/api/watching", "OPTIONS")
+
+        //     // .reply(200, mockResponse, {
+        //     //     "Access-Control-Allow-Headers": "*",
+        //     //     "Access-Control-Allow-Origin": "*",
+        //     //     "Access-Control-Allow-Credentials": "true",
+        //     // })
+        //     .get("/api/watching")
+        //     .reply(200, mockResponse, {
+        //         "Access-Control-Allow-Headers": "*",
+        //         "Access-Control-Allow-Origin": "*",
+        //         "Access-Control-Allow-Credentials": "true",
+        //     });
     });
 
     test("Media sections exist", async () => {

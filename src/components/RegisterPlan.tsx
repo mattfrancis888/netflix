@@ -20,18 +20,27 @@ export interface RegisterPlanProps {
 const RegisterPlan: React.FC<RegisterPlanProps> = (props) => {
     const [step1ButtonClicked, setStep1ButtonClicked] = useState(false);
 
+    useEffect(() => {
+        document.body.style.background = "white";
+        if (props.authStatus) {
+            history.push("/browse");
+        }
+    }, []);
+
     const [planValues, setPlanValues] = useState({
         basic: true,
         standard: false,
         premium: false,
     });
 
-    const onSubmitRegister = async (formValues: EmailAndPasswordFormValues) => {
-        props.signUp(formValues);
+    useEffect(() => {
         if (props.authStatus) {
-            console.log(props.authStatus);
             setStep1ButtonClicked(true);
         }
+    }, [props.authStatus]);
+
+    const onSubmitRegister = async (formValues: EmailAndPasswordFormValues) => {
+        props.signUp(formValues);
     };
 
     return (

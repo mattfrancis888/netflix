@@ -8,4 +8,5 @@ mediasRouter.get("/genre-cast/:mediaId", media_1.getMediaGenreAndCast);
 mediasRouter.get("/watching", media_1.getMediaWatchingByUser);
 mediasRouter.post("/add-to-watching/:mediaId", media_1.addToWatchingByUser);
 mediasRouter.delete("/remove-from-watching/:mediaId", media_1.removeFromWatchingByUser);
+mediasRouter.get("/search", media_1.getMediasBySearch);
 exports.default = mediasRouter;
