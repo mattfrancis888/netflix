@@ -33,12 +33,14 @@ const RegisterPlan: React.FC<RegisterPlanProps> = (props) => {
         premium: false,
     });
 
-    const onSubmitRegister = async (formValues: EmailAndPasswordFormValues) => {
-        props.signUp(formValues);
+    useEffect(() => {
         if (props.authStatus) {
-            console.log(props.authStatus);
             setStep1ButtonClicked(true);
         }
+    }, [props.authStatus]);
+
+    const onSubmitRegister = async (formValues: EmailAndPasswordFormValues) => {
+        props.signUp(formValues);
     };
 
     return (
