@@ -1,12 +1,16 @@
 # Netflix
 
-Replication of [Netflix website](https://www.kijiji.ca/). Database is created in BCNF (Boyce Codd Normal Form). Authentication is done via cookies that stores access tokens and refresh tokens (JWTs); users can create, edit, delete a listing, and see all listings by other users. Data is stored on PostgreSQL. Developed with React, Redux, Express, Typescript, React-Testing-Library, Jest, TravisCI, JS, HTML, CSS.
+Replication of [Netflix website](https://www.netflix.com/ca/). Database is created in BCNF (Boyce Codd Normal Form). Authentication is done via cookies that stores access tokens and refresh tokens (JWTs); users can add and remove titles to their watchlist; and users can search for titles. Data is stored on PostgreSQL. Developed with React, Redux, Express, Typescript, React-Testing-Library, Jest, TravisCI, JS, HTML, CSS.
 
-Deployment / Production repo: https://github.com/mattfrancis888/heroku-kijiji
+Deployment / Production repo: https://github.com/mattfrancis888/netflix
 
 ### BCNF database graph:
 
 <img src="readmeImg/bcnfNetflix.jpg"/>
+
+### What I learned:
+
+-   In testing, I'm using a library that mocks HTTP requests called `nock`. The mocked HTTP request that was failing in my last project, [Kijiji](https://github.com/mattfrancis888/kijiji) was **not** related to the mock cookie. It is because the mocked API calls read an actual cookie in the request (such as Access Tokens). This could be mitigated by sending the cookie in a header with "authorization"; however, after enabling HTTP requests with a header of "authorization" in my Axios interceptor, `nock` cannot mock it. The HTTP requests will always be stuck in pending. By removing the "authorization header", the HTTP requests will be mocked as normal. After spending a lot of time and research, I cannot get `nock`` to work and will use other mocking HTTP request libraries for future projects.
 
 ## External Resources:
 
