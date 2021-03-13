@@ -6,7 +6,7 @@ Deployment / Production repo: https://github.com/mattfrancis888/heroku-kijiji
 
 ### BCNF database graph:
 
-<img src="readmeImg/bcnf-kijiji.png" height="500"/>
+<img src="readmeImg/bcnfNetflix.jpg"/>
 
 ## External Resources:
 
@@ -14,18 +14,19 @@ Deployment / Production repo: https://github.com/mattfrancis888/heroku-kijiji
 -   Postman to test API requests.
 -   Prettier to format code and EsLint for linting.
 -   Redux dev tool google chrome extension to check the values of the states.
+-   React dev tool to check the value of props.
 
 ## What It Looks Like
 
-<img src="readmeImg/browseLg.png" height="350"/>
-<img src="readmeImg/searchLg.png" height="350"/>
+<img src="readmeImg/browseLg.png" width="350"/>
+<img src="readmeImg/searchLg.png" height="250"/>
 <img src="readmeImg/modalLg.png" height="350"/>
 <img src="readmeImg/signInlg.jpg" height="350"/>
 <img src="readmeImg/registerNowLg.jpg" height="350"/>
 <img src="readmeImg/watchEverywhereLg.png" height="350"/>
-<img src="readmeImg/registerPlan1Sm.png" height="350"/>
-<img src="readmeImg/registerPlan2Lg.png" height="350"/>
-<img src="readmeImg/searchNoneLg.png" height="350"/>
+<img src="readmeImg/registerPlan1Sm.png" width="600"/>
+<img src="readmeImg/registerPlan2Lg.png"  width="800"/>
+<img src="readmeImg/searchNoneLg.png" height="250"/>
 
 # Getting Started
 
