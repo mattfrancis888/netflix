@@ -8,6 +8,9 @@ script:
     - npm run test
     - npm run test:coverage
     - CI=false npm run build
+
+notifications:
+    email: false
 # deploy:
 #     provider: pages
 #     skip_cleanup: true
