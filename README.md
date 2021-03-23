@@ -6,7 +6,7 @@ Deployment / Production repo: https://github.com/mattfrancis888/netflix
 
 ### BCNF database graph:
 
-<img src="readmeImg/bcnfNetflix.jpg"/>
+<img src="readmeImg/netflixDiagram.png"/>
 
 ### What I learned:
 
@@ -24,8 +24,8 @@ Deployment / Production repo: https://github.com/mattfrancis888/netflix
 
 <img src="readmeImg/browseLg.png" width="350"/>
 <img src="readmeImg/searchLg.png" height="250"/>
-<img src="readmeImg/modalLg.png" height="350"/>
-<img src="readmeImg/signInlg.jpg" height="350"/>
+<img src="readmeImg/netflixModal.jpg" height="350"/>
+<img src="readmeImg/signInLg.jpg" height="350"/>
 <img src="readmeImg/registerNowLg.jpg" height="350"/>
 <img src="readmeImg/watchEverywhereLg.png" height="350"/>
 <img src="readmeImg/registerPlan1Sm.png" width="600"/>

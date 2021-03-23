@@ -12,52 +12,50 @@ interface MediaProps {
 }
 const MediaContent: React.FC<MediaProps> = (props) => {
     return (
-        <LazyLoad>
-            <div
-                className={`mediaContainerCarousel mediaAnime${props.index}`}
-                onLoad={() => {
-                    anime({
-                        targets: `.mediaAnime${props.index}`,
-                        // Properties
-                        // Animation Parameters
+        // <LazyLoad>
+        <div
+            className={`mediaContainerCarousel mediaAnime${props.index}`}
+            onLoad={() => {
+                anime({
+                    targets: `.mediaAnime${props.index}`,
+                    // Properties
+                    // Animation Parameters
 
-                        opacity: [
-                            {
-                                value: [0, 1],
-                                duration: 250,
-                                easing: "easeOutQuad",
-                            },
-                        ],
-                    });
-                }}
-            >
-                <img src={props.content.banner_image} alt="movie poster"></img>
-                <div className="mediaOutlineDownContainer">
-                    <div
-                        className="clickForWatch"
-                        onClick={() =>
-                            props.onMediaClick(props.content.media_id)
-                        }
-                    ></div>
-                    <div
-                        className="outlineDownWrap "
-                        onClick={() => {
-                            props.modalShow(props.content);
-                        }}
-                    >
-                        <AiOutlineDown className="outlineDown" />
-                    </div>
-                    {props.onRemoveClick && (
-                        <AiOutlineClose
-                            className="removeWatchingIcon"
-                            onClick={() => {
-                                props.onRemoveClick(props.content);
-                            }}
-                        />
-                    )}
+                    opacity: [
+                        {
+                            value: [0, 1],
+                            duration: 250,
+                            easing: "easeOutQuad",
+                        },
+                    ],
+                });
+            }}
+        >
+            <img src={props.content.banner_image} alt="movie poster"></img>
+            <div className="mediaOutlineDownContainer">
+                <div
+                    className="clickForWatch"
+                    onClick={() => props.onMediaClick(props.content.media_id)}
+                ></div>
+                <div
+                    className="outlineDownWrap "
+                    onClick={() => {
+                        props.modalShow(props.content);
+                    }}
+                >
+                    <AiOutlineDown className="outlineDown" />
                 </div>
+                {props.onRemoveClick && (
+                    <AiOutlineClose
+                        className="removeWatchingIcon"
+                        onClick={() => {
+                            props.onRemoveClick(props.content);
+                        }}
+                    />
+                )}
             </div>
-        </LazyLoad>
+        </div>
+        // </LazyLoad>
     );
 };
 

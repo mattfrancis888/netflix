@@ -964,6 +964,7 @@ body {
 }
 
 .modalBox {
+  transform: scale(0);
   position: relative;
   cursor: initial;
   background-color: #181818;

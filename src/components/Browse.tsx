@@ -352,6 +352,12 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         <p>
                             {props.mediaGenreAndCast.data?.casts.map(
                                 (actor, index) => {
+                                    if (
+                                        props.mediaGenreAndCast.data?.casts
+                                            .length ===
+                                        index + 1
+                                    )
+                                        return ` ${actor.actor_first_name}  ${actor.actor_last_name}`;
                                     return ` ${actor.actor_first_name}  ${actor.actor_last_name},`;
                                 }
                             )}
@@ -362,6 +368,12 @@ const Browse: React.FC<BrowseProps> = (props) => {
                         <p>
                             {props.mediaGenreAndCast.data?.genres.map(
                                 (genre, index) => {
+                                    if (
+                                        props.mediaGenreAndCast.data?.genres
+                                            .length ===
+                                        index + 1
+                                    )
+                                        return ` ${genre.genre_name}`;
                                     return ` ${genre.genre_name},`;
                                 }
                             )}
