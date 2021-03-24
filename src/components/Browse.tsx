@@ -25,7 +25,7 @@ import { MediaGenreAndCastStateResponse } from "reducers/mediaGenreAndCastReduce
 import { WatchingStateResponse } from "reducers/watchingReducer";
 import useWindowDimensions from "../windowDimensions";
 import { MED_SCREEN_SIZE } from "../constants";
-
+import { useTransition, animated, useSpring } from "react-spring";
 const avengersBannerData = {
     media_id: 12,
     media_title: "Avengers: Infinity War",
@@ -45,6 +45,8 @@ export interface ModalProps {
     title?: string;
     content?: JSX.Element;
     actions?: JSX.Element;
+    animation?: any;
+    fade?: any;
 }
 
 export interface MediaAndNetflixOriginalCarouselProps {
@@ -68,6 +70,41 @@ interface BrowseProps {
 }
 
 const Browse: React.FC<BrowseProps> = (props) => {
+    const [showModal, setShowModal] = useState(false);
+    const [firstRender, setFirstRender] = useState(true);
+
+    const [showModalContent, setShowModalContent] = useState<Media | null>(
+        null
+    );
+
+    const transition = useTransition(showModal, {
+        from: {
+            transform: showModal ? "scale(0)" : "scale(1)",
+        },
+        enter: {
+            transform: showModal ? "scale(1)" : "scale(0)",
+        },
+
+        config: {
+            duration: 450,
+        },
+    });
+
+    const fade = useSpring({
+        from: {
+            backgroundColor: showModal
+                ? "rgba(52, 49, 49, 0)"
+                : "rgba(52, 49, 49, 0.4)",
+            pointerEvents: showModal ? "all" : "none",
+        },
+        to: {
+            backgroundColor: showModal
+                ? "rgba(52, 49, 49, 0.4)"
+                : "rgba(52, 49, 49, 0)",
+            pointerEvents: showModal ? "all" : "none",
+        },
+    });
+
     const { width } = useWindowDimensions();
 
     useEffect(() => {
@@ -177,10 +214,6 @@ const Browse: React.FC<BrowseProps> = (props) => {
         // }
     };
 
-    const [showModal, setShowModal] = useState(false);
-    const [showModalContent, setShowModalContent] = useState<Media | null>(
-        null
-    );
     const [bannerHeightAuto, setBannerHeightAuto] = useState(false);
 
     const addToWatching = (clickedMediaId: number) => {
@@ -204,84 +237,37 @@ const Browse: React.FC<BrowseProps> = (props) => {
     };
 
     const modalShow = (clickedMedia: Media) => {
+        setFirstRender(false);
         setShowModal(true);
         setShowModalContent({ ...clickedMedia });
         props.fetchMediaGenreAndCast(clickedMedia.media_id);
     };
     const modalOnCancel = () => {
-        anime({
-            targets: ".modalBox",
-            // Properties
-            // Animation Parameters
-            width: "0%",
-            scale: [1, 0],
-            duration: 450,
-
-            easing: "easeOutQuad",
-        });
-        anime({
-            targets: ".modalTextSection",
-            // Properties
-            // Animation Parameters
-            width: "0%",
-            duration: 10,
-
-            easing: "easeOutQuad",
-        });
-        setTimeout(() => {
-            setShowModal(false);
-        }, 450);
+        setShowModal(false);
     };
     const renderModal = () => {
-        if (!showModal) return null;
-        else {
-            return (
+        return transition((style, item) => {
+            if (!firstRender)
+                return (
+                    <Modal
+                        animation={style}
+                        fade={fade}
+                        content={renderModalContent()}
+                        onDismiss={modalOnCancel}
+                    />
+                );
+            else {
                 <Modal
                     content={renderModalContent()}
                     onDismiss={modalOnCancel}
-                />
-            );
-        }
+                />;
+            }
+        });
     };
 
     const renderModalContent = () => {
         return (
-            <div
-                className="modalContentContainer"
-                onLoad={() => {
-                    if (width < MED_SCREEN_SIZE) {
-                        anime({
-                            targets: ".modalBox",
-                            // Properties
-                            // Animation Parameters
-                            width: ["0%", "90%"],
-                            scale: [0, 1],
-                            duration: 750,
-                            easing: "easeOutQuad",
-                        });
-                    } else {
-                        anime({
-                            targets: ".modalBox",
-                            // Properties
-                            // Animation Parameters
-                            width: ["0%", "80%"],
-                            scale: [0, 1],
-                            duration: 750,
-
-                            easing: "easeOutQuad",
-                        });
-                    }
-                    anime({
-                        targets: ".modalTextSection",
-                        // Properties
-                        // Animation Parameters
-
-                        duration: 750,
-                        scale: [0, 1],
-                        easing: "easeOutQuad",
-                    });
-                }}
-            >
+            <div className="modalContentContainer" onLoad={() => {}}>
                 <div className="modalBannerContainer">
                     <div className="modalBannerImageWrap">
                         <img src={showModalContent?.banner_image} alt=""></img>

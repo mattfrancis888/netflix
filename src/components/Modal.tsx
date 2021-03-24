@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ModalProps } from "./Browse";
 import { AiOutlineClose } from "react-icons/ai";
+import { useTransition, animated, useSpring } from "react-spring";
 //We use portals + modals instead of directly creating a component and use it
 //inside the component tree structure because if a parent component
 //uses position:relative; the z-index of all the child's component
@@ -9,13 +10,26 @@ import { AiOutlineClose } from "react-icons/ai";
 //cause layout issues
 
 const Modal: React.FC<ModalProps> = (props) => {
+    // const fade = useSpring({
+    //     from: {
+    //         backgroundColor: "rgba(52, 49, 49, 0)",
+    //     },
+    //     to: {
+    //         backgroundColor: "rgba(52, 49, 49, 0.4)",
+    //     },
+    // });
     return ReactDOM.createPortal(
-        <div onClick={props.onDismiss} className="modal">
-            <div
+        <animated.div
+            onClick={props.onDismiss}
+            className="modal"
+            style={props.fade}
+        >
+            <animated.div
                 onClick={(e) => {
                     e.stopPropagation();
                 }}
                 className="modalBox"
+                style={props.animation}
             >
                 <AiOutlineClose
                     className="modalCloseIcon"
@@ -24,8 +38,8 @@ const Modal: React.FC<ModalProps> = (props) => {
                 <h2>{props.title}</h2>
                 {props.content}
                 {/*{props.actions} */}
-            </div>
-        </div>,
+            </animated.div>
+        </animated.div>,
         //@ts-ignore
         document.querySelector("#modal")
     );
